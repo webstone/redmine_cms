@@ -1,0 +1,52 @@
+class Page < ActiveRecord::Base
+  unloadable
+  acts_as_attachable
+
+  acts_as_tree :dependent => :nullify
+
+  validates_presence_of :name, :title
+  validates_uniqueness_of :name
+  validates_length_of :name, :maximum => 30
+  validates_length_of :title, :maximum => 255
+  validate :validate_page
+
+  def to_param
+    name.parameterize
+  end
+
+  def reload(*args)
+    @valid_parents = nil
+    super
+  end
+
+  def to_s
+    name
+  end
+
+  def valid_parents
+    @valid_parents ||= Page.all - self_and_descendants
+  end
+
+  def self.page_tree(pages, parent_id=nil, level=0)
+    tree = []
+    pages.select {|page| page.parent_id == parent_id}.sort_by(&:title).each do |page|
+      tree << [page, level]
+      tree += page_tree(pages, page.id, level+1)
+    end
+    if block_given?
+      tree.each do |page, level|
+        yield page, level
+      end
+    end
+    tree
+  end
+
+  protected
+
+  def validate_page
+    if parent_id && parent_id_changed?
+      errors.add(:parent_id, :invalid) unless valid_parents.include?(parent)
+    end
+  end
+
+end

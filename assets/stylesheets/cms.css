@@ -1,0 +1,18 @@
+
+/**************************************************************/
+/*                   PAGE
+/**************************************************************/
+
+.wiki.page .wiki-anchor {
+  display: none;
+}
+
+
+/**************************************************************/
+/*                   ICONS
+/**************************************************************/
+#admin-menu a.cms { background-image: url(../images/sitemap_color.png);}
+
+.icon-menu {background-image: url(../images/sitemap.png);}
+.icon-page {background-image: url(../images/page_white_world.png);}
+

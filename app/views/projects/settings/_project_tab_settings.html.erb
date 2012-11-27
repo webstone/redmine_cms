@@ -1,0 +1,16 @@
+<%= form_tag({:controller => "contacts_settings", :action => "save", :project_id => @project, :tab => "project_tab"}, :method => :post, :class => "tabular") do %> 
+  <div class="tabular box">
+    <% 5.times do |n| %>
+    <p>  
+      <label><%= l(:label_project_tab_caption, :index => n + 1) %></label>
+      <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_caption]",  ContactsSetting["project_tab_#{n + 1}_caption".to_sym, @project.id] %>
+      <em><%= l(:label_project_tab_wiki_page) %></em>
+      <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_wiki_page]",  ContactsSetting["project_tab_#{n + 1}_wiki_page".to_sym, @project.id] %>
+    </p>
+    <% end %>
+  
+  </div>
+
+
+  <%= submit_tag l(:button_save) %>
+<% end %>

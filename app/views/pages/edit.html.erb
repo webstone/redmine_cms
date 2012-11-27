@@ -1,0 +1,9 @@
+<h2><%=l(:label_cms_page)%> <%= text_field_tag :path, page_path(@page), :size => 30, :readonly => "readonly"  %></h2>
+
+
+<%= labelled_form_for :page, @page, :url => { :action => 'update', :id => @page},
+  :html => { :id => 'page-form', :multipart => true, :method => :put } do |f| %>
+
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>

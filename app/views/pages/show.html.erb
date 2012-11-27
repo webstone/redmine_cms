@@ -1,0 +1,12 @@
+<% content_for :header do  %>
+  <%= page_breadcrumb(@page) %>
+<% end unless @project %>
+
+<div class="contextual">
+  <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' if User.current.admin? %>
+</div>
+<div class="wiki page <%= @page.name %>">
+  <% cache @page do %>
+    <%= render_page @page %>
+  <% end %>
+</div>
