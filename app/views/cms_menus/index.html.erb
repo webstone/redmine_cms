@@ -1,0 +1,36 @@
+<div class="contextual">
+<%= link_to l(:label_cms_menu_new), new_cms_menu_path, :class => 'icon icon-add' %>
+<%= link_to l(:label_cms_page_plural), pages_path, :class => 'icon icon-page' %>
+
+</div>
+
+<h2><%=l(:label_cms_menu_plural)%></h2>
+
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+    <th><%= l(:label_cms_menu_name) %></th>
+    <th><%= l(:label_cms_menu_caption) %></th>
+    <th><%= l(:label_cms_menu_path) %></th>
+    <th><%= l(:label_cms_menu_type) %></th>
+    <th><%= l(:label_cms_menu_status) %></th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for menu in @cms_menus -%>
+  <tr class="menu <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %>">
+  <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu) %></td>
+  <td class="name"><%= menu.name %></td>
+  <td class="path"><%= menu.path %></td>
+  <td class="type"><%= menu.menu_type %></td>
+  <td class="status"><%= %w(disabled active)[menu.status_id] %></td>
+    <td class="buttons">
+      <%= delete_link cms_menu_path(menu, :back_url => cms_menus_path(params)) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+</div>
+
+<% html_title(l(:label_cms_menu_plural)) -%>

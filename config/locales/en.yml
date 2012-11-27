@@ -1,0 +1,26 @@
+# English strings go here for Rails i18n
+en:
+  label_cms: CMS
+
+  label_project_tab: "Wiki tab"
+  label_project_tab_caption: "Wiki tab %{index} caption"
+  label_project_tab_wiki_page: "Wiki page"
+
+  label_cms_menu: Menu
+  label_cms_menu_new: New menu
+  label_cms_menu_plural: Menus
+  label_cms_menu_name: Name
+  label_cms_menu_caption: Caption
+  label_cms_menu_type: Type
+  label_cms_menu_path: Path
+  label_cms_menu_status: Status
+
+  label_cms_page_plural: Pages
+  label_cms_page: Page
+  label_cms_page_new: New page
+  label_cms_page_name: Name
+  label_cms_page_title: Title
+  label_cms_page_status: Status
+  label_cms_page_content: Content
+  label_cms_page_content_type: Content type
+  label_cms_parent_page: Parent page

@@ -1,0 +1,11 @@
+<%= error_messages_for 'cms_menu' %>
+
+<div class="box tabular">
+
+<p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_menu_name)  %></p>
+<p><%= f.text_field :caption, :size => 30, :required => true, :label => l(:label_cms_menu_caption) %></p>
+<p><%= f.text_field :path, :required => true, :label => l(:label_cms_menu_path) %></p>
+<p><%= f.select :status_id, options_for_select([["Disabled", 0], ["Active", 1]], @cms_menu.status_id), :label => l(:label_cms_menu_status)  %></p>  
+<p><%= f.select :menu_type, options_for_select([["top_menu", "top_menu"], ["project_menu", "project_menu"], ["footer_menu", "footer_menu"]],  @cms_menu.menu_type), :label => l(:label_cms_menu_type) %></p>  
+
+</div>
