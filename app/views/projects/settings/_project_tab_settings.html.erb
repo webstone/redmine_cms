@@ -4,8 +4,8 @@
     <p>  
       <label><%= l(:label_project_tab_caption, :index => n + 1) %></label>
       <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_caption]",  ContactsSetting["project_tab_#{n + 1}_caption".to_sym, @project.id] %>
-      <em><%= l(:label_project_tab_wiki_page) %></em>
-      <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_wiki_page]",  ContactsSetting["project_tab_#{n + 1}_wiki_page".to_sym, @project.id] %>
+      <em><%= l(:label_project_tab_page) %></em>
+      <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_page]",  ContactsSetting["project_tab_#{n + 1}_page".to_sym, @project.id] %>
     </p>
     <% end %>
   

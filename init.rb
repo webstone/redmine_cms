@@ -1,5 +1,4 @@
 
-
 Redmine::Plugin.register :redmine_cms do
   name 'Redmine CMS plugin'
   author 'RedmineCRM'
@@ -7,7 +6,15 @@ Redmine::Plugin.register :redmine_cms do
   version '0.0.1'
   url 'http://redminecrm.com'
 
+  requires_redmine :version_or_higher => '2.1.2'   
+  
   require 'redmine_cms'
+
+  settings :default => {
+    :hide_home_page => true,
+    :hide_my_page => true,
+    :hide_projects_page => true
+  }, :partial => 'settings/cms'  
 
   project_module :project_tab do
     permission :view_project_tabs, { 
@@ -18,9 +25,10 @@ Redmine::Plugin.register :redmine_cms do
     }
   end
   
+  delete_menu_item(:top_menu, :home) 
+  delete_menu_item(:top_menu, :"my_page")
+  delete_menu_item(:top_menu, :"projects")
 
-  # delete_menu_item(:top_menu, :home)
-  # delete_menu_item(:top_menu, :"my_page")
   # delete_menu_item(:project_menu, :activity)
 
   (1..5).each do |index|

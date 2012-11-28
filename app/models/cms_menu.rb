@@ -2,9 +2,16 @@ class CmsMenu < ActiveRecord::Base
   unloadable
   belongs_to :source, :polymorphic => true
 
+  acts_as_list :scope => 'menu_type = \'#{menu_type}\''
+
+  default_scope order(:position)
+
   after_save :rebuild_menu
 
-  acts_as_list :scope => 'menu_type = \'#{menu_type}\''
+  validates_presence_of :name, :caption
+  validates_uniqueness_of :name
+  validates_length_of :name, :maximum => 30
+  validates_length_of :caption, :maximum => 255
 
   def rebuild_menu
     CmsMenu.rebuild 
