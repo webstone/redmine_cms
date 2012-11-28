@@ -7,6 +7,10 @@
   display: none;
 }
 
+div#page_title {
+  padding: 10px 0 25px;  
+  text-align: center;
+}
 
 /**************************************************************/
 /*                   ICONS

@@ -5,3 +5,7 @@ require 'redmine_cms/patches/attachment_patch'
 
 require 'redmine_cms/hooks/views_layouts_hook'
 require 'redmine_cms/wiki_macros/cms_wiki_macros'
+
+module RedmineCms
+  def self.settings() Setting[:plugin_redmine_cms] end
+end
