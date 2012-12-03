@@ -1,15 +1,17 @@
 <%= error_messages_for 'page' %>
  
 <div class="box tabular">
-
+<%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows => 30, :class => 'wiki-edit' %><%= wikitoolbar_for 'page_content' if @page.content_type == 'textile' %>
 <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
 <p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
 <p><%= f.text_field :summary, :size => 100, :label => l(:label_cms_page_summary) %></p>
+<% if @page.valid_parents.any? %>
 <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_parent_page %></p>
-<p><%= f.select :status_id, options_for_select([["Disabled", 0], ["Active", 1]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
+<% end %>
+<p><%= f.select :status_id, options_for_select([["Locked", Page::STATUS_LOCKED], ["Active", Page::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
 <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
 
-<p class  = "content"><%= f.text_area :content , :cols => 80, :rows => 30, :class => 'wiki-edit', :label=>l(:label_cms_page_content)  %></p> <%= wikitoolbar_for 'page_content' if @page.content_type == 'textile' %>
+
 <%= link_to_attachments @page %>
 <p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
 </div>

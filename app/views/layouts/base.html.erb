@@ -61,12 +61,12 @@
 <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
 <div id="ajax-modal" style="display:none;"></div>
 
-<%= yield :footer %>
-
 <div id="footer">
-  <div class="bgl"><div class="bgr">
-    Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> &copy; 2006-2012 Jean-Philippe Lang
-  </div></div>
+  <%# yield :footer %>
+  <%= render_menu :footer_menu -%>
+  <p>
+     &copy; <%= link_to "RedmineCRM", "http://redminecrm.com" %>,  Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> 
+  </p>
 </div>
 </div>
 </div>

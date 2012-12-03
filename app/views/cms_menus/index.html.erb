@@ -13,7 +13,6 @@
     <th><%= l(:label_cms_menu_caption) %></th>
     <th><%= l(:label_cms_menu_path) %></th>
     <th><%= l(:label_cms_menu_type) %></th>
-    <th><%= l(:label_cms_menu_status) %></th>
     <th></th>
   </tr></thead>
   <tbody>
@@ -23,8 +22,8 @@
   <td class="name"><%= menu.name %></td>
   <td class="path"><%= menu.path %></td>
   <td class="type"><%= menu.menu_type %></td>
-  <td class="status"><%= %w(disabled active)[menu.status_id] %></td>
     <td class="buttons">
+      <%= change_menu_status_link(menu) %>
       <%= delete_link cms_menu_path(menu, :back_url => cms_menus_path(params)) %>
     </td>
   </tr>

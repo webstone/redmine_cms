@@ -27,6 +27,4 @@ en:
   label_cms_page_content_type: Content type
   label_cms_parent_page: Parent page
 
-  label_hide_my_page: Hide My page
-  label_hide_home_page: Hide home page
-  label_hide_projects_page: Hide projects page
+  label_cms_layout_content: Layout content
