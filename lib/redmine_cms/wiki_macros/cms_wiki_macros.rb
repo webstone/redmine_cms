@@ -4,8 +4,6 @@ module RedmineCms
     Redmine::WikiFormatting::Macros.register do
       desc "Include page"
       macro :include_page do |obj, args|
-        return "" unless obj.is_a?(Page)
-        return "" if obj.blank?
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
         page = Page.find_by_name(args.first)
@@ -15,8 +13,6 @@ module RedmineCms
 
       desc "Link to page"
       macro :page do |obj, args|
-        return "" unless obj.is_a?(Page)
-        return "" if obj.blank?
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
         page = Page.find_by_name(args.first)
@@ -30,7 +26,7 @@ module RedmineCms
         return "" if obj.blank?
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
-        content_for(args.first.to_sym, textilizable(text, :attachments => obj.attachments))
+        content_for(args.first.to_sym, textilizable(text, :attachments => obj.attachments ))
         ""
       end 
 

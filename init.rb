@@ -24,14 +24,19 @@ Redmine::Plugin.register :redmine_cms do
       :contacts_settings => :save
     }
   end
+
+  Redmine::MenuManager.map :footer_menu do |menu|
+    menu.push :home, :home_path
+  end  
   
   delete_menu_item(:top_menu, :home) 
   delete_menu_item(:top_menu, :"my_page")
   delete_menu_item(:top_menu, :"projects")
+  delete_menu_item(:account_menu, :register)  
 
   # delete_menu_item(:project_menu, :activity)
 
-  (1..5).each do |index|
+  5.downto(1) do |index|
     tab = "project_tab_#{index}".to_sym
     menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index}, 
                              :after => :overview,

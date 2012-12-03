@@ -10,6 +10,13 @@ class Page < ActiveRecord::Base
   validates_length_of :title, :maximum => 255
   validate :validate_page
 
+  STATUS_ACTIVE = 1
+  STATUS_LOCKED = 0
+
+  def active?
+    self.status_id == Page::STATUS_ACTIVE
+  end
+
   def to_param
     name.parameterize
   end
@@ -25,6 +32,10 @@ class Page < ActiveRecord::Base
 
   def valid_parents
     @valid_parents ||= Page.all - self_and_descendants
+  end
+
+  def self.main
+    Page.find_by_name('main')
   end
 
   def self.page_tree(pages, parent_id=nil, level=0)

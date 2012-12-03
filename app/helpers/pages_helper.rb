@@ -1,16 +1,4 @@
 module PagesHelper
-  def render_page(page)
-    case page.content_type
-    when "textile"
-      textilizable(page, :content, :attachments => page.attachments)
-    when "html"
-      page.content.html_safe
-    else
-      page.content
-    end  
-
-  end
-
    def page_breadcrumb(page)
     return unless page.parent
     pages = page.ancestors.reverse
@@ -28,4 +16,15 @@ module PagesHelper
     end
     options
   end 
+
+  def change_page_status_link(page)
+    url = {:controller => 'pages', :action => 'update', :id => page, :page => params[:page], :status => params[:status], :tab => nil}
+
+    if page.active?
+      link_to l(:button_lock), url.merge(:page => {:status_id => Page::STATUS_LOCKED}), :method => :put, :class => 'icon icon-lock'
+    else
+      link_to l(:button_unlock), url.merge(:page => {:status_id => Page::STATUS_ACTIVE}), :method => :put, :class => 'icon icon-unlock'
+    end
+  end
+
 end
