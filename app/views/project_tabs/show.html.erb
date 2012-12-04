@@ -1,7 +1,1 @@
-<!-- <h2><%= ContactsSetting["wiki_tab_#{params[:tab]}_caption".to_sym, @project.id] %></h2> -->
-
-<div class="wiki page <%= @page.name %>">
-  <% cache @page do %>
-    <%= render_page @page %>
-  <% end %>
-</div>
+<%= render :partial => 'pages/page' %>
