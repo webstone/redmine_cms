@@ -6,6 +6,8 @@ class PagesController < ApplicationController
   before_filter :check_status, :only => :show
   # before_filter :find_optional_project, :only => :show
 
+  helper :attachments
+
   def index
     @pages = Page.all
   end
