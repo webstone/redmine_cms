@@ -1,3 +1,8 @@
+<p>  
+  <label><%= l(:label_cms_use_localization) %></label>
+  <%= check_box_tag 'settings[use_localization]', 1, @settings[:use_localization] %>
+</p>
+
 <fieldset class="box"><legend><%= l(:label_cms_layout_content) %></legend>
 <%= text_area_tag 'settings[layout_content]', @settings[:layout_content], :class => 'wiki-edit', :rows => 20 %>
 </fieldset>    

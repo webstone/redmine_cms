@@ -11,9 +11,7 @@ Redmine::Plugin.register :redmine_cms do
   require 'redmine_cms'
 
   settings :default => {
-    :hide_home_page => true,
-    :hide_my_page => true,
-    :hide_projects_page => true
+    :use_localization => true
   }, :partial => 'settings/cms'  
 
   project_module :project_tab do
