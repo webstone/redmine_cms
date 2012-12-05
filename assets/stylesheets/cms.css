@@ -43,6 +43,7 @@ div.feature .feature-content {
 
 div.feature.left .feature-content {
   padding-left: 0px;
+  padding-right: 50%;
 }
 
 div.feature.left .feature-content img {
