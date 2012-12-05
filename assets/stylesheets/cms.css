@@ -29,7 +29,8 @@ div.feature {
 
 div.feature .feature-content {
   padding-left: 50%;
-  min-height: 200px;
+  min-height: 250px;
+  height: 250px;
   position: relative;
 }
 
