@@ -18,6 +18,37 @@ div#footer p {
   text-align: right;
 }
 
+
+/**************************************************************/
+/*                   FEATURE
+/**************************************************************/
+div.feature {
+  padding: 20px;
+  border-bottom: 1px solid #AAA;
+}
+
+div.feature .feature-content {
+  padding-left: 50%;
+  min-height: 200px;
+  position: relative;
+}
+
+.feature .feature-content img {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border: 1px solid #CCC;
+}
+
+div.feature.left .feature-content {
+  padding-left: 0px;
+}
+
+div.feature.left .feature-content img {
+  right: 0px;
+  left: initial;
+}
+
 /**************************************************************/
 /*                   PAGE
 /**************************************************************/
