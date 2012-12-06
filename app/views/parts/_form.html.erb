@@ -8,6 +8,9 @@
 
 <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"], ["CSS", "css"], ["JavaScript", "java_script"]],  @part.content_type), :label => l(:label_cms_part_content_type) %></p>  
 
+<p><%= f.check_box :is_cached, :label => l(:label_cms_is_cached) %></p>
+
+
 
 <%= link_to_attachments @part %>
 <p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @part} %></p>

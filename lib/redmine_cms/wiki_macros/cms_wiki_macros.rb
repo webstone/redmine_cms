@@ -9,7 +9,12 @@ module RedmineCms
         raise 'No or bad arguments.' if args.size != 1
         page = Page.find_by_name(args.first)
         raise 'Page not found' unless page
-        render_page(page)
+        @included_pages ||= []
+        raise 'Circular inclusion detected' if @included_pages.include?(page.name)
+        @included_pages << page.name
+        out = render_page(page)
+        @included_pages.pop
+        out
       end 
 
 
@@ -19,8 +24,13 @@ module RedmineCms
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
         part = Part.find_by_name(args.first)
-        raise 'Page not found' unless part
-        render_part(part)
+        raise 'Part not found' unless part
+        @included_pages_parts ||= []
+        raise 'Circular inclusion detected' if @included_pages_parts.include?(part.name)
+        @included_pages_parts << part.name
+        out = render_part(part)
+        @included_pages_parts.pop
+        out
       end 
 
 

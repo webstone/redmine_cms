@@ -5,6 +5,8 @@ class Part < ActiveRecord::Base
 
   acts_as_attachable
 
+  default_scope order(:part_type)
+
   after_commit :touch_pages
 
   validates_uniqueness_of :name

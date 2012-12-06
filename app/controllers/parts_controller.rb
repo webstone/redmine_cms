@@ -27,6 +27,10 @@ class PartsController < ApplicationController
     @part = Part.new(:content_type => 'textile')
   end
 
+  def refresh
+    expire_fragment(@part)
+  end
+
   def update
     @part.assign_attributes(params[:part])
     @part.save_attachments(params[:attachments])
