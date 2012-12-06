@@ -9,24 +9,29 @@ module RedmineCMS
 
       module InstanceMethods
         def render_page(page)
-
-          page.header_parts.active.each do |pages_part|
-            content_for(:header, render_part(pages_part.part))
-          end
-
-          page.sidebar_parts.active.each do |pages_part|
-            content_for(:sidebar, render_part(pages_part.part))
-          end
-
-          page.footer_parts.active.each do |pages_part|
-            content_for(:footer, render_part(pages_part.part))
-          end          
-
           s = "".html_safe
-          page.content_parts.active.each do |pages_part|
-            s << render_part(pages_part.part)
+          page.pages_parts.active.each do |pages_part|
+            case pages_part.part.part_type
+            when "header"
+              content_for(:header, render_part(pages_part.part))
+            when "sidebar"
+              content_for(:sidebar, render_part(pages_part.part))
+            when "footer"
+              content_for(:footer, render_part(pages_part.part))
+            when "content"
+              s << cached_render_part(pages_part.part)
+            end  
           end
           s
+
+        end
+
+        def cached_render_part(part)
+          if part.is_cached && (output = Rails.cache.fetch(part, :expires_in => 15.minutes) {render_part(part)})
+            output
+          else
+            output = render_part(part)
+          end
         end
 
         def render_part(part)

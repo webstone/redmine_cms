@@ -31,6 +31,7 @@ en:
   label_cms_landing_page: Landing page
   label_cms_projects_page: Projects page
   label_cms_my_page: My page
+  label_cms_is_cached: Is cached
 
   label_cms_part_plural: Parts
   label_cms_part: Part

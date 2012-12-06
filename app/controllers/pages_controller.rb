@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :check_status, :only => :show
   # before_filter :find_optional_project, :only => :show
-
+  
   helper :attachments
   helper :cms_menus
   helper :parts

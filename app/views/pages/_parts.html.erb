@@ -12,11 +12,11 @@
   <tr class="part <%= cycle("odd", "even") %>" id="page_part_<%= pages_part.id %>">
     <td class="name"><%= link_to h(pages_part.part.name), edit_part_path(pages_part.part) %></td>
     <td class="type" align="center"><%= pages_part.part.part_type %></td>
-    <td><%= cms_reorder_links('pages_part', {:controller => 'pages_parts', :action => 'update', :page_id => @page, :part_id => pages_part}, :put) %></td>
+    <td><%= cms_reorder_links('pages_part', {:controller => 'pages_parts', :action => 'update', :id => pages_part}, :put) %></td>
     <td class="buttons">
       <%= cms_change_status_link('pages_part', pages_part) %>
       <%= link_to image_tag('link_break.png'),
-                                    {:controller => 'pages_parts', :action => 'delete', :page_id => @page, :part_id => pages_part},
+                                    {:controller => 'pages_parts', :action => 'destroy', :id => pages_part},
                                     :remote => true,
                                     :method => :delete,
                                     :data => {:confirm => l(:text_are_you_sure)},

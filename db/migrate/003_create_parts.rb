@@ -6,6 +6,7 @@ class CreateParts < ActiveRecord::Migration
       t.text :content
       t.string :content_type
       t.integer :position
+      t.boolean :is_cached, :default => false
       t.timestamps 
     end
 
