@@ -22,7 +22,7 @@ class CmsMenusController < ApplicationController
     @cms_menu.assign_attributes(params[:cms_menu])
     if @cms_menu.save
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action =>"index"
+      redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
     else
       render :action => 'edit'
     end
@@ -32,7 +32,7 @@ class CmsMenusController < ApplicationController
     @cms_menu = CmsMenu.new(params[:cms_menu])
     if @cms_menu.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action =>"index"
+      redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
     else
       render :action => 'new'
     end
@@ -40,7 +40,7 @@ class CmsMenusController < ApplicationController
 
   def destroy
     @cms_menu.destroy
-    redirect_to :action => 'index'
+    redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
   end  
 
 private

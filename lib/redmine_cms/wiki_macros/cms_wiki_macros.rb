@@ -4,12 +4,25 @@ module RedmineCms
     Redmine::WikiFormatting::Macros.register do
       desc "Include page"
       macro :include_page do |obj, args|
+        return "" unless obj.is_a?(Page) || obj.is_a?(Part)
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
         page = Page.find_by_name(args.first)
         raise 'Page not found' unless page
         render_page(page)
       end 
+
+
+      desc "Include page"
+      macro :include_part do |obj, args|
+        return "" unless obj.is_a?(Page) || obj.is_a?(Part)
+        args, options = extract_macro_options(args, :parent)
+        raise 'No or bad arguments.' if args.size != 1
+        part = Part.find(args.first)
+        raise 'Page not found' unless part
+        render_part(part)
+      end 
+
 
       desc "Link to page"
       macro :page do |obj, args|
@@ -20,19 +33,9 @@ module RedmineCms
         link_to page.title, page_path(page)
       end 
 
-      desc "Link to page"
-      macro :page_part do |obj, args, text|
-        return "" unless obj.is_a?(Page)
-        return "" if obj.blank?
-        args, options = extract_macro_options(args, :parent)
-        raise 'No or bad arguments.' if args.size != 1
-        content_for(args.first.to_sym, textilizable(text, :object => obj, :attachments => obj.attachments ))
-        ""
-      end 
-
       desc "Feature with media"
       macro :feature do |obj, args, text|
-        return "" unless obj.is_a?(Page)
+        return "" unless obj.is_a?(Page) || obj.is_a?(Part)
         return "" if obj.blank?
         args, options = extract_macro_options(args, :parent, :class)
         feature_class = "feature #{options[:class] || ""}"
@@ -59,6 +62,17 @@ module RedmineCms
         end
       end
 
+      desc "Page title"
+      macro :page_title do |obj, args, text|
+        return "" unless obj.is_a?(Page) || obj.is_a?(Part) 
+        return "" if obj.blank?
+        args, options = extract_macro_options(args, :parent, :class)
+        feature_class = "feature #{options[:class] || ""}"
+        raise 'No or bad arguments.' if args.size != 1
+        title = content_tag('h1', args.first)
+        summary = textilizable(text, :object => obj, :attachments => obj.attachments)
+        content_tag('div', title + summary, :class => "page-title") + ' <hr/>'.html_safe
+      end       
     end  
 
   end

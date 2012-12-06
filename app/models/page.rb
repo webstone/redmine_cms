@@ -1,7 +1,9 @@
 class Page < ActiveRecord::Base
   unloadable
-  acts_as_attachable
 
+  has_and_belongs_to_many :parts, :uniq => true, :order => "#{PagesPart.table_name}.position"
+
+  acts_as_attachable
   acts_as_tree :dependent => :nullify
 
   validates_presence_of :name, :title
@@ -12,6 +14,17 @@ class Page < ActiveRecord::Base
 
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 0
+
+
+  [:content, :header, :footer, :sidebar].each do |name, params|
+    src = <<-END_SRC
+    def #{name}_parts
+      parts.where(:part_type => "#{name.to_s}")
+    end
+
+    END_SRC
+    class_eval src, __FILE__, __LINE__
+  end
 
   def active?
     self.status_id == Page::STATUS_ACTIVE

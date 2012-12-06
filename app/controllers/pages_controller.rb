@@ -7,9 +7,14 @@ class PagesController < ApplicationController
   # before_filter :find_optional_project, :only => :show
 
   helper :attachments
+  helper :cms_menus
+  helper :parts
+  helper :cms
 
   def index
     @pages = Page.all
+    @parts = Part.all
+    @cms_menus = CmsMenu.all
   end
 
   def show
@@ -19,9 +24,7 @@ class PagesController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      format.html {render :action => 'edit', :layout => 'base'} 
-    end    
+    @parts = @page.parts
   end
 
   def new
