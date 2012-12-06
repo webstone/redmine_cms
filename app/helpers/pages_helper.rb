@@ -21,9 +21,9 @@ module PagesHelper
     url = {:controller => 'pages', :action => 'update', :id => page, :page => params[:page], :status => params[:status], :tab => nil}
 
     if page.active?
-      link_to l(:button_lock), url.merge(:page => {:status_id => Page::STATUS_LOCKED}), :method => :put, :class => 'icon icon-lock'
+      link_to l(:button_lock), url.merge(:page => {:status_id => RedmineCms::STATUS_LOCKED}), :method => :put, :class => 'icon icon-lock'
     else
-      link_to l(:button_unlock), url.merge(:page => {:status_id => Page::STATUS_ACTIVE}), :method => :put, :class => 'icon icon-unlock'
+      link_to l(:button_unlock), url.merge(:page => {:status_id => RedmineCms::STATUS_ACTIVE}), :method => :put, :class => 'icon icon-unlock'
     end
   end
 

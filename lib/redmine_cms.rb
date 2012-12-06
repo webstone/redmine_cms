@@ -11,5 +11,9 @@ require 'redmine_cms/hooks/views_layouts_hook'
 require 'redmine_cms/wiki_macros/cms_wiki_macros'
 
 module RedmineCms
+  
+  STATUS_ACTIVE = 1
+  STATUS_LOCKED = 0
+
   def self.settings() Setting[:plugin_redmine_cms] end
 end

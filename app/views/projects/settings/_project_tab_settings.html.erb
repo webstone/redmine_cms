@@ -4,8 +4,6 @@
       <label><%= l(:label_cms_landing_page) %></label>
       <%= text_field_tag "contacts_settings[landing_page]",  ContactsSetting["landing_page", @project.id] %>
     </p>
-
-
     <% 5.times do |n| %>
     <p>  
       <label><%= l(:label_project_tab_caption, :index => n + 1) %></label>
@@ -14,9 +12,7 @@
       <%= text_field_tag "contacts_settings[project_tab_#{n + 1}_page]",  ContactsSetting["project_tab_#{n + 1}_page".to_sym, @project.id] %>
     </p>
     <% end %>
-  
   </div>
-
-
   <%= submit_tag l(:button_save) %>
 <% end %>
+

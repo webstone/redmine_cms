@@ -7,19 +7,30 @@
 <div class="autoscroll">
 <table class="list">
   <thead><tr>
-    <th>#</th>
     <th><%= l(:label_cms_part_name) %></th>
     <th><%= l(:label_cms_part_type) %></th>
     <th></th>
   </tr></thead>
+  <% previous_group = false %>
   <tbody>
 <% for part in @parts -%>
+    <% if part.part_type != previous_group %>
+      <% reset_cycle %>
+      <tr class="group open">
+        <td colspan="4">
+          <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= part.part_type.blank? ? 'None' : part.part_type %> 
+          <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}", "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+        </td>
+      </tr>
+      <% previous_group = part.part_type %>
+    <% end %>
+
+
   <tr class="part <%= cycle("odd", "even") %> <%= %w(disabled active)[part.status_id] %>">
-  <td class="id"><%= link_to part.id, edit_part_path(part) %></td>
   <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
   <td class="type"><%= part.part_type %></td>
     <td class="buttons">
-      <%= change_part_status_link(part) %>
       <%= delete_link part_path(part, :back_url => parts_path(params)) %>
     </td>
   </tr>

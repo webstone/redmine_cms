@@ -4,7 +4,9 @@ class CmsMenu < ActiveRecord::Base
 
   acts_as_list :scope => 'menu_type = \'#{menu_type}\''
 
-  default_scope order(:position)
+  default_scope order(:menu_type).order(:position)
+  scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+
 
   after_commit :rebuild_menu
 
@@ -12,12 +14,10 @@ class CmsMenu < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_length_of :name, :maximum => 30
   validates_length_of :caption, :maximum => 255
-
-  STATUS_ACTIVE = 1
-  STATUS_LOCKED = 0
+  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
 
   def active?
-    self.status_id == Page::STATUS_ACTIVE
+    self.status_id == RedmineCms::STATUS_ACTIVE
   end
 
   def rebuild_menu

@@ -1,7 +1,8 @@
 class Page < ActiveRecord::Base
   unloadable
 
-  has_and_belongs_to_many :parts, :uniq => true, :order => "#{PagesPart.table_name}.position"
+  has_many :pages_parts, :order => "#{PagesPart.table_name}.position"
+  has_many :parts, :uniq => true, :through => :pages_parts
 
   acts_as_attachable
   acts_as_tree :dependent => :nullify
@@ -11,15 +12,12 @@ class Page < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   validates_length_of :title, :maximum => 255
   validate :validate_page
-
-  STATUS_ACTIVE = 1
-  STATUS_LOCKED = 0
-
+  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
 
   [:content, :header, :footer, :sidebar].each do |name, params|
     src = <<-END_SRC
     def #{name}_parts
-      parts.where(:part_type => "#{name.to_s}")
+      pages_parts.includes(:part).where(:parts => {:part_type => "#{name.to_s}"})
     end
 
     END_SRC
@@ -27,7 +25,7 @@ class Page < ActiveRecord::Base
   end
 
   def active?
-    self.status_id == Page::STATUS_ACTIVE
+    self.status_id == RedmineCms::STATUS_ACTIVE
   end
 
   def to_param

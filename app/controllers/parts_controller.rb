@@ -8,7 +8,7 @@ class PartsController < ApplicationController
   helper :cms
 
   def index
-    @parts = Part.all
+    redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
   end
 
   def show
@@ -24,7 +24,7 @@ class PartsController < ApplicationController
   end
 
   def new
-    @part = Part.new
+    @part = Part.new(:content_type => 'textile')
   end
 
   def update
@@ -33,7 +33,11 @@ class PartsController < ApplicationController
     if @part.save
       render_attachment_warning_if_needed(@part)
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action =>"show", :id => @part
+      if params[:unlock] 
+        redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
+      else
+        redirect_to :action =>"show", :id => @part
+      end
     else
       render :action => 'edit'
     end

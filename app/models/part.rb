@@ -5,16 +5,11 @@ class Part < ActiveRecord::Base
 
   acts_as_attachable
 
-  STATUS_ACTIVE = 1
-  STATUS_LOCKED = 0
-
   after_commit :touch_pages
 
-  validates_presence_of :name, :part_type, :content_type, :status_id
-
-  def active?
-    self.status_id == Part::STATUS_ACTIVE
-  end
+  validates_uniqueness_of :name
+  validates_presence_of :name, :part_type, :content_type
+  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
 
 private
   def touch_pages

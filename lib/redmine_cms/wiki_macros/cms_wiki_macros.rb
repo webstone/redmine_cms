@@ -18,7 +18,7 @@ module RedmineCms
         return "" unless obj.is_a?(Page) || obj.is_a?(Part)
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
-        part = Part.find(args.first)
+        part = Part.find_by_name(args.first)
         raise 'Page not found' unless part
         render_part(part)
       end 

@@ -1,4 +1,4 @@
-<h2><%="#{l(:label_cms_part)} ##{@part.id}"%></h2>
+<h2><%="#{l(:label_cms_part)} - #{@part.name}"%></h2>
 
 <%= labelled_form_for :part, @part, :url => { :action => 'update', :id => @part},
   :html => { :id => 'part-form', :multipart => true, :method => :put } do |f| %>

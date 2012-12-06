@@ -6,12 +6,17 @@ class PagesPart < ActiveRecord::Base
   acts_as_list :scope => 'page_id = \'#{page_id}\''
 
   default_scope order(:page_id).order(:position)
+  scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
 
   before_destroy :touch_page
   after_save :touch_page
 
   validates_presence_of :page, :part
 
+  def active?
+    self.status_id == RedmineCms::STATUS_ACTIVE
+  end
+  
 private
 
   def touch_page
