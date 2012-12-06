@@ -1,0 +1,9 @@
+<h2><%="#{l(:label_cms_part)} ##{@part.id}"%></h2>
+
+<%= labelled_form_for :part, @part, :url => { :action => 'update', :id => @part},
+  :html => { :id => 'part-form', :multipart => true, :method => :put } do |f| %>
+
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>
+
