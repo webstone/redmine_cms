@@ -15,7 +15,7 @@ class CreateParts < ActiveRecord::Migration
       t.integer :part_id
       t.integer :status_id, :default => RedmineCms::STATUS_LOCKED
     end
-    add_index :page_parts, [:page_id, :part_id]
+    add_index :pages_parts, [:page_id, :part_id]
 
   end
 end
