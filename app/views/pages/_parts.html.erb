@@ -1,22 +1,22 @@
-<% if @parts.any? %>
+<% if @pages_parts.any? %>
 <div class="autoscroll">
 <table class="list">
   <thead><tr>
-    <th>#</th>
     <th><%= l(:label_cms_part_name) %></th>
     <th style="width:15%;"><%= l(:label_cms_part_type) %></th>
     <th style="width:15%;"></th>
     <th style="width:10%;"> </th>    
   </tr></thead>
   <tbody>
-<% @parts.each do |part| -%>
-  <tr class="part <%= cycle("odd", "even") %>" id="page_part_<%= part.id %>">
-    <td class="id"><%= link_to part.id, edit_part_path(part) %></td>
-    <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
-    <td class="type" align="center"><%= part.part_type %></td>
-    <td><%= cms_reorder_links('pages_part', {:controller => 'pages_parts', :action => 'update', :page_id => @page, :part_id => part}, :put) %></td>
-    <td class="buttons"><%= link_to image_tag('link_break.png'),
-                                    {:controller => 'pages_parts', :action => 'delete', :page_id => @page, :part_id => part},
+<% @pages_parts.each do |pages_part| -%>
+  <tr class="part <%= cycle("odd", "even") %>" id="page_part_<%= pages_part.id %>">
+    <td class="name"><%= link_to h(pages_part.part.name), edit_part_path(pages_part.part) %></td>
+    <td class="type" align="center"><%= pages_part.part.part_type %></td>
+    <td><%= cms_reorder_links('pages_part', {:controller => 'pages_parts', :action => 'update', :page_id => @page, :part_id => pages_part}, :put) %></td>
+    <td class="buttons">
+      <%= cms_change_status_link('pages_part', pages_part) %>
+      <%= link_to image_tag('link_break.png'),
+                                    {:controller => 'pages_parts', :action => 'delete', :page_id => @page, :part_id => pages_part},
                                     :remote => true,
                                     :method => :delete,
                                     :data => {:confirm => l(:text_are_you_sure)},
@@ -31,7 +31,7 @@
 
 
 <%= form_tag({:controller => 'pages_parts',
-                            :action => 'add',
+                            :action => 'create',
                             :page_id => @page},
                  :remote => true,
                  :method => :post,

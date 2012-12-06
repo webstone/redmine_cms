@@ -6,6 +6,7 @@ match "products/:project_id" => "project_tabs#show"
 resources :cms_menus
 resources :pages
 resources :parts
+resources :pages_parts
 
 match "pages/:project_id/:id" => "pages#show", :via => :get
 

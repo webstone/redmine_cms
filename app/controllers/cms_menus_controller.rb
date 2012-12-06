@@ -6,7 +6,7 @@ class CmsMenusController < ApplicationController
   before_filter :find_menu, :except => [:index, :new, :create]
 
   def index
-    @cms_menus = CmsMenu.all
+    redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'   
   end
 
   def edit

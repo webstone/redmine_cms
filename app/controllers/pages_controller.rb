@@ -24,7 +24,7 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @parts = @page.parts
+    @pages_parts = @page.pages_parts
   end
 
   def new
