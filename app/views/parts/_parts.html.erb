@@ -27,7 +27,7 @@
     <% end %>
 
 
-  <tr class="part <%= cycle("odd", "even") %> <%= %w(disabled active)[part.status_id] %>">
+  <tr class="part <%= cycle("odd", "even") %> ">
   <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
   <td class="type"><%= part.part_type %></td>
     <td class="buttons">
