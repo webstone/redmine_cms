@@ -3,7 +3,6 @@
 <div class="box tabular">
 <%= text_area_tag 'part[content]', @part.content, :cols => 100, :rows => 30, :class => 'wiki-edit' %><%= wikitoolbar_for 'part_content' if @part.content_type == 'textile' %>
 <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_part_name)  %></p>
-<p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @part.status_id), :label => l(:label_cms_part_status)  %></p>  
 <p><%= f.select :part_type, options_for_select([["Content", "content"], ["Sidebar", "sidebar"], ["Header", "header"], ["Footer", "footer"]],  @part.part_type), :label => l(:label_cms_part_type) %></p>  
 
 <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"], ["CSS", "css"], ["JavaScript", "java_script"]],  @part.content_type), :label => l(:label_cms_part_content_type) %></p>  
