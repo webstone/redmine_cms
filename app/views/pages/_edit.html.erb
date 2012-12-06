@@ -1,0 +1,8 @@
+<%= labelled_form_for :page, @page, :url => { :action => 'update', :id => @page},
+  :html => { :id => 'page-form', :multipart => true, :method => :put } do |f| %>
+
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>
+
+

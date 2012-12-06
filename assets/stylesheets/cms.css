@@ -28,9 +28,8 @@ div.feature {
 }
 
 div.feature .feature-content {
-  padding-left: 50%;
+  padding-left: 52%;
   min-height: 250px;
-  height: 250px;
   position: relative;
 }
 
@@ -43,7 +42,7 @@ div.feature .feature-content {
 
 div.feature.left .feature-content {
   padding-left: 0px;
-  padding-right: 50%;
+  padding-right: 52%;
 }
 
 div.feature.left .feature-content img {
@@ -59,9 +58,10 @@ div.feature.left .feature-content img {
   display: none;
 }
 
-div#page_title {
+div.page-title {
   padding: 10px 0 25px;  
   text-align: center;
+  font-size: 14px;
 }
 
 /**************************************************************/

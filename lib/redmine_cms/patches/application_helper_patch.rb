@@ -9,15 +9,37 @@ module RedmineCMS
 
       module InstanceMethods
         def render_page(page)
-          case page.content_type
-          when "textile"
-            textilizable(page, :content, :attachments => page.attachments)
-          when "html"
-            page.content.html_safe
-          else
-            page.content
-          end  
+
+          page.header_parts.each do |part|
+            content_for(:header, render_part(part))
+          end
+
+          page.sidebar_parts.each do |part|
+            content_for(:sidebar, render_part(part))
+          end
+
+          page.footer_parts.each do |part|
+            content_for(:footer, render_part(part))
+          end          
+
+          s = "".html_safe
+          page.content_parts.each do |part|
+            s << render_part(part)
+          end
+          s
         end
+
+        def render_part(part)
+          case part.content_type
+          when "textile"
+            textilizable(part, :content, :attachments => part.attachments)
+          when "html"
+            part.content.html_safe
+          else
+            part.content
+          end  
+        end        
+
       end
       
     end

@@ -27,5 +27,18 @@ en:
   label_cms_page_content_type: Content type
   label_cms_parent_page: Parent page
   label_cms_use_localization: Localization
+  label_cms_home_page: Home page
+  label_cms_landing_page: Landing page
+  label_cms_projects_page: Projects page
+  label_cms_my_page: My page
+
+  label_cms_part_plural: Parts
+  label_cms_part: Part
+  label_cms_part_new: New part
+  label_cms_part_name: Name
+  label_cms_part_status: Status
+  label_cms_part_content: Content
+  label_cms_part_content_type: Content type
+  label_cms_part_type: Type
 
   label_cms_layout_content: Layout content

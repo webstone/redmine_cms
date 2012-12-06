@@ -32,12 +32,13 @@ Redmine::Plugin.register :redmine_cms do
   delete_menu_item(:top_menu, :"projects")
   delete_menu_item(:account_menu, :register)  
 
-  # delete_menu_item(:project_menu, :activity)
+  delete_menu_item(:project_menu, :activity)
+  delete_menu_item(:project_menu, :overview)
 
   5.downto(1) do |index|
     tab = "project_tab_#{index}".to_sym
     menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index}, 
-                             :after => :overview,
+                             :first => :true,
                              :param => :project_id,
                              :caption => Proc.new{|p| ContactsSetting["project_tab_#{index}_caption".to_sym, p.id] || tab.to_s },
                              :if => Proc.new{|p| !ContactsSetting["project_tab_#{index}_caption".to_sym, p.id].blank? }

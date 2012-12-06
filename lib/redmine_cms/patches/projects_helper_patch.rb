@@ -1,6 +1,6 @@
 require_dependency 'queries_helper'
 
-module RedmineCMS
+module RedmineCms
   module Patches
     module ProjectsHelperPatch
       def self.included(base)
@@ -33,6 +33,6 @@ module RedmineCMS
   end
 end
 
-unless ProjectsHelper.included_modules.include?(RedmineCMS::Patches::ProjectsHelperPatch)
-  ProjectsHelper.send(:include, RedmineCMS::Patches::ProjectsHelperPatch)
+unless ProjectsHelper.included_modules.include?(RedmineCms::Patches::ProjectsHelperPatch)
+  ProjectsHelper.send(:include, RedmineCms::Patches::ProjectsHelperPatch)
 end
