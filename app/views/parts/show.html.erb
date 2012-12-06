@@ -1,0 +1,8 @@
+<div class="contextual">
+  <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' if User.current.admin? %>
+</div>
+<h2><%="#{l(:label_cms_part)}: #{@part.name} - ##{@part.id}"%></h2>
+
+<div class="wiki part <%= @part.name %>">
+  <%= render_part @part %>
+</div>

@@ -1,0 +1,31 @@
+<div class="contextual">
+<%= link_to l(:label_cms_part_new), new_part_path, :class => 'icon icon-add' %>
+</div>
+
+<h2><%=l(:label_cms_part_plural)%></h2>
+
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+    <th>#</th>
+    <th><%= l(:label_cms_part_name) %></th>
+    <th><%= l(:label_cms_part_type) %></th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for part in @parts -%>
+  <tr class="part <%= cycle("odd", "even") %> <%= %w(disabled active)[part.status_id] %>">
+  <td class="id"><%= link_to part.id, edit_part_path(part) %></td>
+  <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
+  <td class="type"><%= part.part_type %></td>
+    <td class="buttons">
+      <%= change_part_status_link(part) %>
+      <%= delete_link part_path(part, :back_url => parts_path(params)) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+</div>
+
+<% html_title(l(:label_cms_part_plural)) -%>
