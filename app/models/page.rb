@@ -1,7 +1,7 @@
 class Page < ActiveRecord::Base
   unloadable
 
-  has_many :pages_parts, :order => "#{PagesPart.table_name}.position"
+  has_many :pages_parts
   has_many :parts, :uniq => true, :through => :pages_parts
 
   acts_as_attachable

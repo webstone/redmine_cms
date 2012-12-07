@@ -27,10 +27,10 @@ module RedmineCMS
         end
 
         def cached_render_part(part)
-          if part.is_cached && (output = Rails.cache.fetch(part, :expires_in => 15.minutes) {render_part(part)})
-            output
+          if part.is_cached 
+            Rails.cache.fetch(part, :expires_in => 15.minutes) {render_part(part)}
           else
-            output = render_part(part)
+            render_part(part)
           end
         end
 
