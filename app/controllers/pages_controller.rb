@@ -25,6 +25,9 @@ class PagesController < ApplicationController
 
   def edit
     @pages_parts = @page.pages_parts.order_by_type
+    respond_to do |format|
+      format.html {render :action => 'edit', :layout => 'base'} 
+    end  
   end
 
   def new
