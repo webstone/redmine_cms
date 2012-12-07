@@ -51,6 +51,59 @@ div.feature.left .feature-content img {
 }
 
 /**************************************************************/
+/*                   PRICING TABLE
+/**************************************************************/
+
+div.wiki .pricingtable {
+  width: 100%;
+}
+
+div.wiki table.pricingtable {
+  text-align: center;
+}
+
+div.wiki table.pricingtable, div.wiki table.pricingtable th, div.wiki table.pricingtable td {
+  border: none;
+}
+
+div.wiki table.pricingtable th, div.wiki table.pricingtable td {
+  padding: 15px;
+}
+
+div.wiki table.pricingtable .divider td, div.wiki table.pricingtable .divider th {
+  padding: 2px;
+}
+div.wiki table.pricingtable .divider, div.wiki table.pricingtable .divider .optimal  {
+  background: #CCC;
+}
+
+div.wiki  table.pricingtable td:first-child {
+  text-align: left;
+  white-space: nowrap;
+}
+
+div.wiki table.pricingtable div.price {
+  font-size: 25px;
+  padding: 10px;
+}
+
+div.wiki table.pricingtable .optimal {
+  background: #EBEBEB;
+}
+
+div.wiki table.pricingtable .odd .optimal {
+  background: #DBDBDB;
+}
+
+div.wiki table.pricingtable .buttons td {
+  padding-bottom: 40px;
+}
+
+div.wiki table.pricingtable .header th {
+  padding-top: 40px;
+}
+
+/**************************************************************/
 /*                   PAGE
 /**************************************************************/
 
