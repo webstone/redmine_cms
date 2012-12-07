@@ -14,4 +14,4 @@ match "pages/:page_id/add_part" => "pages_parts#add", :via => :post
 match "pages/:page_id/delete_part/:part_id" => "pages_parts#delete", :via => :delete
 match "pages/:page_id/update/:part_id" => "pages_parts#update", :via => :put
 
-root :to => 'pages#home', :as => 'home'
+root :to => 'pages#main'

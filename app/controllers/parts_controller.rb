@@ -1,6 +1,5 @@
 class PartsController < ApplicationController
   unloadable
-  layout 'admin'
   before_filter :require_admin
   before_filter :find_part, :except => [:index, :new, :create]
 
@@ -12,15 +11,9 @@ class PartsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html {render :action => 'show', :layout => 'base'} 
-    end    
   end
 
   def edit
-    respond_to do |format|
-      format.html {render :action => 'edit', :layout => 'base'} 
-    end    
   end
 
   def new

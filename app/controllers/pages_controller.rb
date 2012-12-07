@@ -24,7 +24,7 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @pages_parts = @page.pages_parts
+    @pages_parts = @page.pages_parts.order_by_type
   end
 
   def new

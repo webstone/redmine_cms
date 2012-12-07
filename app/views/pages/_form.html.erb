@@ -8,10 +8,7 @@
 <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_parent_page %></p>
 <% end %>
 <p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
-<p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
 
-<%= link_to_attachments @page %>
-<p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
 </div>
 
 

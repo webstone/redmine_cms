@@ -5,8 +5,8 @@ class PagesPart < ActiveRecord::Base
 
   acts_as_list :scope => 'page_id = \'#{page_id}\''
 
-  default_scope order(:page_id).order(:position)
   scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+  scope :order_by_type, includes(:part).order("#{Part.table_name}.part_type").order(:position)
 
   before_destroy :touch_page
   after_save :touch_page

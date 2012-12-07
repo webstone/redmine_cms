@@ -61,7 +61,7 @@ private
     @pages_part = PagesPart.find(params[:id])
     @part = @pages_part.part
     @page = @pages_part.page
-    @pages_parts = @page.pages_parts
+    @pages_parts = @page.pages_parts.order_by_type
   rescue ActiveRecord::RecordNotFound
     render_404
   end
@@ -69,7 +69,7 @@ private
   def find_page_and_part
     @page = Page.find_by_name(params[:page_id])
     @part = Part.find(params[:part_id])
-    @pages_parts = @page.pages_parts 
+    @pages_parts = @page.pages_parts.order_by_type 
   rescue ActiveRecord::RecordNotFound
     render_404
   end
