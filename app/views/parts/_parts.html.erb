@@ -17,7 +17,7 @@
     <% if part.part_type != previous_group %>
       <% reset_cycle %>
       <tr class="group open">
-        <td colspan="4">
+        <td colspan="3">
           <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
           <%= part.part_type.blank? ? 'None' : part.part_type %> 
           <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}", "toggleAllRowGroups(this)", :class => 'toggle-all') %>
