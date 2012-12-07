@@ -10,7 +10,8 @@ module RedmineCMS
       module InstanceMethods
         def render_page(page)
           s = "".html_safe
-          page.pages_parts.active.each do |pages_part|
+          s << cached_render_part(page)
+          page.pages_parts.order(:position).active.each do |pages_part|
             case pages_part.part.part_type
             when "header"
               content_for(:header, render_part(pages_part.part))
@@ -27,7 +28,7 @@ module RedmineCMS
         end
 
         def cached_render_part(part)
-          if part.is_cached 
+          if part.respond_to?(:is_cached) && part.is_cached?
             Rails.cache.fetch(part, :expires_in => 15.minutes) {render_part(part)}
           else
             render_part(part)

@@ -67,7 +67,7 @@ div.wiki table.pricingtable, div.wiki table.pricingtable th, div.wiki table.pric
 }
 
 div.wiki table.pricingtable th, div.wiki table.pricingtable td {
-  padding: 15px;
+  padding: 10px;
 }
 
 div.wiki table.pricingtable .divider td, div.wiki table.pricingtable .divider th {
@@ -82,7 +82,7 @@ div.wiki  table.pricingtable td:first-child {
   white-space: nowrap;
 }
 
-div.wiki table.pricingtable div.price {
+div.wiki table.pricingtable div.price, div.wiki table.pricingtable th.product  {
   font-size: 25px;
   padding: 10px;
 }
@@ -96,11 +96,11 @@ div.wiki table.pricingtable .odd .optimal {
 }
 
 div.wiki table.pricingtable .buttons td {
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 div.wiki table.pricingtable .header th {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 /**************************************************************/
