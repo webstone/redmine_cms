@@ -47,7 +47,7 @@ div.feature.left .feature-content {
 
 div.feature.left .feature-content img {
   right: 0px;
-  left: initial;
+  left: auto;
 }
 
 /**************************************************************/

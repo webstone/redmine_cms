@@ -3,6 +3,7 @@ class PagesPartsController < ApplicationController
   before_filter :find_pages_part, :only => [:destroy, :update]
 
   helper :cms
+  helper :parts
 
   def create
     PagesPart.create(:page => @page, :part => @part)
