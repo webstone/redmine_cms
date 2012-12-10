@@ -9,21 +9,21 @@ module PartsHelper
     end
   end  
 
- def parts_option_for_select
-  parts = Part.order(:part_type).order(:content_type)
-  return "" unless parts.any?
-  previous_group = parts.first.part_type 
-  s = "<optgroup label=\"#{ERB::Util.html_escape(parts.first.part_type)}\">".html_safe
-  parts.each do |part|
-    if part.part_type != previous_group
-      reset_cycle
-      s << '</optgroup>'.html_safe
-      s << "<optgroup label=\"#{ERB::Util.html_escape(part.part_type)}\">".html_safe
-      previous_group = part.part_type
+  def parts_option_for_select
+    parts = Part.order(:part_type).order(:content_type)
+    return "" unless parts.any?
+    previous_group = parts.first.part_type 
+    s = "<optgroup label=\"#{ERB::Util.html_escape(parts.first.part_type)}\">".html_safe
+    parts.each do |part|
+      if part.part_type != previous_group
+        reset_cycle
+        s << '</optgroup>'.html_safe
+        s << "<optgroup label=\"#{ERB::Util.html_escape(part.part_type)}\">".html_safe
+        previous_group = part.part_type
+      end
+      s << %Q(<option value="#{ERB::Util.html_escape(part.id)}">#{ERB::Util.html_escape(part.name)}</option>).html_safe
     end
-    s << %Q(<option value="#{ERB::Util.html_escape(part.id)}">#{ERB::Util.html_escape(part.name)}</option>).html_safe
-  end
-  s << '</optgroup>'
-  s.html_safe
-end 
+    s << '</optgroup>'
+    s.html_safe
+  end 
 end

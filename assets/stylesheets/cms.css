@@ -104,6 +104,25 @@ div.wiki table.pricingtable .header th {
 }
 
 /**************************************************************/
+/*                   BUTTONS
+/**************************************************************/
+
+a.button, button.button, strong.button, div.button {
+  background-color: #628DB6;
+  
+  color: white;
+  border-radius: 3px;
+}
+
+a.button:hover {
+  text-decoration: none;
+}
+
+.button span {
+  font-size: 12px;
+}
+
+/**************************************************************/
 /*                   PAGE
 /**************************************************************/
 
@@ -112,9 +131,7 @@ div.wiki table.pricingtable .header th {
 }
 
 div.page-title {
-  padding: 10px 0 25px;  
   text-align: center;
-  font-size: 14px;
 }
 
 /**************************************************************/
@@ -124,4 +141,5 @@ div.page-title {
 
 .icon-menu {background-image: url(../images/sitemap.png);}
 .icon-page {background-image: url(../images/page_white_world.png);}
+.icon-refresh {background-image: url(../images/arrow_refresh.png);}
 

@@ -4,7 +4,11 @@ match "projects/:project_id/pages/:tab" => "project_tabs#show"
 match "products/:project_id" => "project_tabs#show"
 
 resources :cms_menus
-resources :pages
+resources :pages do
+  member do
+   get :expire_cache
+  end
+end
 resources :parts
 resources :pages_parts
 

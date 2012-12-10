@@ -19,14 +19,14 @@ class PagesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html {render :action => 'show', :layout => 'base'} 
+      format.html {render :action => 'show', :layout => use_layout} 
     end    
   end
 
   def edit
     @pages_parts = @page.pages_parts.order_by_type
     respond_to do |format|
-      format.html {render :action => 'edit', :layout => 'base'} 
+      format.html {render :action => 'edit', :layout => use_layout} 
     end  
   end
 
@@ -61,7 +61,15 @@ class PagesController < ApplicationController
   def destroy
     @page.destroy
     redirect_to :action => 'index'
-  end    
+  end   
+
+  def expire_cache
+    expire_fragment(@page)
+    @page.parts.each do |part|
+      expire_fragment(part)
+    end
+    redirect_to :back
+  end 
 
 private
   def find_page
