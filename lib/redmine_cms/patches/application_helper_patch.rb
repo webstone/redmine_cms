@@ -24,7 +24,6 @@ module RedmineCMS
             end  
           end
           s
-
         end
 
         def cached_render_part(part)
@@ -36,18 +35,19 @@ module RedmineCMS
         end
 
         def render_part(part)
-          case part.content_type
-          when "textile"
-            textilizable(part, :content, :attachments => part.attachments)
-          when "html"
-            part.content.html_safe
-          when "java_script"
-            "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe
-          when "css"
-            "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe
-          else
-            part.content
-          end  
+          s = case part.content_type
+              when "textile"
+                textilizable(part, :content, :attachments => part.attachments)
+              when "html"
+                part.content.html_safe
+              when "java_script"
+                "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe
+              when "css"
+                "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe
+              else
+                part.content
+              end 
+          Liquid::Template.parse(s).render('test' => 'Привет').html_safe 
         end        
 
       end

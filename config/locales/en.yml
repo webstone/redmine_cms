@@ -41,5 +41,6 @@ en:
   label_cms_part_content: Content
   label_cms_part_content_type: Content type
   label_cms_part_type: Type
+  label_cms_refresh_cache: Refresh cache
 
   label_cms_layout_content: Layout content
