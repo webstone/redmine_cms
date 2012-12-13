@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <title><%=h html_title %></title>
-<meta name="description" content="<%= Redmine::Info.app_name %>" />
-<meta name="keywords" content="redmine,plugins,crm" />
+<meta name="description" content="<%= @page_description || Redmine::Info.app_name %>" />
+<meta name="keywords" content="<%= @page_keywords || "issue,bug,tracker" %>" />
 <%= csrf_meta_tag %>
 <%= favicon %>
 <%= stylesheet_link_tag 'jquery/jquery-ui-1.8.21', 'application', :media => 'all' %>
@@ -70,7 +70,7 @@
 <div id="ajax-modal" style="display:none;"></div>
 
 <div id="footer">
-  <%# yield :footer %>
+  <%= yield :footer %>
   <%= render_menu :footer_menu -%>
   <p>
      &copy; <%= link_to "RedmineCRM", "http://redminecrm.com" %>,  Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> 

@@ -47,7 +47,7 @@ module RedmineCMS
               else
                 part.content
               end 
-          Liquid::Template.parse(s).render('test' => 'Привет').html_safe 
+          Liquid::Template.parse(s).render.html_safe 
         end        
 
       end

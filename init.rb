@@ -11,7 +11,8 @@ Redmine::Plugin.register :redmine_cms do
   require 'redmine_cms'
 
   settings :default => {
-    :use_localization => true
+    :use_localization => true,
+    :base_layout => 'base'
   }, :partial => 'settings/cms'  
 
   project_module :project_tab do

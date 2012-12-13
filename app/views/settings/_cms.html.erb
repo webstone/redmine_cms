@@ -4,6 +4,11 @@
 </p>
 
 <p>  
+  <label><%= l(:label_cms_base_layout) %></label>
+  <%= select_tag 'settings[base_layout]',  options_for_select([["Redmine", "base"], ["Redmine with meta tags", "base_meta"], ["CMS", "cms"]], @settings[:base_layout]) %>
+</p>
+
+<p>  
   <label><%= l(:label_cms_landing_page) %></label> 
   <%= text_field_tag 'settings[landing_page]', @settings[:landing_page], :size => 100 %>
 </p>

@@ -4,6 +4,8 @@ class CreatePages < ActiveRecord::Migration
       t.string :name
       t.string :title
       t.string :summary
+      t.string :keywords
+      t.text :description
       t.text :content
       t.string :content_type      
       t.integer :status_id, :default => RedmineCms::STATUS_LOCKED

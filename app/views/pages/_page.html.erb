@@ -14,9 +14,7 @@
 </div>
 <% end %>
 <div class="wiki page <%= @page.name %>">
-  <%# cache @page do %>
-    <%= render_page @page %>
-  <%# end %>
+  <%= render_page @page %>
 </div>
 
 <% html_title(@page.title) -%>
