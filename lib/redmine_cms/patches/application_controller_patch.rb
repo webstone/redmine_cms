@@ -19,11 +19,11 @@ module RedmineCMS
 
         def set_layout
           # _layout = "cms"
-          self.class.layout "cms"
+          self.class.layout(RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
         end
 
         def use_layout_with_cms
-          request.xhr? ? false : "cms"
+          request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
         end
 
         def set_localization_with_cms

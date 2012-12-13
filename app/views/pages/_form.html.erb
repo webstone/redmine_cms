@@ -14,6 +14,7 @@
   <%= link_to_function image_tag('edit.png'), '$("#show_content_link").hide(); $("#page_content").show()' %>
 </p>
 
+
 <span id="page_content" style="display:none;">
 <p>
   <%= label_tag l(:label_cms_page_content) %>
@@ -25,6 +26,11 @@
 <p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
 
 </span>
+
+<fieldset><title><%= l(:label_cms_seo) %></title>
+  <p><%= f.text_field :keywords, :size => 100, :label => l(:label_cms_keywords)  %></p>
+  <p><%= f.text_area :description, :rows => 5, :label => l(:label_cms_description) %></p> 
+</fieldset>
 </div>
 
 

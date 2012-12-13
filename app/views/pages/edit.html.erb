@@ -1,5 +1,4 @@
-<p><%= breadcrumb [link_to(l(:label_cms_page_plural), pages_path)] %></p>
-<h2><%=l(:label_cms_page)%> <%= link_to page_path(@page), page_url(@page) %></h2>
+<h2><%= link_to l(:label_cms_page_plural), pages_path %> &#187; <%=l(:label_cms_page)%> <%= link_to page_path(@page), page_url(@page) %></h2>
 
 
 <% edit_page_tabs = [{:name => 'edit', :partial => 'edit', :label => :label_cms_page_plural},

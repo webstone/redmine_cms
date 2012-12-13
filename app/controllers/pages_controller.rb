@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   unloadable
-  layout 'admin', :except => :show
+  layout 'admin', :except => [:show, :edit]
   before_filter :require_admin, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :check_status, :only => :show
@@ -18,6 +18,8 @@ class PagesController < ApplicationController
   end
 
   def show
+    @page_keywords = @page.keywords if @page.keywords
+    @page_description = @page.description
     respond_to do |format|
       format.html {render :action => 'show', :layout => use_layout} 
     end    
