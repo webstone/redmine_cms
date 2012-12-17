@@ -109,9 +109,7 @@ div.wiki table.pricingtable .header th {
 
 a.button, button.button, strong.button, div.button {
   background-color: #628DB6;
-  
   color: white;
-  border-radius: 3px;
 }
 
 a.button:hover {

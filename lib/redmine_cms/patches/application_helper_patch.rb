@@ -37,17 +37,16 @@ module RedmineCMS
         def render_part(part)
           s = case part.content_type
               when "textile"
-                textilizable(part, :content, :attachments => part.attachments)
+                Liquid::Template.parse(textilizable(part, :content, :attachments => part.attachments)).render.html_safe 
               when "html"
-                part.content.html_safe
+                Liquid::Template.parse(part.content).render.html_safe 
               when "java_script"
-                "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe
+                Liquid::Template.parse("<script type=\"text/javascript\">#{part.content.html_safe}</script>").render.html_safe 
               when "css"
-                "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe
+                Liquid::Template.parse("<style type=\"text/css\">#{part.content.html_safe}</style>").render.html_safe 
               else
                 part.content
               end 
-          Liquid::Template.parse(s).render.html_safe 
         end        
 
       end
