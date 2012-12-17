@@ -82,7 +82,42 @@ module RedmineCms
         title = content_tag('h1', args.first)
         summary = textilizable(text, :object => obj, :attachments => obj.attachments)
         content_tag('div', title + summary, :class => "page-title") + ' <hr/>'.html_safe
-      end       
+      end
+
+      desc "Youtube video"
+      macro :youtube do |obj, args|
+        args, options = extract_macro_options(args, :width, :height)
+        width = options[:width] || 400
+        height = options[:height] || 300
+        %~
+        <iframe 
+          width="#{width}" 
+          height="#{height}" 
+          src="http://www.youtube.com/embed/#{args[0]}?hd=1" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+        ~.html_safe
+      end
+      
+      desc "Vimeo video"
+      macro :vimeo do |obj, args|
+        args, options = extract_macro_options(args, :width, :height)
+        width = options[:width] || 400
+        height = options[:height] || 300
+        %~
+        <iframe 
+           src="http://player.vimeo.com/video/#{args[0]}?title=0&amp;byline=0&amp;portrait=0"
+           width="#{width}" 
+           height="#{height}" 
+           frameborder="0" 
+           webkitAllowFullScreen 
+           mozallowfullscreen 
+           allowFullScreen>
+         </iframe>
+        ~.html_safe
+      end
+
     end  
 
   end
