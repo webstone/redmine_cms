@@ -7,6 +7,9 @@ class Part < ActiveRecord::Base
 
   default_scope order(:part_type)
 
+  liquid_methods :name, :attachments, :title
+
+
   after_commit :touch_pages
 
   validates_uniqueness_of :name
