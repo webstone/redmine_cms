@@ -1,6 +1,5 @@
 class Page < ActiveRecord::Base
   unloadable
-
   has_many :pages_parts
   has_many :parts, :uniq => true, :through => :pages_parts
 
