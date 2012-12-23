@@ -1,3 +1,38 @@
+/**************************************************************/
+/*                   TOP MENU
+/**************************************************************/
+
+#top-menu li ul.menu-children {
+  display: none;
+  position: absolute;
+  clear: both;
+  top: 20px;
+  border: 1px solid #555;
+  background-color: #fff;
+  color: #505050; 
+}
+
+#top-menu ul.menu-children > li {
+  padding: 5px;
+  margin: 0px;
+  float: none;
+}
+
+#top-menu ul.menu-children > li a {
+  color: inherit;
+}
+
+#top-menu li:hover ul.menu-children {
+  display: block;
+  z-index: 1000;
+}
+
+#top-menu div#account img.gravatar {
+  margin-right: 5px;
+  padding: 0px;
+}
+
+
 
 /**************************************************************/
 /*                   FOOTER MENU

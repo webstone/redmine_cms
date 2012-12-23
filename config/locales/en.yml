@@ -15,6 +15,7 @@ en:
   label_cms_menu_path: Path
   label_cms_menu_status: Status
   label_cms_position: Position
+  label_cms_account_settings: Account settings
 
   label_cms_page_plural: Pages
   label_cms_page: Page

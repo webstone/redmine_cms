@@ -8,6 +8,23 @@ module RedmineCMS
 
 
       module InstanceMethods
+        def render_account_menu
+          s = "<ul>"
+          if User.current.logged?
+            s << "<li>#{avatar(User.current, :size => "16").to_s.html_safe + link_to(l(:label_my_account), { :controller => 'my', :action => 'account'}) }"
+              s << "<ul class=\"menu-children\">"
+                s << "<li>#{link_to(l(:label_cms_account_settings), { :controller => 'my', :action => 'account'})}</li>"
+                s << "<li>#{link_to l(:label_my_page), { :controller => 'my', :action => 'page' }}</li>"
+                s << "<li>#{link_to l(:label_logout), signout_path}</li>"
+              s << "</ul>"
+            s << "</li>"
+          else
+            s << "<li>#{link_to l(:label_login), signin_path}</li>"
+          end
+          s << "</ul>"
+          s.html_safe
+        end
+
         def render_page(page)
           s = "".html_safe
           s << cached_render_part(page)

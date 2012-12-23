@@ -15,7 +15,8 @@
   </tr></thead>
   <% previous_group = false %>
   <tbody>
-<% for menu in @cms_menus -%>
+
+<% menu_tree(@cms_menus) do |menu, level| -%>
     <% if menu.menu_type != previous_group %>
       <% reset_cycle %>
       <tr class="group open">
@@ -27,9 +28,9 @@
       </tr>
       <% previous_group = menu.menu_type %>
     <% end %>
-  <tr class="menu <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %>">
+  <tr class="menu project <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+  <td class="name"><span><%= link_to menu.name, edit_cms_menu_path(menu) %></span></td>
   <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu) %></td>
-  <td class="name"><%= menu.name %></td>
   <td class="path"><%= menu.path %></td>
   <td class="type"><%= menu.menu_type %></td>
     <td class="buttons">
