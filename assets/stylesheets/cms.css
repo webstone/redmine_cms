@@ -30,6 +30,8 @@
 #top-menu div#account img.gravatar {
   margin-right: 5px;
   padding: 0px;
+  position: relative;
+  top: -2px;  
 }
 
 
