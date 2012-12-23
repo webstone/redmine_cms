@@ -10,4 +10,18 @@ module CmsMenusHelper
     end
   end
 
+  def menus_options_for_select(menus)
+    options = []
+    CmsMenu.menu_tree(menus) do |menu, level|
+      label = (level > 0 ? '&nbsp;' * 2 * level + '&#187; ' : '').html_safe
+      label << menu.name
+      options << [label, menu.id]
+    end
+    options    
+  end
+
+  def menu_tree(menus, &block)
+    CmsMenu.menu_tree(menus, &block)
+  end
+
 end
