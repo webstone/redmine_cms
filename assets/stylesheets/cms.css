@@ -182,6 +182,19 @@ a.button:hover {
   border: 1px solid #CCC;
   padding: 5px 10px;
   background: white;  
+  z-index: 1;
+}
+
+.contextual.page-edit ul.parts-edit li {
+  padding-left: 10px;
+}
+
+.contextual.page-edit ul.parts-edit {
+  display: none;
+}
+
+.contextual.page-edit:hover ul.parts-edit {
+  display: inline;
 }
 
 #content:hover > .contextual.page-edit {
