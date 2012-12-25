@@ -1,7 +1,9 @@
-<div class="contextual">
-  <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' if User.current.admin? %>
-  <%= link_to l(:label_cms_refresh_cache), expire_cache_page_path(@page), :class => 'icon icon-reload' if User.current.admin? %>
+<% if User.current.admin? %>
+<div class="contextual page-edit">
+  <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
+  <%= link_to l(:label_cms_refresh_cache), expire_cache_page_path(@page), :class => 'icon icon-reload' %>
 </div>
+<% end %>
 
 <%= page_breadcrumb(@page) unless @project %>
 
