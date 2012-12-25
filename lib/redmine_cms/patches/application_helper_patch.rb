@@ -71,6 +71,8 @@ module RedmineCMS
               else
                 part.content
               end 
+
+          (part.is_a?(Part) && ["textile", "html"].include?(part.content_type))? content_tag(:span, s, :id => part.name, :class => "part") : s
         end        
 
       end
