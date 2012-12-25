@@ -1,8 +1,10 @@
 <h2><%= link_to l(:label_cms_page_plural), pages_path %> &#187; <%=l(:label_cms_page)%> <%= link_to page_path(@page), page_url(@page) %></h2>
 
+<%= error_messages_for 'page' %>
 
-<% edit_page_tabs = [{:name => 'edit', :partial => 'edit', :label => :label_cms_page_plural},
-        {:name => 'page_parts', :partial => 'page_parts', :label => :label_cms_part_plural}
+<% edit_page_tabs = [{:name => 'edit', :partial => 'edit', :label => :label_cms_page},
+        {:name => 'page_parts', :partial => 'page_parts', :label => :label_cms_part_plural},
+        {:name => 'content', :partial => 'content', :label => :label_cms_page_content}
         ]   %>   
 
 <%= render_tabs edit_page_tabs %>

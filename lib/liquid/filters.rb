@@ -27,7 +27,7 @@ module RedmineCms
       end  
 
       # example:
-      #   {{ 'image.png' | thumbnail_url: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
+      #   {{ 'image.png' | thumbnail_tag: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
       def thumbnail_tag(input, *args)
         return '' if input.nil?
         image_options = inline_options(args_to_options(args))
@@ -36,6 +36,15 @@ module RedmineCms
         part = @context.registers[:part]
         attachment = part.attachments.where(:filename => input).first
         attachment ? "<img src=\"/attachments/thumbnail/#{attachment.id}/#{size}\" #{image_options}/>"  : "attachment #{input} not found"
+      end    
+
+      # example:
+      #   {{ 'image.png' | asset_image_tag: 'title:A title', 'width:100px', 'height:200px'  }}
+      def asset_image_tag(input, *args)
+        return '' if input.nil?
+        image_options = inline_options(args_to_options(args))
+        options = args_to_options(args)
+        "<img src=\"/plugin_assets/redmine_cms/images/#{input}\" #{image_options}/>" 
       end      
 
     protected  
