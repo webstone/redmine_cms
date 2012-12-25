@@ -8,13 +8,14 @@
 
 <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
 
-<%= link_to_attachments @page, :thumbnails => true  %>
 <p id="attachments_form"><label><%= l(:label_attachment_plural) %></label><%= render :partial => 'attachments/form', :locals => {:container => @page} %></p>
 
 </div>
 
 <%= submit_tag l(:button_save) %>
 <% end %>
+
+<%= link_to_attachments @page, :thumbnails => true  %>
 
 <% content_for :header_tags do %>
   <%= javascript_include_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
