@@ -18,7 +18,8 @@ module RedmineCMS
         # include ContactsHelper
 
         def set_layout
-          _layout = "cms"
+          # _layout = "cms"
+          self.class.layout "cms"
           # self.class.layout(RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
         end
 
