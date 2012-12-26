@@ -50,10 +50,25 @@ Redmine::Plugin.register :redmine_cms do
 
   end
 
-  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms, :if => Proc.new{|p| User.current.admin?}
+  # menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms, :parent => :administration
 
   menu :admin_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms
 
+  # Redmine::MenuManager.map :top_menu do |menu|
+  #   menu.push :projects, {:controller => 'admin', :action => 'projects'}, :caption => :label_project_plural, :parent => :administration
+  #   menu.push :users, {:controller => 'users'}, :caption => :label_user_plural, :parent => :administration
+  #   menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural, :parent => :administration
+  #   menu.push :roles, {:controller => 'roles'}, :caption => :label_role_and_permissions, :parent => :administration
+  #   menu.push :trackers, {:controller => 'trackers'}, :caption => :label_tracker_plural, :parent => :administration
+  #   menu.push :issue_statuses, {:controller => 'issue_statuses'}, :caption => "Привет", :html => {:class => 'issue_statuses'}, :parent => :administration  
+  # end
+
+end
+
+Redmine::MenuManager.items(:admin_menu).root.children.each do |node| 
+  Redmine::MenuManager.map(:top_menu) do |menu| 
+    menu.push(node.name.to_s + "_top", node.url, :parent => :administration) unless menu.exists?(node.name)
+  end
 end
 
 CmsMenu.rebuild if CmsMenu.table_exists?

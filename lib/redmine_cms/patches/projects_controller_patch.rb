@@ -14,6 +14,11 @@ module RedmineCms
       module InstanceMethods
 
         def show_with_cms
+          if params[:jump]
+            # try to redirect to the requested menu item
+            redirect_to_project_menu_item(@project, params[:jump]) && return
+          end          
+          
           unless ContactsSetting["landing_page", @project.id].blank?
             redirect_to ContactsSetting["landing_page", @project.id], :status => 301
           else
