@@ -25,9 +25,13 @@ Redmine::Plugin.register :redmine_cms do
   end
 
   Redmine::MenuManager.map :footer_menu do |menu|
-    menu.push :home, :home_path
+    #empty
   end  
-  
+
+  Redmine::MenuManager.map :top_menu do |menu|
+    #empty
+  end  
+
   delete_menu_item(:top_menu, :home) 
   delete_menu_item(:top_menu, :"my_page")
   delete_menu_item(:top_menu, :"projects")
@@ -46,11 +50,11 @@ Redmine::Plugin.register :redmine_cms do
 
   end
 
-  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :first => :true, :caption => :label_cms, :if => Proc.new{|p| User.current.admin?}
+  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms, :if => Proc.new{|p| User.current.admin?}
 
   menu :admin_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms
 
 end
 
-
 CmsMenu.rebuild if CmsMenu.table_exists?
+
