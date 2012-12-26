@@ -7,7 +7,7 @@
 <% end %>
 <p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
 
-<fieldset><title><%= l(:label_cms_seo) %></title>
+<fieldset><legend><%= l(:label_cms_seo) %></legend>
   <p><%= f.text_field :keywords, :size => 100, :label => l(:label_cms_keywords)  %></p>
   <p><%= f.text_area :description, :rows => 5, :label => l(:label_cms_description) %></p> 
 </fieldset>

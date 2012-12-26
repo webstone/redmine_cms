@@ -42,7 +42,7 @@ class PagesController < ApplicationController
     if @page.save
       render_attachment_warning_if_needed(@page)
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action =>"index"
+      redirect_to :action =>"show", :id => @page
     else
       render :action => 'edit'
     end
@@ -54,7 +54,7 @@ class PagesController < ApplicationController
     if @page.save
       render_attachment_warning_if_needed(@page)
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action =>"index"
+      redirect_to :action =>"show", :id => @page
     else
       render :action => 'new'
     end

@@ -187,6 +187,7 @@ a.button:hover {
 
 .contextual.page-edit ul.parts-edit li {
   padding-left: 10px;
+  list-style-type: none;
 }
 
 .contextual.page-edit ul.parts-edit {
