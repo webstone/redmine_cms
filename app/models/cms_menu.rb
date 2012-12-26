@@ -47,8 +47,10 @@ class CmsMenu < ActiveRecord::Base
   def self.rebuild 
     Redmine::MenuManager.map :top_menu do |menu|
       CmsMenu.all.each{|m| menu.delete(m.name.to_sym) }
+
       CmsMenu.active.where(:menu_type => "top_menu", :parent_id => nil).each do |cms_menu|
-        Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
+        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? )
+        # Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
       end  
 
       CmsMenu.active.where(:menu_type => "top_menu").where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
@@ -57,11 +59,14 @@ class CmsMenu < ActiveRecord::Base
     end  
 
     Redmine::MenuManager.map :footer_menu do |menu|
+      CmsMenu.all.each{|m| menu.delete(m.name.to_sym) }
       CmsMenu.where(:menu_type => "footer_menu").each do |cms_menu|
-        menu.delete(cms_menu.name.to_sym)
-        Redmine::MenuManager.items(:footer_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
+        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption)
+        # menu.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
+        # Redmine::MenuManager.items(:footer_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
       end  
-    end  
+    end 
+
   end
 
   def valid_parents
