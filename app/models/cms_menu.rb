@@ -2,7 +2,7 @@ class CmsMenu < ActiveRecord::Base
   unloadable
   belongs_to :source, :polymorphic => true
 
-  acts_as_list :scope => 'menu_type = \'#{menu_type}\''
+  acts_as_list :scope => 'menu_type = \'#{menu_type}\' AND parent_id = #{parent_id}'
   acts_as_tree :dependent => :nullify
 
   default_scope order(:menu_type).order(:position)

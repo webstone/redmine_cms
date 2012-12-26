@@ -6,7 +6,8 @@ module RedmineCMS
 
         base.class_eval do
           unloadable
-          after_filter :set_layout
+          layout :use_layout_with_cms
+          # after_filter :set_layout
           alias_method_chain :set_localization, :cms
           alias_method_chain :use_layout, :cms
           # skip_before_filter :set_localization, :only => [:method_name]
@@ -19,12 +20,12 @@ module RedmineCMS
 
         def set_layout
           # _layout = "cms"
-          self.class.layout "cms"
-          # self.class.layout(RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
+          # self.class.layout "cms"
+          self.class.layout(RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
         end
 
         def use_layout_with_cms
-          request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base") unless _layout == 'admin'
+          request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base")
         end
 
         def set_localization_with_cms
