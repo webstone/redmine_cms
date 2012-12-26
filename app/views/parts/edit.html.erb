@@ -4,8 +4,10 @@
   :html => { :id => 'part-form', :multipart => true, :method => :put } do |f| %>
 
 <%= render :partial => 'form', :locals => { :f => f } %>
+<fieldset><legend><%= l(:label_attachment_plural) %></legend>
+  <%= link_to_attachments @part, :thumbnails => true  %>
+</fieldset><br/>
+
 <%= submit_tag l(:button_save) %>
 <% end %>
-
-<%= link_to_attachments @part, :thumbnails => true %>
 
