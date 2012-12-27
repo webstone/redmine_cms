@@ -9,7 +9,6 @@ Redmine::Plugin.register :redmine_cms do
 
   requires_redmine :version_or_higher => '2.1.2'   
   
-  require 'redmine_cms'
 
   settings :default => {
     :use_localization => true,
@@ -41,7 +40,7 @@ Redmine::Plugin.register :redmine_cms do
   delete_menu_item(:project_menu, :activity)
   delete_menu_item(:project_menu, :overview)
 
-  5.downto(1) do |index|
+  10.downto(1) do |index|
     tab = "project_tab_#{index}".to_sym
     menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index}, 
                              :first => :true,
@@ -57,14 +56,7 @@ Redmine::Plugin.register :redmine_cms do
 
 end
 
-# Redmine::MenuManager.items(:admin_menu).root.children.each do |node| 
-#   Redmine::MenuManager.map(:top_menu) do |menu| 
-#     sub_node = node.clone
-#     admin_menu = menu.find(:administration)
-#     admin_menu.add sub_node unless menu.exists?(sub_node.name)
-#     menu.push(node.name.to_s + "_top", node.url, :parent => :administration) unless menu.exists?(node.name)
-#   end
-# end
+require 'redmine_cms'
 
 CmsMenu.rebuild if CmsMenu.table_exists?
 
