@@ -7,6 +7,8 @@ class CmsMenu < ActiveRecord::Base
 
   default_scope order(:menu_type).order(:position)
   scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+  scope :footer_menu, where(:menu_type => "footer_menu")
+  scope :top_menu, where(:menu_type => "top_menu")
 
   after_commit :rebuild_menu
 
@@ -46,21 +48,21 @@ class CmsMenu < ActiveRecord::Base
 
   def self.rebuild 
     Redmine::MenuManager.map :top_menu do |menu|
-      CmsMenu.all.each{|m| menu.delete(m.name.to_sym) }
+      CmsMenu.top_menu.each{|m| menu.delete(m.name.to_sym) }
 
-      CmsMenu.active.where(:menu_type => "top_menu", :parent_id => nil).each do |cms_menu|
+      CmsMenu.active.top_menu.where(:parent_id => nil).each do |cms_menu|
         menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? ) unless menu.exists?(cms_menu.name.to_sym)
         # Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
       end  
 
-      CmsMenu.active.where(:menu_type => "top_menu").where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
+      CmsMenu.active.top_menu.where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
         menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active? && !menu.exists?(cms_menu.name.to_sym)
       end
     end  
 
     Redmine::MenuManager.map :footer_menu do |menu|
-      CmsMenu.all.each{|m| menu.delete(m.name.to_sym) }
-      CmsMenu.where(:menu_type => "footer_menu").each do |cms_menu|
+      CmsMenu.footer_menu.each{|m| menu.delete(m.name.to_sym) }
+      CmsMenu.footer_menu.each do |cms_menu|
         menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption)
         # menu.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
         # Redmine::MenuManager.items(:footer_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
