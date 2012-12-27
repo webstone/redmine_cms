@@ -49,12 +49,12 @@ class CmsMenu < ActiveRecord::Base
       CmsMenu.all.each{|m| menu.delete(m.name.to_sym) }
 
       CmsMenu.active.where(:menu_type => "top_menu", :parent_id => nil).each do |cms_menu|
-        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? )
+        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? ) unless menu.exists?(cms_menu.name.to_sym)
         # Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
       end  
 
       CmsMenu.active.where(:menu_type => "top_menu").where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
-        menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active?
+        menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active? && !menu.exists?(cms_menu.name.to_sym)
       end
     end  
 
