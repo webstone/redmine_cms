@@ -51,7 +51,7 @@ Redmine::Plugin.register :redmine_cms do
 
   end
 
-  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms, :parent => :administration
+  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :first => true, :caption => :label_cms, :parent => :administration
 
   menu :admin_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms
 
