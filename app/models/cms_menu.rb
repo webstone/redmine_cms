@@ -11,7 +11,7 @@ class CmsMenu < ActiveRecord::Base
   after_commit :rebuild_menu
 
   validates_presence_of :name, :caption
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :scope => :menu_type
   validates_length_of :name, :maximum => 30
   validates_length_of :caption, :maximum => 255
   validate :validate_menu
