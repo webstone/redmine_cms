@@ -8,6 +8,7 @@ module RedmineCms
           unloadable
           alias_method_chain :show, :cms
           alias_method_chain :index, :cms
+          helper :pages
         end
       end
 

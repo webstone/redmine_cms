@@ -3,7 +3,7 @@ en:
   label_cms: CMS
 
   label_project_tab: "Project tab"
-  label_project_tab_caption: "Project tab %{index} caption"
+  label_project_tab_caption: "Project tab %{index}"
   label_project_tab_page: "Page"
 
   label_cms_menu: Menu

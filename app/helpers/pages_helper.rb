@@ -17,6 +17,16 @@ module PagesHelper
     options
   end 
 
+  def pages_name_options_for_select(pages)
+    options = []
+    Page.page_tree(pages) do |page, level|
+      label = (level > 0 ? '&nbsp;' * 2 * level + '&#187; ' : '').html_safe
+      label << page.title
+      options << [label, page.name]
+    end
+    options
+  end   
+
   def change_page_status_link(page)
     url = {:controller => 'pages', :action => 'update', :id => page, :page => params[:page], :status => params[:status], :tab => nil}
 
