@@ -13,9 +13,9 @@
     <th></th>
   </tr></thead>
   <tbody>
-<% for page in @pages -%>
-  <tr class="page <%= cycle("odd", "even") %> <%= %w(disabled active)[page.status_id] %>">
-  <td class="name"><%= link_to h(page.name), edit_page_path(page) %></td>
+<% page_tree(@pages) do |page, level| -%>    
+  <tr class="page project <%= cycle("odd", "even") %> <%= %w(disabled active)[page.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+  <td class="name"><span><%= link_to h(page.name), edit_page_path(page) %></span></td>
   <td class="title"><%= page.title %></td>
     <td class="buttons">
       <%= change_page_status_link(page) %>

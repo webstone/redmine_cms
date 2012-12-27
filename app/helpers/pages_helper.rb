@@ -27,4 +27,8 @@ module PagesHelper
     end
   end
 
+  def page_tree(pages, &block)
+    Page.page_tree(pages, &block)
+  end  
+
 end
