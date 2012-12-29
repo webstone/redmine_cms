@@ -62,7 +62,7 @@ class CmsMenu < ActiveRecord::Base
 
     Redmine::MenuManager.map :footer_menu do |menu|
       CmsMenu.footer_menu.each{|m| menu.delete(m.name.to_sym) }
-      CmsMenu.footer_menu.each do |cms_menu|
+      CmsMenu.active.footer_menu.each do |cms_menu|
         menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption)
         # menu.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
         # Redmine::MenuManager.items(:footer_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i) if cms_menu.active?
