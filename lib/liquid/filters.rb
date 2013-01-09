@@ -10,9 +10,9 @@ module RedmineCms
 
       def attachment_url(input)
         return '' if input.nil?
-        part = @context.registers[:part]
-        attachment = part.attachments.where(:filename => input).first
-        attachment ? "/attachments/#{attachment.id}/#{attachment.filename}" : "attachment #{input} not found"
+        part, filename = get_part(input)
+        attachment = part.attachments.where(:filename => filename).first
+        attachment ? "/attachments/#{attachment.id}/#{attachment.filename}" : "attachment #{filename} not found"
       end
 
       # example:
@@ -21,9 +21,10 @@ module RedmineCms
         return '' if input.nil?
         options = args_to_options(args)
         size   = options[:size] || '100'
-        part = @context.registers[:part]
-        attachment = part.attachments.where(:filename => input).first
-        attachment ? "/attachments/thumbnail/#{attachment.id}/#{size}" : "attachment #{input} not found"
+        ss.match(/(^\S+):/)
+        part, filename = get_part(input)
+        attachment = part.attachments.where(:filename => filename).first
+        attachment ? "/attachments/thumbnail/#{attachment.id}/#{size}" : "attachment #{filename} not found"
       end  
 
       # example:
@@ -33,9 +34,9 @@ module RedmineCms
         image_options = inline_options(args_to_options(args))
         options = args_to_options(args)
         size   = options[:size] || '100'
-        part = @context.registers[:part]
-        attachment = part.attachments.where(:filename => input).first
-        attachment ? "<img src=\"/attachments/thumbnail/#{attachment.id}/#{size}\" #{image_options}/>"  : "attachment #{input} not found"
+        part, filename = get_part(input)
+        attachment = part.attachments.where(:filename => filename).first
+        attachment ? "<img src=\"/attachments/thumbnail/#{attachment.id}/#{size}\" #{image_options}/>"  : "attachment #{filename} not found"
       end    
 
       # example:
@@ -66,6 +67,16 @@ module RedmineCms
       def inline_options(options = {})
         return '' if options.empty?
         (options.stringify_keys.sort.to_a.collect { |a, b| "#{a}=\"#{b}\"" }).join(' ') << ' '
+      end
+
+      def get_part(input)
+        if m = input.match(/(^\S+):(.+)$/)
+          part = Part.find_by_name(m[1])
+          filename = m[2]
+        end
+        part ||= @context.registers[:part]
+        filename ||= input
+        [part, filename]
       end
 
     end
