@@ -8,6 +8,14 @@ module RedmineCMS
 
 
       module InstanceMethods
+        def favicon_cms
+          if current_theme && current_theme.images.include?('favicon.ico')
+            "<link rel='shortcut icon' href='#{current_theme.image_path('/favicon.ico')}' />".html_safe
+          else
+            favicon
+          end          
+        end
+
         def render_account_menu
           s = "<ul>"
           if User.current.logged?
