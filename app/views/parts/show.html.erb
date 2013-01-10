@@ -1,7 +1,5 @@
 <p><%= breadcrumb [link_to(l(:label_cms_part_plural), parts_path)] %></p>
-<div class="contextual page-edit">
-  <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' if User.current.admin? %>
-</div>
+
 <h2><%="#{l(:label_cms_part)}: #{@part.name}"%></h2>
 
 <% if @part.is_header_type? %>
@@ -17,3 +15,9 @@
     <%= render_part @part %>
   </div>
 <% end %>
+
+<% content_for :header %>
+  <div class="contextual page-edit">
+    <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' %>
+  </div>
+<% end if User.current.admin? %>
