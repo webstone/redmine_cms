@@ -16,7 +16,7 @@
   </div>
 <% end %>
 
-<% content_for :header %>
+<% content_for :header do %>
   <div class="contextual page-edit">
     <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' %>
   </div>
