@@ -175,7 +175,7 @@ a.button:hover {
   display: none;
 }
 
-#content > .contextual.page-edit {
+.contextual.page-edit {
   position: fixed;
   top: 0px;
   left: 0px;
