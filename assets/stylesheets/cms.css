@@ -176,13 +176,14 @@ a.button:hover {
 }
 
 #content > .contextual.page-edit {
-  display: none;
-  float: none;
-  position: absolute;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  margin-top: 0px;
   border: 1px solid #CCC;
   padding: 5px 10px;
   background: white;  
-  z-index: 1;
+  z-index: 10000;
 }
 
 .contextual.page-edit ul.parts-edit li {
@@ -196,11 +197,6 @@ a.button:hover {
 
 .contextual.page-edit:hover ul.parts-edit {
   display: inline;
-}
-
-#content:hover > .contextual.page-edit {
-  display: inline;
-  position: absolute;
 }
 
 div.page-title {
