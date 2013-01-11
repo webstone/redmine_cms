@@ -19,6 +19,7 @@
   <td class="title"><%= page.title %></td>
     <td class="buttons">
       <%= change_page_status_link(page) %>
+      <%= link_to l(:button_duplicate), {:controller => 'pages', :action => 'new', :copy_from => page }, :class => 'icon icon-duplicate' %>
       <%= delete_link page_path(page, :back_url => pages_path(params)) %>
     </td>
   </tr>

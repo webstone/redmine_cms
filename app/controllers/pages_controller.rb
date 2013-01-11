@@ -34,6 +34,7 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
+    @page.copy_from(params[:copy_from]) if params[:copy_from]
   end
 
   def update
