@@ -44,10 +44,6 @@ class Page < ActiveRecord::Base
     @valid_parents ||= Page.all - self_and_descendants
   end
 
-  def self.main
-    Page.find_by_name('main')
-  end
-
   def self.page_tree(pages, parent_id=nil, level=0)
     tree = []
     pages.select {|page| page.parent_id == parent_id}.sort_by(&:title).each do |page|
@@ -60,6 +56,12 @@ class Page < ActiveRecord::Base
       end
     end
     tree
+  end
+
+  def copy_from(arg)
+    page = arg.is_a?(Page) ? arg : Page.find_by_name(arg)
+    self.attributes = page.attributes.dup.except("id", "name", "created_at", "updated_at")
+    self
   end
 
   protected
