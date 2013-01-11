@@ -81,7 +81,7 @@ module RedmineCms
         raise 'No or bad arguments.' if args.size != 1
         title = content_tag('h1', args.first)
         summary = textilizable(text, :object => obj, :attachments => obj.attachments)
-        content_tag('div', title + summary, :class => "page-title") + ' <hr/>'.html_safe
+        content_tag('div', title + summary, :class => "page-title").html_safe
       end
 
       desc "Youtube video"
