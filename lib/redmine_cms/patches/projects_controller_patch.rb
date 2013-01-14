@@ -20,8 +20,11 @@ module RedmineCms
             redirect_to_project_menu_item(@project, params[:jump]) && return
           end          
           
-          unless ContactsSetting["landing_page", @project.id].blank?
-            redirect_to ContactsSetting["landing_page", @project.id], :status => 301
+          unless (page_path = ContactsSetting["landing_page", @project.id]).blank?
+            if page_path.to_i > 0 && page_path.to_i < 11
+              page_path = {:controller => 'project_tabs', :action => 'show', :tab => page_path.to_i.to_s, :project_id => @project}
+            end
+            redirect_to page_path, :status => 301
           else
             show_without_cms
           end

@@ -2,7 +2,7 @@
   <div class="tabular box">
     <p>  
       <label><%= l(:label_cms_landing_page) %></label>
-      <%= text_field_tag "contacts_settings[landing_page]",  ContactsSetting["landing_page", @project.id] %>
+      <%= text_field_tag "contacts_settings[landing_page]",  ContactsSetting["landing_page", @project.id], :size => 60 %>
     </p>
     <% pages = Page.all %>
     <% 10.times do |n| %>
