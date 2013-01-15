@@ -1,7 +1,7 @@
 <h2><%= link_to l(:label_cms_part_plural), parts_path %> &#187; <%=l(:label_cms_part)%> <%= link_to link_to @part.name, part_url(@part)%></h2>
 
 <%= labelled_form_for :part, @part, :url => { :action => 'update', :id => @part},
-  :html => { :id => 'part-form', :multipart => true, :method => :put } do |f| %>
+  :html => { :id => 'part_form', :multipart => true, :method => :put } do |f| %>
 
 <%= render :partial => 'form', :locals => { :f => f } %>
 <fieldset><legend><%= l(:label_attachment_plural) %></legend>
@@ -9,5 +9,6 @@
 </fieldset><br/>
 
 <%= submit_tag l(:button_save) %>
+<%= link_to l(:label_cms_apply), "#", :style => "margin-left:10px;", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@part)}', type: \'post\', data: $(\'#part_form\').serialize()});return false;"%>
 <% end %>
 

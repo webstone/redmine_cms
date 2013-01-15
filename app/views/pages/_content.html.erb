@@ -1,10 +1,10 @@
 <%= labelled_form_for :page, @page, :url => { :action => 'update', :id => @page},
-  :html => { :id => 'page-form', :multipart => true, :method => :put } do |f| %>
+  :html => { :id => 'page_form', :multipart => true, :method => :put } do |f| %>
 
 <div class="box tabular">
 
   <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows => 30, :class => 'wiki-edit' %>
- <%= javascript_tag 'var editor = CodeMirror.fromTextArea(document.getElementById("page_content"), {mode: "text/html", tabMode: "indent", matchBrackets: true, lineNumbers: "true"});' %>
+ <%= javascript_tag 'var editor = CodeMirror.fromTextArea(document.getElementById("page_content"), {mode: "text/html", tabMode: "indent", lineNumbers: "true", lineWrapping: "true", autofocus: "true"});' %>
 
 <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
 
@@ -17,6 +17,7 @@
 </fieldset>
 <br/>
 <%= submit_tag l(:button_save) %>
+<%= link_to l(:label_cms_apply), "#", :style => "margin-left:10px;", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@page)}', type: \'post\', data: $(\'#page_form\').serialize()});return false;"%>
 <% end %>
 
 

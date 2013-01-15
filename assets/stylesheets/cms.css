@@ -210,7 +210,6 @@ div.page-title {
 .CodeMirror {
   padding: 2px;
   border: 1px solid #D7D7D7;
-  min-height: 300px;
   height: auto !important;
 }
 .CodeMirror-scroll {

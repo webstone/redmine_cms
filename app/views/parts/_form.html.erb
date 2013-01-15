@@ -2,7 +2,7 @@
  
 <div class="box tabular">
 <%= text_area_tag 'part[content]', @part.content, :cols => 100, :rows =>  30, :class => 'wiki-edit' %><%= wikitoolbar_for 'part_content' if @part.content_type == 'textile' %>
-<%= javascript_tag 'var editor = CodeMirror.fromTextArea(document.getElementById("part_content"), {mode: "text/html", tabMode: "indent", lineNumbers: "true"});' %>
+<%= javascript_tag 'var editor = CodeMirror.fromTextArea(document.getElementById("part_content"), {mode: "text/html", tabMode: "indent", lineNumbers: "true", lineWrapping: "true", autofocus: "true"});' %>
 <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_part_name)  %></p>
 <p><%= f.select :part_type, options_for_select([["Content", "content"], ["Sidebar", "sidebar"], ["Header", "header"], ["Footer", "footer"]],  @part.part_type), :label => l(:label_cms_part_type) %></p>  
 
