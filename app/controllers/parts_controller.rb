@@ -30,11 +30,18 @@ class PartsController < ApplicationController
     if @part.save
       render_attachment_warning_if_needed(@part)
       flash[:notice] = l(:notice_successful_update)
-      if params[:unlock] 
-        redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
-      else
-        redirect_to :action =>"show", :id => @part
+      respond_to do |format|
+        format.html do 
+          if params[:unlock] 
+            redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
+          else
+            redirect_to :action =>"show", :id => @part
+          end
+        end
+        format.js {render :nothing => true}
       end
+
+
     else
       render :action => 'edit'
     end

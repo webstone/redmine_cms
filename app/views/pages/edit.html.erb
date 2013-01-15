@@ -8,8 +8,7 @@
 <%= error_messages_for 'page' %>
 
 <% edit_page_tabs = [{:name => 'edit', :partial => 'edit', :label => :label_cms_page},
-        {:name => 'page_parts', :partial => 'page_parts', :label => :label_cms_part_plural},
-        {:name => 'content', :partial => 'content', :label => :label_cms_page_content}
+        {:name => 'page_parts', :partial => 'page_parts', :label => :label_cms_part_plural}
         ]   %>   
 
 <%= render_tabs edit_page_tabs %>

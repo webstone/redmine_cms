@@ -35,6 +35,9 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     @page.copy_from(params[:copy_from]) if params[:copy_from]
+    respond_to do |format|
+      format.html {render :action => 'new', :layout => use_layout} 
+    end     
   end
 
   def update
@@ -43,7 +46,10 @@ class PagesController < ApplicationController
     if @page.save
       render_attachment_warning_if_needed(@page)
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action =>"show", :id => @page
+      respond_to do |format|
+        format.html {redirect_to :action =>"show", :id => @page}
+        format.js {render :nothing => true}
+      end
     else
       render :action => 'edit'
     end
