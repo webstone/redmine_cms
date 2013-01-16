@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   unloadable
-  belongs_to :project
+  belongs_to :page_project, :class_name => 'Project', :foreign_key => 'project_id'   
   has_many :pages_parts
   has_many :parts, :uniq => true, :through => :pages_parts
 

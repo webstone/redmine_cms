@@ -83,7 +83,7 @@ class PagesController < ApplicationController
 private
   def authorize_page
     @project = Project.find(params[:project_id]) unless params[:project_id].blank?
-    if @page.project && @project != @page.project && !User.current.admin?
+    if @page.page_project && @project != @page.page_project && !User.current.admin?
       render_403
     end
   rescue ActiveRecord::RecordNotFound
