@@ -38,6 +38,8 @@ module RedmineCMS
           s << cached_render_part(page)
           page.pages_parts.order(:position).active.each do |pages_part|
             case pages_part.part.part_type
+            when "header_tags"
+              content_for(:header_tags, render_part(pages_part.part))
             when "header"
               content_for(:header, render_part(pages_part.part))
             when "sidebar"
@@ -80,7 +82,7 @@ module RedmineCMS
                 part.content
               end 
 
-          (part.is_a?(Part) && ["textile", "html"].include?(part.content_type))? content_tag(:span, s, :id => part.name, :class => "part") : s
+          # (part.is_a?(Part) && ["textile", "html"].include?(part.content_type))? content_tag(:span, s, :id => part.name, :class => "part") : s
         end        
 
       end

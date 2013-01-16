@@ -10,6 +10,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :content_type      
       t.integer :status_id, :default => RedmineCms::STATUS_LOCKED
       t.integer :parent_id
+      t.integer :project_id
       t.timestamps 
     end
     add_index :pages, :parent_id

@@ -9,6 +9,10 @@ module PartsHelper
     end
   end  
 
+  def parts_type_collection
+    [["Content", "content"], ["Sidebar", "sidebar"], ["Header", "header"], ["Footer", "footer"], ["Header tags", "header_tags"]]
+  end
+
   def parts_option_for_select
     parts = Part.order(:part_type).order(:content_type)
     return "" unless parts.any?

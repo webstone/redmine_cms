@@ -12,7 +12,7 @@ module RedmineCms
         return '' if input.nil?
         part, filename = get_part(input)
         attachment = part.attachments.where(:filename => filename).first
-        attachment ? "/attachments/#{attachment.id}/#{attachment.filename}" : "attachment #{filename} not found"
+        attachment ? "/attachments/download/#{attachment.id}/#{attachment.filename}" : "attachment #{filename} not found"
       end
 
       # example:
