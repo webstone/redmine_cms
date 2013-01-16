@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_filter :require_admin, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :check_status, :only => :show
-  before_filter :find_optional_project, :authorize_page, :only => :show
+  before_filter :authorize_page, :only => :show
 
   helper :attachments
   helper :cms_menus
@@ -82,9 +82,12 @@ class PagesController < ApplicationController
 
 private
   def authorize_page
-    if !User.current.admin? || (@project && @project != @page.project) || (@page.project && !User.current.allowed_to?(:view_project_tabs, @page.project))
+    @project = Project.find(params[:project_id]) unless params[:project_id].blank?
+    if @page.project && @project != @page.project && !User.current.admin?
       render_403
     end
+  rescue ActiveRecord::RecordNotFound
+    render_404    
   end
 
   def find_page
