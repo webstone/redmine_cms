@@ -6,7 +6,7 @@
 <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_page_parent %></p>
 <% end %>
 
-<p><%= f.select :project_id, "<option value=''></option>".html_safe + project_tree_options_for_select(Project.all, :selected => @page.project) %></p>
+<p><%= f.select :project_id, "<option value=''></option>".html_safe + project_tree_options_for_select(Project.all, :selected => @page.page_project) %></p>
 
 <p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>  
 
