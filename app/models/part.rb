@@ -7,8 +7,9 @@ class Part < ActiveRecord::Base
 
   default_scope order(:part_type)
 
-  liquid_methods :name, :attachments, :title
+  scope :global, where(:is_global => true)
 
+  liquid_methods :name, :attachments, :title
 
   after_commit :touch_pages
 
