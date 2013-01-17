@@ -19,12 +19,17 @@ module RedmineCMS
         def render_account_menu
           s = "<ul>"
           if User.current.logged?
-            s << "<li>#{avatar(User.current, :size => "16").to_s.html_safe + link_to(l(:label_my_account), { :controller => 'my', :action => 'account'}) }"
-              s << "<ul class=\"menu-children\">"
-                s << "<li>#{link_to(l(:label_cms_account_settings), { :controller => 'my', :action => 'account'})}</li>"
-                s << "<li>#{link_to l(:label_my_page), { :controller => 'my', :action => 'page' }}</li>"
-                s << "<li>#{link_to l(:label_logout), signout_path}</li>"
-              s << "</ul>"
+            s << "<li>#{avatar(User.current, :size => "16").to_s.html_safe + link_to_user(User.current, :format => :username) }"
+              # s << "<ul class=\"menu-children\">"
+              links = []
+              menu_items_for(:account_menu) do |node|
+                links << render_menu_node(node)
+              end
+              s << (links.empty? ? "" : content_tag('ul', links.join("\n").html_safe, :class => "menu-children"))
+              #   s << "<li>#{link_to(l(:label_cms_account_settings), { :controller => 'my', :action => 'account'})}</li>"
+              #   s << "<li>#{link_to l(:label_my_page), { :controller => 'my', :action => 'page' }}</li>"
+              #   s << "<li>#{link_to l(:label_logout), signout_path}</li>"
+              # s << "</ul>"
             s << "</li>"
           else
             s << "<li>#{link_to l(:label_login), signin_path}</li>"
