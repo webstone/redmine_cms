@@ -13,3 +13,7 @@ Redmine::MenuManager.map :top_menu do |menu|
     menu.push :adm_plugins, {:controller => 'admin', :action => 'plugins'}, :caption => :label_plugins, :last => true, :parent => :administration
     menu.push :adm_info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true, :parent => :administration
 end
+
+Redmine::MenuManager.map :account_menu do |menu|
+    menu.push :my_page, { :controller => 'my', :action => 'page' }, :if => Proc.new { User.current.logged? }, :after => :my_account
+end
