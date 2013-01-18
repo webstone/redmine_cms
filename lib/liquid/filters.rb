@@ -5,7 +5,7 @@ module RedmineCms
       include Rails.application.routes.url_helpers
 
       def textilize(input)
-        textilizable(input)
+        RedCloth3.new(input).to_html
       end
 
       def attachment_url(input)
