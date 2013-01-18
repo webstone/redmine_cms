@@ -37,6 +37,18 @@ module RedmineCms
         part, filename = get_part(input)
         attachment = part.attachments.where(:filename => filename).first
         attachment ? "<img src=\"/attachments/thumbnail/#{attachment.id}/#{size}\" #{image_options}/>"  : "attachment #{filename} not found"
+      end   
+
+      # example:
+      #   {{ 'image.png' | fancybox_tag: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
+      def fancybox_tag(input, *args)
+        return '' if input.nil?
+        image_options = inline_options(args_to_options(args))
+        options = args_to_options(args)
+        size   = options[:size] || '100'
+        # part, filename = get_part(input)
+        # attachment = part.attachments.where(:filename => filename).first
+        "<a rel=\"fancybox_group\" href=\"#{attachment_url(input)}\" title=\"#{options[:title]}\">#{thumbnail_tag(input, *args)}</a><p>#{options[:title]}</p>"
       end    
 
       # example:
