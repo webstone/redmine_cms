@@ -5,6 +5,8 @@ class CmsMenusController < ApplicationController
   before_filter :require_admin
   before_filter :find_menu, :except => [:index, :new, :create]
 
+  helper :cms
+
   def index
     redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'   
   end
@@ -17,12 +19,16 @@ class CmsMenusController < ApplicationController
     @cms_menu = CmsMenu.new
   end
 
-
   def update
     @cms_menu.assign_attributes(params[:cms_menu])
     if @cms_menu.save
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
+      @cms_menus = CmsMenu.all
+      respond_to do |format|
+        format.html { redirect_to :back }  
+        format.js {render :action => "change"}
+      end    
+      # redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
     else
       render :action => 'edit'
     end

@@ -1,16 +1,9 @@
-<div class="contextual">
-<%= link_to l(:label_cms_menu_new), new_cms_menu_path, :class => 'icon icon-add' %>
-</div>
-
-<h2><%=l(:label_cms_menu_plural)%></h2>
-
-<div class="autoscroll">
 <table class="list">
   <thead><tr>
     <th><%= l(:label_cms_menu_name) %></th>
     <th><%= l(:label_cms_menu_caption) %></th>
     <th><%= l(:label_cms_menu_path) %></th>
-    <th><%= l(:label_cms_menu_type) %></th>
+    <th></th>
     <th></th>
   </tr></thead>
   <% previous_group = false %>
@@ -28,11 +21,11 @@
       </tr>
       <% previous_group = menu.menu_type %>
     <% end %>
-  <tr class="menu project <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+  <tr class="menu project <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>" id="cms_menu_<%= menu.id %>">
   <td class="name"><span><%= link_to menu.name, edit_cms_menu_path(menu) %></span></td>
   <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu) %></td>
   <td class="path"><%= menu.path %></td>
-  <td class="type"><%= menu.menu_type %></td>
+  <td><%= cms_reorder_links('cms_menu', {:controller => 'cms_menus', :action => 'update', :id => menu}, :put) %></td> 
     <td class="buttons">
       <%= change_menu_status_link(menu) %>
       <%= delete_link cms_menu_path(menu, :back_url => cms_menus_path(params)) %>
@@ -41,6 +34,3 @@
 <% end -%>
   </tbody>
 </table>
-</div>
-
-<% html_title(l(:label_cms_menu_plural)) -%>

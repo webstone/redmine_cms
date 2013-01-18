@@ -8,7 +8,7 @@
 <table class="list">
   <thead><tr>
     <th><%= l(:label_cms_part_name) %></th>
-    <th><%= l(:label_cms_part_type) %></th>
+    <th><%= l(:label_cms_part_content) %></th>
     <th></th>
   </tr></thead>
   <% previous_group = false %>
@@ -29,8 +29,9 @@
 
   <tr class="part <%= cycle("odd", "even") %> ">
   <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
-  <td class="type"><%= part.part_type %></td>
+  <td class="type"><%= part.content_type %></td>
     <td class="buttons">
+      <%= link_to l(:button_duplicate), {:controller => 'parts', :action => 'new', :copy_from => part }, :class => 'icon icon-duplicate' %>
       <%= delete_link part_path(part, :back_url => parts_path(params)) %>
     </td>
   </tr>

@@ -26,6 +26,12 @@ class Part < ActiveRecord::Base
     class_eval src, __FILE__, __LINE__
   end
 
+  def copy_from(arg)
+    part = arg.is_a?(Part) ? arg : Part.find_by_id(arg)
+    self.attributes = part.attributes.dup.except("id", "name", "created_at", "updated_at") if part
+    self
+  end
+
 
 private
   def touch_pages

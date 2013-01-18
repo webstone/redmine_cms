@@ -18,6 +18,7 @@ class PartsController < ApplicationController
 
   def new
     @part = Part.new(:content_type => 'textile')
+    @part.copy_from(params[:copy_from]) if params[:copy_from]
   end
 
   def refresh
