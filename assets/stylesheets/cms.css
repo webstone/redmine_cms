@@ -122,6 +122,7 @@ div.wiki  table.pricingtable td:first-child {
 div.wiki table.pricingtable .price, div.wiki table.pricingtable th.product  {
   font-size: 25px;
   padding: 10px;
+  display: block;
 }
 
 div.wiki table.pricingtable .optimal {
