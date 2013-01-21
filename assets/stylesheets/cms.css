@@ -119,7 +119,7 @@ div.wiki  table.pricingtable td:first-child {
   white-space: nowrap;
 }
 
-div.wiki table.pricingtable div.price, div.wiki table.pricingtable th.product  {
+div.wiki table.pricingtable .price, div.wiki table.pricingtable th.product  {
   font-size: 25px;
   padding: 10px;
 }
