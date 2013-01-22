@@ -38,7 +38,7 @@
 
     <% project.wiki.pages.each do |wiki_page| %>
     <url>
-      <loc><%= url_for({:controller => 'wiki', :action => 'show', :id => wiki_page.title, :project_id => wiki_page.project, :version => nil}) %></loc>
+      <loc><%= url_for(:only_path => false, :controller => 'wiki', :action => 'show', :id => wiki_page.title, :project_id => wiki_page.project, :version => nil ) %></loc>
       <lastmod><%= wiki_page.updated_on.strftime("%Y-%m-%d") %></lastmod>
       <changefreq>weekly</changefreq>
     </url>
