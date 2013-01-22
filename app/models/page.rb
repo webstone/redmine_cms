@@ -7,6 +7,8 @@ class Page < ActiveRecord::Base
   acts_as_attachable
   acts_as_tree :dependent => :nullify
 
+  scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+
   validates_presence_of :name, :title
   validates_uniqueness_of :name
   validates_length_of :name, :maximum => 30

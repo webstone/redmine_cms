@@ -1,5 +1,8 @@
 # Plugin's routes
 # See: http://guides.rubyonrails.org/routing.html
+
+match "/sitemap.xml" => "welcome#sitemap", :defaults => {:format => :xml}
+
 match "projects/:project_id/pages/:tab" => "project_tabs#show"
 match "products/:project_id" => "project_tabs#show"
 
