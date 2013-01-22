@@ -6,6 +6,7 @@ module RedmineCms
 
         base.class_eval do
           unloadable
+          caches_action :sitemap, :expires_in => 1.week
           alias_method_chain :index, :cms
         end
       end
@@ -19,6 +20,14 @@ module RedmineCms
             index_without_cms
           end
         end
+
+        def sitemap
+          @projects = Project.all_public.active
+          @pages = Page.active.all
+          respond_to do |format|
+            format.xml
+          end
+        end        
         
       end
 
