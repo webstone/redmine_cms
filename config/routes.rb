@@ -4,7 +4,7 @@
 match "/sitemap.xml" => "welcome#sitemap", :defaults => {:format => :xml}
 
 match "projects/:project_id/pages/:tab" => "project_tabs#show", :as => "project_tab"
-match "products/:project_id" => "project_tabs#show"
+match "products/:project_id/:id" => "project_tabs#show"
 
 resources :cms_menus
 resources :pages do
