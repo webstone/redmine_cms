@@ -74,7 +74,7 @@ module RedmineCms
 
       desc "Page title"
       macro :page_title do |obj, args, text|
-        return "" unless obj.is_a?(Page) || obj.is_a?(Part) 
+        return "" unless obj.is_a?(Page) || obj.is_a?(Part) || obj.is_a?(WikiContent) 
         return "" if obj.blank?
         args, options = extract_macro_options(args, :parent, :class)
         feature_class = "feature #{options[:class] || ""}"
