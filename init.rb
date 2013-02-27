@@ -1,5 +1,3 @@
-require 'redmine/menu'
-
 Redmine::Plugin.register :redmine_cms do
   name 'Redmine CMS plugin'
   author 'RedmineCRM'
@@ -57,6 +55,7 @@ Redmine::Plugin.register :redmine_cms do
 end
 
 require 'redmine_cms'
+require 'redmine/menu'
 
-CmsMenu.rebuild if CmsMenu.table_exists?
+CmsMenu.rebuild if ActiveRecord::Base.connection.table_exists?(:cms_menus)
 
