@@ -12,8 +12,15 @@ Redmine::MenuManager.map :top_menu do |menu|
     menu.push :adm_ldap_authentication, {:controller => 'auth_sources', :action => 'index'}, :caption => :label_ldap_authentication, :html => {:class => 'server_authentication'}, :parent => :administration
     menu.push :adm_plugins, {:controller => 'admin', :action => 'plugins'}, :caption => :label_plugins, :last => true, :parent => :administration
     menu.push :adm_info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true, :parent => :administration
+
+    menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural, :if => Proc.new { Setting.plugin_redmine_cms[:menu_show_projects] }
 end
 
 Redmine::MenuManager.map :account_menu do |menu|
     menu.push :my_page, { :controller => 'my', :action => 'page' }, :if => Proc.new { User.current.logged? }, :after => :my_account
 end
+
+Redmine::MenuManager.map :project_menu do |menu|
+  menu.push :overview, { :controller => 'projects', :action => 'show' }, :if => Proc.new{|p| ContactsSetting["project_tab_show_overview".to_sym, p.id].to_i > 0 }
+  menu.push :activity, { :controller => 'activities', :action => 'index' }, :if => Proc.new{|p| ContactsSetting["project_tab_show_activity".to_sym, p.id].to_i > 0 }
+end        
