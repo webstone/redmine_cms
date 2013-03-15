@@ -31,7 +31,11 @@ module RedmineCMS
         def set_localization_with_cms
           if RedmineCms.settings[:use_localization]
             set_localization_without_cms
+          else
+            lang ||= Setting.default_language
+            set_language_if_valid(lang)
           end
+
         end
         
       end
