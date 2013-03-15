@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   unloadable
   layout 'admin', :except => [:show, :edit]
+  layout :use_layout, :only => [:show]
   before_filter :require_admin, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :check_status, :only => :show
@@ -20,9 +21,9 @@ class PagesController < ApplicationController
   def show
     @page_keywords = @page.keywords if @page.keywords
     @page_description = @page.description
-    respond_to do |format|
-      format.html {render :action => 'show', :layout => use_layout} 
-    end    
+    # respond_to do |format|
+    #   format.html {render :action => 'show', :layout => use_layout} 
+    # end    
   end
 
   def edit
@@ -91,7 +92,7 @@ private
   end
 
   def find_page
-    @page = Page.find_by_name(params[:id])
+    @page = Page.includes([:attachments, :parts, :pages_parts]).includes(:parts => :attachments).find_by_name(params[:id])
     render_404 unless @page
   end
 
