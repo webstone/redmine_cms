@@ -2,7 +2,6 @@
   <thead><tr>
     <th><%= l(:label_cms_menu_name) %></th>
     <th><%= l(:label_cms_menu_caption) %></th>
-    <th><%= l(:label_cms_menu_path) %></th>
     <th></th>
     <th></th>
   </tr></thead>
@@ -22,9 +21,8 @@
       <% previous_group = menu.menu_type %>
     <% end %>
   <tr class="menu project <%= cycle("odd", "even") %> <%= %w(disabled active)[menu.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>" id="cms_menu_<%= menu.id %>">
-  <td class="name"><span><%= link_to menu.name, edit_cms_menu_path(menu) %></span></td>
-  <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu) %></td>
-  <td class="path"><%= menu.path %></td>
+  <td class="name"><span><%= link_to menu.name, edit_cms_menu_path(menu), :title => menu.path %></span></td>
+  <td class="caption"><%= link_to h(menu.caption), edit_cms_menu_path(menu), :title => menu.path %></td>
   <td><%= cms_reorder_links('cms_menu', {:controller => 'cms_menus', :action => 'update', :id => menu}, :put) %></td> 
     <td class="buttons">
       <%= change_menu_status_link(menu) %>
