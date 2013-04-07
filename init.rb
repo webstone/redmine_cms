@@ -2,19 +2,11 @@ Redmine::Plugin.register :redmine_cms do
   name 'Redmine CMS plugin'
   author 'RedmineCRM'
   description 'This is a CMS plugin for Redmine'
-<<<<<<< HEAD
   version '0.0.2'
   url 'http://redminecrm.com'
 
   requires_redmine :version_or_higher => '2.1.2'   
   requires_redmine_plugin :redmine_contacts, :version_or_higher => '3.2.1'
-=======
-  version '0.0.1'
-  url 'http://redminecrm.com'
-
-  requires_redmine :version_or_higher => '2.1.2'   
-  
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
 
   settings :default => {
     :use_localization => true,

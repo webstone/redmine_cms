@@ -10,10 +10,7 @@ module RedmineCMS
           # after_filter :set_layout
           alias_method_chain :set_localization, :cms
           alias_method_chain :use_layout, :cms
-<<<<<<< HEAD
           before_filter :menu_setup
-=======
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
           # skip_before_filter :set_localization, :only => [:method_name]
         end
       end
@@ -22,14 +19,11 @@ module RedmineCMS
       module InstanceMethods
         # include ContactsHelper
 
-<<<<<<< HEAD
         def menu_setup
           # Check the settings cache for each request
           CmsMenu.check_cache
         end
 
-=======
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
         def set_layout
           # _layout = "cms"
           # self.class.layout "cms"

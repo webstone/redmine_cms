@@ -1,10 +1,6 @@
 class PagesController < ApplicationController
   unloadable
   layout 'admin', :except => [:show, :edit]
-<<<<<<< HEAD
-=======
-  layout :use_layout, :only => [:show]
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
   before_filter :require_admin, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :check_status, :only => :show
@@ -24,15 +20,9 @@ class PagesController < ApplicationController
   def show
     @page_keywords = @page.keywords if @page.keywords
     @page_description = @page.description
-<<<<<<< HEAD
     respond_to do |format|
       format.html {render :action => 'show', :layout => use_layout} 
     end    
-=======
-    # respond_to do |format|
-    #   format.html {render :action => 'show', :layout => use_layout} 
-    # end    
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
   end
 
   def edit

@@ -27,14 +27,11 @@
   z-index: 1000;
 }
 
-<<<<<<< HEAD
 #top-menu li:last-child > ul.menu-children {
   right: 0px;
   left: auto;
 }
 
-=======
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
 #top-menu div#account img.gravatar {
   margin-right: 5px;
   padding: 0px;

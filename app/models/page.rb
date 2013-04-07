@@ -8,10 +8,7 @@ class Page < ActiveRecord::Base
   acts_as_tree :dependent => :nullify
 
   scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
-<<<<<<< HEAD
   scope :visible, lambda{where(Page.visible_condition)}
-=======
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
 
   validates_presence_of :name, :title
   validates_uniqueness_of :name
@@ -30,7 +27,6 @@ class Page < ActiveRecord::Base
     class_eval src, __FILE__, __LINE__
   end
 
-<<<<<<< HEAD
   def self.visible_condition(user=User.current)
     user_ids = [user.id] + user.groups.map(&:id)
     cond = ""
@@ -39,8 +35,6 @@ class Page < ActiveRecord::Base
     cond << " OR (#{table_name}.visibility IN (#{user_ids.join(',')})))"
   end
 
-=======
->>>>>>> 1072d65dea79a20bdb351cc5c21eb98edae7186a
   def active?
     self.status_id == RedmineCms::STATUS_ACTIVE
   end
