@@ -52,6 +52,6 @@ en:
 
   label_cms_layout_content: Layout content
   label_cms_apply: Apply
-
+  label_cms_visibility: Visibility
   label_cms_show_activity_tab: Show activity tab
   label_cms_show_overview_tab: Show overview tab

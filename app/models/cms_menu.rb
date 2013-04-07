@@ -7,6 +7,7 @@ class CmsMenu < ActiveRecord::Base
 
   default_scope order(:menu_type).order(:position)
   scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+  scope :visible, lambda { where(CmsMenu.visible_condition) }
   scope :footer_menu, where(:menu_type => "footer_menu")
   scope :top_menu, where(:menu_type => "top_menu")
   scope :account_menu, where(:menu_type => "account_menu")
@@ -19,6 +20,26 @@ class CmsMenu < ActiveRecord::Base
   validates_length_of :caption, :maximum => 255
   validate :validate_menu
   validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
+
+  @cached_cleared_on = Time.now
+  
+  def self.visible_condition(user=User.current)
+    user_ids = [user.id] + user.groups.map(&:id)
+    return "(1=1)" if user.admin?
+    cond = ""
+    cond << " ((#{table_name}.visibility = 'public')" 
+    cond << " OR (#{table_name}.visibility = 'logged')" if User.current.logged?
+    cond << " OR (#{table_name}.visibility IN (#{user_ids.join(',')})))" if User.current.logged?
+  end
+
+  def visible?(user=User.current)
+    user_ids = [user.id] + user.groups.map(&:id)
+    return true if user.admin?
+    return true if visibility == 'public'
+    return true if visibility == 'logged' && User.current.logged?
+    return true if user_ids.include?(visibility) && User.current.logged?
+    false
+  end
 
   def active?
     self.status_id == RedmineCms::STATUS_ACTIVE
@@ -47,17 +68,30 @@ class CmsMenu < ActiveRecord::Base
     tree
   end
 
+  def self.check_cache
+    menu_updated_on = CmsMenu.maximum(:updated_at)
+    if menu_updated_on && @cached_cleared_on <= menu_updated_on
+      clear_cache
+    end
+  end
+  
+  # Clears the settings cache
+  def self.clear_cache
+    CmsMenu.rebuild
+    @cached_cleared_on = Time.now
+    logger.info "Menu cache cleared." if logger
+  end  
+
   def self.rebuild 
     Redmine::MenuManager.map :top_menu do |menu|
       CmsMenu.top_menu.each{|m| menu.delete(m.name.to_sym) }
 
       CmsMenu.active.top_menu.where(:parent_id => nil).each do |cms_menu|
-        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? ) unless menu.exists?(cms_menu.name.to_sym)
-        # Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
+        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first?, :if => Proc.new{|p| cms_menu.visible? } ) unless menu.exists?(cms_menu.name.to_sym)
       end  
 
       CmsMenu.active.top_menu.where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
-        menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active? && !menu.exists?(cms_menu.name.to_sym)
+        menu.push(cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption, :if => Proc.new{|p| cms_menu.visible? && cms_menu.parent.visible?  }) if cms_menu.parent.active? && !menu.exists?(cms_menu.name.to_sym)
       end
     end  
 
@@ -66,18 +100,17 @@ class CmsMenu < ActiveRecord::Base
 
       CmsMenu.active.account_menu.where(:parent_id => nil).each do |cms_menu|
         menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :first => cms_menu.first? ) unless menu.exists?(cms_menu.name.to_sym)
-        # Redmine::MenuManager.items(:top_menu).root.add_at(Redmine::MenuManager::MenuItem.new(cms_menu.name, cms_menu.path, :caption => cms_menu.caption), cms_menu.position.to_i)
       end  
 
       CmsMenu.active.account_menu.where("#{CmsMenu.table_name}.parent_id IS NOT NULL").each do |cms_menu|
-        menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active? && !menu.exists?(cms_menu.name.to_sym)
+        menu.push cms_menu.name.to_sym, cms_menu.path, :parent => cms_menu.parent.name.to_sym, :caption => cms_menu.caption if cms_menu.parent.active? && cms_menu.parent.visible? && !menu.exists?(cms_menu.name.to_sym)
       end
     end 
 
     Redmine::MenuManager.map :footer_menu do |menu|
       CmsMenu.footer_menu.each{|m| menu.delete(m.name.to_sym) }
       CmsMenu.active.footer_menu.each do |cms_menu|
-        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption)
+        menu.push(cms_menu.name, cms_menu.path, :caption => cms_menu.caption, :if => Proc.new{|p| cms_menu.visible? })
       end  
     end 
 
