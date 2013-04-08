@@ -218,11 +218,26 @@ div.page-title {
   border: 1px solid #D7D7D7;
   height: auto !important;
 }
+
 .CodeMirror-scroll {
   overflow-y: hidden;
   overflow-x: auto !important;
 }
 
+.CodeMirror.CodeMirror-fullscreen {
+  display: block;
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100% !important;
+  z-index: 9999;
+  font-size: 14px; 
+}
+
+.CodeMirror .cm-liquid {
+  color: #0ca;
+}
+  
 /**************************************************************/
 /*                   ICONS
 /**************************************************************/
