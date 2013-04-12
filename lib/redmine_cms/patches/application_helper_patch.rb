@@ -16,6 +16,14 @@ module RedmineCMS
           end          
         end
 
+        def jquery_tag
+          if Redmine::VERSION.to_s > "2.3"
+            stylesheet_link_tag 'jquery/jquery-ui-1.9.2', 'application', :media => 'all' 
+          else
+            stylesheet_link_tag 'jquery/jquery-ui-1.8.21', 'application', :media => 'all'
+          end
+        end
+
         def render_account_menu
           s = "<ul>"
           if User.current.logged?
