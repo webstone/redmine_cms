@@ -1,3 +1,0 @@
-= redmine_cms
-
-Description goes here
