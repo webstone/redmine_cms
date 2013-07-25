@@ -118,3 +118,9 @@
   <%= stylesheet_link_tag 'codemirror/theme/ambiance', :plugin => 'redmine_cms'  %>
 <% end %>
 
+<% content_for :header do %>
+  <div class="contextual page-edit" id="float_buttons">
+    <%= link_to l(:label_cms_apply), "#", :class => "icon icon-checked", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@part)}', type: \'post\', data: $(\'#part_form\').serialize()});return false;"%>
+  </div>
+<% end %>
+

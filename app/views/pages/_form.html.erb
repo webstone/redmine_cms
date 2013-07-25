@@ -17,7 +17,7 @@
 
 <p id="show_content_edit">
   <%= f.label_for_field :content, :label => l(:label_cms_page_content) %>
-  <%= link_to_function image_tag('edit.png'), '$("#show_content_edit").hide(); $(".edit-content").show();editor.refresh();return false;' %>
+  <%= link_to_function image_tag('edit.png'), '$("#show_content_edit").hide();$("#float_buttons").show();$(".edit-content").show();editor.refresh();return false;' %>
 </p>  
 <span class="edit-content" style="display:none;">
   <p><%= f.select :content_type, options_for_select([["Textile", "textile"], ["HTML", "html"]],  @page.content_type), :label => l(:label_cms_page_content_type) %></p>  
@@ -136,6 +136,12 @@
   <%= javascript_include_tag 'codemirror/mode/javascript/javascript', :plugin => 'redmine_cms'  %>
   <%= stylesheet_link_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
   <%= stylesheet_link_tag 'codemirror/theme/ambiance', :plugin => 'redmine_cms'  %>
+<% end %>
+
+<% content_for :header do %>
+  <div class="contextual page-edit" id="float_buttons" style="display:none;">
+    <%= link_to l(:label_cms_apply), "#", :class => "icon icon-checked", :remote => true, :onclick => "editor.save(); $.ajax({url: '#{escape_javascript url_for(@page)}', type: \'post\', data: $(\'#page_form\').serialize()});return false;"%>
+  </div>
 <% end %>
 
 
