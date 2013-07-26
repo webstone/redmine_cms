@@ -96,7 +96,7 @@ private
   end
 
   def check_status
-    render_404 unless @page.active?
+    render_404 unless @page.active? || User.current.admin?
   end
 
 end
