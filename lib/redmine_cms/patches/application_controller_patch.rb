@@ -17,8 +17,6 @@ module RedmineCMS
 
 
       module InstanceMethods
-        # include ContactsHelper
-
         def menu_setup
           # Check the settings cache for each request
           CmsMenu.check_cache

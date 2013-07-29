@@ -37,7 +37,7 @@ class CmsMenu < ActiveRecord::Base
     return true if user.admin?
     return true if visibility == 'public'
     return true if visibility == 'logged' && User.current.logged?
-    return true if user_ids.include?(visibility) && User.current.logged?
+    return true if user_ids.include?(visibility.to_i) && User.current.logged?
     false
   end
 
