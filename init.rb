@@ -2,8 +2,8 @@ Redmine::Plugin.register :redmine_cms do
   name 'Redmine CMS plugin'
   author 'RedmineCRM'
   description 'This is a CMS plugin for Redmine'
-  version '0.0.2-alpha'
-  url 'http://redminecrm.com'
+  version '0.0.3-alpha'
+  url 'http://redminecrm.com/projects/cms'
 
   requires_redmine :version_or_higher => '2.1.2'   
 

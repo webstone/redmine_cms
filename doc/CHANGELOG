@@ -4,8 +4,15 @@ Redmine CMS plugin - content management system for Redmine
 Copyright (C) 2011-2013  Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2013-07-29 v0.0.3
+
+* Menu visibility fixes
+* Attachments delete routing error fixed
+* Apply menu on the top of page
+
 == 2013-04-07 v0.0.2
 
 * Redmine 2.3 support
 * View menu permissions
 * Fixed bug with menu updates in multi redmine instanses
+

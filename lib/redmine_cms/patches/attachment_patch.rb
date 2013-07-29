@@ -17,7 +17,7 @@ module RedmineCMS
           if container.respond_to?(:project)
             container.try(:project) 
           else
-            false
+            ""
           end  
         end
 
