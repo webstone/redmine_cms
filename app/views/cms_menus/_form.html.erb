@@ -13,6 +13,6 @@
 
 <p><%= f.select :visibility, options_for_select([["Public", 'public'], ["Logged", 'logged']] + (Group.all.map{|g| [g.name, g.id]}), @cms_menu.visibility), :label => l(:label_cms_visibility)  %></p> 
 
-<p><%= f.select :menu_type, options_for_select([["top_menu", "top_menu"], ["project_menu", "project_menu"], ["footer_menu", "footer_menu"], ["account_menu", "account_menu"]],  @cms_menu.menu_type), :label => l(:label_cms_menu_type) %></p>  
+<p><%= f.select :menu_type, options_for_select([["top_menu", "top_menu"], ["footer_menu", "footer_menu"], ["account_menu", "account_menu"]],  @cms_menu.menu_type), :label => l(:label_cms_menu_type) %></p>  
 
 </div>

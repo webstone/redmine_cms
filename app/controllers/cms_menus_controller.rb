@@ -38,7 +38,7 @@ class CmsMenusController < ApplicationController
     @cms_menu = CmsMenu.new(params[:cms_menu])
     if @cms_menu.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
+      redirect_to :action => 'edit', :id => @cms_menu
     else
       render :action => 'new'
     end
