@@ -117,6 +117,23 @@ module RedmineCms
          </iframe>
         ~.html_safe
       end
+      
+      desc "Info block"
+      macro :info do |obj, args, text|
+        raise 'No or bad arguments.' if args.size < 1 && args.size > 2
+        info_type = case args.first.downcase 
+        when 'warning' 
+          then 'warning'
+        when 'error' 
+          then 'error'
+        else 
+          'info'
+        end
+        content = args.second ? args.second : textilizable(text, :object => obj, :attachments => obj.attachments)
+
+        # content = textilizable(text, :object => obj, :attachments => obj.attachments)
+        content_tag('div', content, :class => "flash #{info_type}").html_safe
+      end
 
     end  
 
