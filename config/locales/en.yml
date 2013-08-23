@@ -55,3 +55,5 @@ en:
   label_cms_visibility: Visibility
   label_cms_show_activity_tab: Show activity tab
   label_cms_show_overview_tab: Show overview tab
+
+  label_cms_redmine_top_menu: Default top menu items

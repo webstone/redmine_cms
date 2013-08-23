@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_cms do
   name 'Redmine CMS plugin'
   author 'RedmineCRM'
   description 'This is a CMS plugin for Redmine'
-  version '0.0.3-alpha'
+  version '0.0.4-alpha'
   url 'http://redminecrm.com/projects/cms'
 
   requires_redmine :version_or_higher => '2.1.2'   
@@ -31,7 +31,8 @@ Redmine::Plugin.register :redmine_cms do
 
   delete_menu_item(:top_menu, :home) 
   delete_menu_item(:top_menu, :"my_page")
-  delete_menu_item(:top_menu, :"projects")
+  delete_menu_item(:top_menu, :projects)
+  delete_menu_item(:top_menu, :help)
   delete_menu_item(:account_menu, :register)  
 
   delete_menu_item(:project_menu, :activity)
@@ -47,9 +48,9 @@ Redmine::Plugin.register :redmine_cms do
 
   end
 
-  menu :top_menu, :cms, {:controller => 'pages', :action => 'index'}, :first => true, :caption => :label_cms, :parent => :administration
+  menu :top_menu, :cms, {:controller => 'settings', :action => 'plugin', :id => "redmine_cms"}, :first => true, :caption => :label_cms, :parent => :administration
 
-  menu :admin_menu, :cms, {:controller => 'pages', :action => 'index'}, :caption => :label_cms
+  menu :admin_menu, :cms, {:controller => 'settings', :action => 'plugin', :id => "redmine_cms"}, :caption => :label_cms
 
 end
 

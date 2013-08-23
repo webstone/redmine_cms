@@ -69,7 +69,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page.destroy
-    redirect_to :action => 'index'
+    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "pages"
   end   
 
   def expire_cache

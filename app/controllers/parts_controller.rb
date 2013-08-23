@@ -7,7 +7,7 @@ class PartsController < ApplicationController
   helper :cms
 
   def index
-    redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
+    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
   end
 
   def show
@@ -34,7 +34,7 @@ class PartsController < ApplicationController
       respond_to do |format|
         format.html do 
           if params[:unlock] 
-            redirect_to :controller => 'pages', :action =>"index", :tab => 'parts'
+            redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
           else
             redirect_to :action =>"show", :id => @part
           end
@@ -62,7 +62,7 @@ class PartsController < ApplicationController
 
   def destroy
     @part.destroy
-    redirect_to :controller => 'pages', :action => 'index', :tab => 'parts'
+    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
   end    
 
 private

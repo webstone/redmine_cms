@@ -6,12 +6,6 @@
     </p>
 
     <p>  
-      <label><%= l(:label_cms_show_overview_tab) %></label>
-        <%= hidden_field_tag('contacts_settings[project_tab_show_overview]', 0) %>
-        <%= check_box_tag "contacts_settings[project_tab_show_overview]", 1, ContactsSetting["project_tab_show_overview", @project.id].to_i > 0 %>
-    </p>
-
-    <p>  
       <label><%= l(:label_cms_show_activity_tab) %></label>
         <%= hidden_field_tag('contacts_settings[project_tab_show_activity]', 0) %>
         <%= check_box_tag "contacts_settings[project_tab_show_activity]", 1, ContactsSetting["project_tab_show_activity", @project.id].to_i > 0 %>

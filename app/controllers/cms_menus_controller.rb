@@ -8,7 +8,7 @@ class CmsMenusController < ApplicationController
   helper :cms
 
   def index
-    redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'   
+    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "cms_menus"
   end
 
   def edit
@@ -46,7 +46,7 @@ class CmsMenusController < ApplicationController
 
   def destroy
     @cms_menu.destroy
-    redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
+    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "cms_menus"
   end  
 
 private

@@ -13,7 +13,9 @@ Redmine::MenuManager.map :top_menu do |menu|
     menu.push :adm_plugins, {:controller => 'admin', :action => 'plugins'}, :caption => :label_plugins, :last => true, :parent => :administration
     menu.push :adm_info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true, :parent => :administration
 
-    menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural, :if => Proc.new { Setting.plugin_redmine_cms[:menu_show_projects] }
+    menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural, :if => Proc.new { Setting.plugin_redmine_cms[:show_projects] }
+    menu.push :home, { :controller => 'welcome', :action => 'index' }, :if => Proc.new { Setting.plugin_redmine_cms[:show_home] }
+    menu.push :help, Redmine::Info.help_url, :last => true, :if => Proc.new { !Setting.plugin_redmine_cms[:hide_help] }
 end
 
 Redmine::MenuManager.map :account_menu do |menu|
@@ -21,6 +23,6 @@ Redmine::MenuManager.map :account_menu do |menu|
 end
 
 Redmine::MenuManager.map :project_menu do |menu|
-  menu.push :overview, { :controller => 'projects', :action => 'show' }, :if => Proc.new{|p| ContactsSetting["project_tab_show_overview".to_sym, p.id].to_i > 0 }
-  menu.push :activity, { :controller => 'activities', :action => 'index' }, :if => Proc.new{|p| ContactsSetting["project_tab_show_activity".to_sym, p.id].to_i > 0 }
+  menu.push :activity, { :controller => 'activities', :action => 'index' }, :if => Proc.new{|p| !p.module_enabled?(:project_tab) || ContactsSetting["project_tab_show_activity".to_sym, p.id].to_i > 0 }, :first => true
+  menu.push :overview, { :controller => 'projects', :action => 'show' }, :if => Proc.new{|p| !p.module_enabled?(:project_tab) || ContactsSetting["landing_page".to_sym, p.id].blank? }, :first => true
 end        
