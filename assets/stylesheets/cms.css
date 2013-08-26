@@ -2,6 +2,10 @@
 /*                   TOP MENU
 /**************************************************************/
 
+#top-menu > ul > li {
+  height: 20px;
+}
+
 #top-menu li ul.menu-children {
   display: none;
   position: absolute;
