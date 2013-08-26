@@ -15,7 +15,7 @@ Redmine::MenuManager.map :top_menu do |menu|
 
     menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural, :if => Proc.new { Setting.plugin_redmine_cms[:show_projects] }
     menu.push :home, { :controller => 'welcome', :action => 'index' }, :if => Proc.new { Setting.plugin_redmine_cms[:show_home] }
-    menu.push :help, Redmine::Info.help_url, :last => true, :if => Proc.new { !Setting.plugin_redmine_cms[:hide_help] }
+    menu.push :help, Redmine::Info.help_url, :last => true, :if => Proc.new { Setting.plugin_redmine_cms[:show_help] }
 end
 
 Redmine::MenuManager.map :account_menu do |menu|
