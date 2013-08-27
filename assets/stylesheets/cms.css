@@ -31,7 +31,7 @@
   z-index: 1000;
 }
 
-#top-menu li:last-child > ul.menu-children {
+#top-menu #account li:last-child > ul.menu-children {
   right: 0px;
   left: auto;
 }
