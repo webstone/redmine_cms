@@ -69,7 +69,7 @@
 
 <div id="footer">
   <div class="bgl"><div class="bgr">
-    Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> &copy; 2006-2012 Jean-Philippe Lang
+    <%= Setting.plugin_redmine_cms[:copyright].blank? ? "Powered by #{link_to Redmine::Info.app_name, Redmine::Info.url}".html_safe : Setting.plugin_redmine_cms[:copyright].to_s.html_safe %>
   </div></div>
 </div>
 </div>

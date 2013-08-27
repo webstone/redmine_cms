@@ -31,6 +31,10 @@
 </p>
 
 
+<p>  
+  <label><%= l(:label_cms_copyright) %></label> 
+  <%= text_field_tag 'settings[copyright]', @settings[:copyright], :size => 100 %>
+</p>
 
 <fieldset class="box"><legend><%= l(:label_cms_layout_content) %></legend>
 <%= text_area_tag 'settings[layout_content]', @settings[:layout_content], :class => 'wiki-edit', :rows => 20 %>

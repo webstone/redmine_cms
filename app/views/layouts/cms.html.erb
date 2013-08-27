@@ -74,7 +74,7 @@
   <%= yield :footer %>
   <%= render_menu :footer_menu -%>
   <p>
-     &copy; <%= link_to "RedmineCRM", "http://redminecrm.com" %>,  Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> 
+     <%= Setting.plugin_redmine_cms[:copyright].blank? ? "Powered by #{link_to Redmine::Info.app_name, Redmine::Info.url}".html_safe : Setting.plugin_redmine_cms[:copyright].to_s.html_safe %>
   </p>
 </div>
 </div>
