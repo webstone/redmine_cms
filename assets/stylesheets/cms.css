@@ -31,7 +31,8 @@
   z-index: 1000;
 }
 
-#top-menu #account.cms li {
+#top-menu #account.cms > ul > li {
+  height: 20px;
   position: relative;
 }
 
