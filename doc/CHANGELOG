@@ -8,7 +8,8 @@ http://www.redminecrm.com/
 
 * Show overview and activity tabs for projects without project_tab module
 * CMS plugin settings with pages/menus/parts tabs
-
+* Copyright info settings for CMS and Default with meta templates
+* Top menu child fixes for default themes
 
 == 2013-07-29 v0.0.3
 
