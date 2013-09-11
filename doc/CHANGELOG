@@ -6,6 +6,11 @@ http://www.redminecrm.com/
 
 == 2013-08-28 v0.0.3
 
+* Width for long setting fields as 98%
+* Fixed redirect to landing page for project with disabled cms module
+
+== 2013-08-28 v0.0.3
+
 * Show overview and activity tabs for projects without project_tab module
 * CMS plugin settings with pages/menus/parts tabs
 * Copyright info settings for CMS and Default with meta templates

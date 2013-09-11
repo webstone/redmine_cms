@@ -20,7 +20,7 @@ module RedmineCms
             redirect_to_project_menu_item(@project, params[:jump]) && return
           end          
           
-          unless (page_path = ContactsSetting["landing_page", @project.id]).blank?
+          unless !User.current.allowed_to?(:view_project_tabs, @project) || (page_path = ContactsSetting["landing_page", @project.id]).blank?
             if page_path.to_i > 0 && page_path.to_i < 11
               page_path = {:controller => 'project_tabs', :action => 'show', :tab => page_path.to_i.to_s, :project_id => @project}
             end

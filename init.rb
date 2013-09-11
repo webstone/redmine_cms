@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_cms do
     :base_layout => 'base'
   }, :partial => 'settings/cms'  
 
-  project_module :project_tab do
+  project_module :cms do
     permission :view_project_tabs, { 
       :project_tabs => [:show]
     }    

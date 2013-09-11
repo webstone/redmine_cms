@@ -30,9 +30,7 @@
 </div>
 
 
-<div id="header" class="<%= has_content?(:header) ? '' : 'noheader' %>">
-
-
+<div id="header">
     <%= yield :header %>
     <% if show_main_menu = @project %>
         <% if User.current.logged? || !Setting.login_required? %>
