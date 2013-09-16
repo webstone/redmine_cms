@@ -29,7 +29,7 @@ class UserDrop < Liquid::Drop
   end
 
   def language
-    ::I18n.locale.to_s    
+    @user.language 
   end  
 
   def permissions
