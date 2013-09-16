@@ -75,7 +75,8 @@ module RedmineCMS
         end
 
         def render_part(part)
-          assigns = { 'part' => part }
+          user_drop = UserDrop.new(User.current)
+          assigns = { 'part' => part, 'user' => user_drop }
 
           registers = {
             :controller     => self,
