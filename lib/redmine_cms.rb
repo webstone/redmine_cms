@@ -1,6 +1,10 @@
 require 'liquid/tags'
 require 'liquid/filters'
-require 'liquid/user_drop'
+require 'liquid/paginate'
+require 'liquid/drops/users_drop'
+require 'liquid/drops/pages_drop'
+require 'liquid/drops/menus_drop'
+require 'liquid/drops/contacts_drop'
 
 require 'redmine_cms/patches/projects_helper_patch'
 require 'redmine_cms/patches/application_helper_patch'

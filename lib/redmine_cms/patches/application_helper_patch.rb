@@ -75,8 +75,22 @@ module RedmineCMS
         end
 
         def render_part(part)
-          user_drop = UserDrop.new(User.current)
-          assigns = { 'part' => part, 'user' => user_drop }
+          assigns = { 
+            'part'         => part, 
+            'users'        => UsersDrop.new(User.sorted),
+            'contacts'     => ContactsDrop.new(Contact.scoped({})),
+            'current_page' => params[:page] || 1,
+            'page'         => PageDrop.new(@page),
+            'pages'        => PagesDrop.new(Page.scoped({})),
+            'menus'        => MenusDrop.new(CmsMenu.scoped({})),
+            'params'       => self.params,
+            'language'     => request.accept_language,
+            'path'         => request.path,
+            'fullpath'     => request.fullpath,
+            'url'          => request.url,
+            'now'          => Time.now.utc,
+            'today'        => Date.today
+           }
 
           registers = {
             :controller     => self,
