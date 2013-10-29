@@ -18,7 +18,7 @@ module RedmineCms
       end 
 
 
-      desc "Include page"
+      desc "Include part"
       macro :include_part do |obj, args|
         return "" unless obj.is_a?(Page) || obj.is_a?(Part)
         args, options = extract_macro_options(args, :parent)

@@ -8,6 +8,17 @@ module RedmineCms
         RedCloth3.new(input).to_html
       end
 
+      # example:
+      #   {{ 'part1' | include_part }}
+      def include_part(input)
+        return '' if input.nil?
+        part = Part.find_by_name(input)
+        helper.render_part(part)
+      end
+
+
+      # example:
+      #   {{ 'part1:image.png' | attachment_url }}
       def attachment_url(input)
         return '' if input.nil?
         part, filename = get_part(input)
@@ -67,7 +78,7 @@ module RedmineCms
         pages = paginate['pages']
         result = ''
         if paginate['previous']
-          result += %Q( <span class="prev"><a href="#{paginate['previous']['url']}">« #{paginate['previous']['title']}</a></span>)
+          result += %Q( <span class="prev"><a href="#{paginate['previous']['url']}">&#187; #{paginate['previous']['title']}</a></span>)
         end
         paginate['parts'].each do |part|
           page =  part['title']
@@ -86,7 +97,7 @@ module RedmineCms
           end
         end
         if paginate['next']
-          result += %Q( <span class="next"><a href="#{paginate['next']['url']}">#{paginate['next']['title']} »</a></span>)
+          result += %Q( <span class="next"><a href="#{paginate['next']['url']}">#{paginate['next']['title']} &#187;</a></span>)
         end
         result
       end        

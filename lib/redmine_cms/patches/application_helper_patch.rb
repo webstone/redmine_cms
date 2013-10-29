@@ -28,16 +28,12 @@ module RedmineCMS
           s = "<ul>"
           if User.current.logged?
             s << "<li>#{avatar(User.current, :size => "16").to_s.html_safe + link_to_user(User.current, :format => :username) }"
-              # s << "<ul class=\"menu-children\">"
               links = []
               menu_items_for(:account_menu) do |node|
                 links << render_menu_node(node)
               end
               s << (links.empty? ? "" : content_tag('ul', links.join("\n").html_safe, :class => "menu-children"))
-              #   s << "<li>#{link_to(l(:label_cms_account_settings), { :controller => 'my', :action => 'account'})}</li>"
-              #   s << "<li>#{link_to l(:label_my_page), { :controller => 'my', :action => 'page' }}</li>"
-              #   s << "<li>#{link_to l(:label_logout), signout_path}</li>"
-              # s << "</ul>"
+
             s << "</li>"
           else
             s << "<li>#{link_to l(:label_login), signin_path}</li>"
@@ -74,34 +70,33 @@ module RedmineCMS
           end
         end
 
-        def render_part(part)
-          assigns = { 
-            'part'         => part, 
-            'users'        => UsersDrop.new(User.sorted),
-            'contacts'     => ContactsDrop.new(Contact.scoped({})),
-            'current_page' => params[:page] || 1,
-            'page'         => PageDrop.new(@page),
-            'pages'        => PagesDrop.new(Page.scoped({})),
-            'menus'        => MenusDrop.new(CmsMenu.scoped({})),
-            'params'       => self.params,
-            'language'     => request.accept_language,
-            'path'         => request.path,
-            'fullpath'     => request.fullpath,
-            'url'          => request.url,
-            'now'          => Time.now.utc,
-            'today'        => Date.today
-           }
+        def render_liquid(content, part=nil)
+          assigns = {}
+          assigns['users'] = UsersDrop.new(User.sorted)
+          assigns['contacts'] = ContactsDrop.new(Contact.scoped({}))
+          assigns['current_page'] = params[:page] || 1
+          assigns['page'] = PageDrop.new(@page) if @page
+          assigns['pages'] = PagesDrop.new(Page.scoped({}))
+          assigns['menus'] = MenusDrop.new(CmsMenu.scoped({}))
+          assigns['params'] = self.params if self.respond_to?(:params)
+          assigns['request'] = RequestDrop.new(request)
+          assigns['now'] = Time.now.utc
+          assigns['today'] = Date.today
+          assigns['layout'] = LayoutDrop.new
 
-          registers = {
-            :controller     => self,
-            :part           => part
-          }
+          registers = {}
+          registers[:part] = part if part
+
+          Liquid::Template.parse(content).render(Liquid::Context.new({}, assigns, registers)).html_safe 
+        end
+
+        def render_part(part)
 
           s = case part.content_type
               when "textile"
                 textilizable(part, :content, :attachments => part.attachments)
               when "html"
-                Liquid::Template.parse(part.content).render(Liquid::Context.new({}, assigns, registers)).html_safe 
+                render_liquid(part.content, part)
               when "java_script"
                 "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe 
               when "css"

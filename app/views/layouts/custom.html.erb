@@ -1,0 +1,50 @@
+<% 
+    assigns = { 
+      'layout_content'          => yield,
+      'layout_sidebar'          => yield(:sidebar),
+      'layout_header'           => yield(:header),
+      'layout_redmine_headers'  => csrf_meta_tag + "\n" + 
+                                   favicon_cms + "\n" + 
+                                   jquery_tag + "\n" + 
+                                   l(:direction) == 'rtl' ? stylesheet_link_tag('rtl', :media => 'all') : '' + "\n" + 
+                                   javascript_heads + "\n" + 
+                                   heads_for_theme + "\n" + 
+                                   call_hook(:view_layouts_base_html_head) + "\n" + 
+                                   heads_for_theme + 
+                                   yield(:header_tags), 
+      'layout_header_tags'      => yield(:header_tags),
+      'layout_html_head_hook'   => call_hook(:view_layouts_base_html_head),
+      'layout_body_bottom_hook' => call_hook(:view_layouts_base_body_bottom),
+      'layout_jquery_tag'       => jquery_tag,
+      'layout_html_title'       => html_title,
+      'layout_csrf_meta_tag'    => csrf_meta_tag,
+      'layout_favicon'          => favicon_cms,
+      'layout_javascript_heads' => javascript_heads,
+      'layout_heads_for_theme'  => heads_for_theme,
+      'layout_account_menu'     => render_menu(:account_menu),
+      'layout_top_menu'         => render_menu(:top_menu),
+      'layout_main_menu'        => render_main_menu(@project),
+      
+      'layout'                  => LayoutDrop.new,
+
+      'users'                   => UsersDrop.new(User.sorted),
+      'contacts'                => ContactsDrop.new(Contact.scoped({})),
+      'current_page'            => params[:page] || 1,
+      'page'                    => PageDrop.new(@page),
+      'pages'                   => PagesDrop.new(Page.scoped({})),
+      'menus'                   => MenusDrop.new(CmsMenu.scoped({})),
+      'params'                  => self.params,
+      'language'                => request.accept_language,
+      'path'                    => request.path,
+      'fullpath'                => request.fullpath,
+      'url'                     => request.url,
+      'now'                     => Time.now.utc,
+      'today'                   => Date.today
+     }
+
+    registers = {
+      :controller     => self,
+    }
+ %>
+
+<%= Liquid::Template.parse(Setting.plugin_redmine_cms[:custom_layout_content]).render(Liquid::Context.new({}, assigns, registers)).html_safe  %>

@@ -11,15 +11,22 @@
   position: absolute;
   clear: both;
   top: 20px;
-  border: 1px solid #555;
+  border: 1px solid #e4e4e4;
   background-color: #fff;
-  color: #505050; 
+  color: #505050;
+  max-width: 230px;
 }
 
 #top-menu ul.menu-children > li {
   padding: 5px;
-  margin: 0px;
   float: none;
+  display: block;
+  border-bottom: 1px solid #e4e4e4;
+  margin: 0 6px;
+}
+
+#top-menu ul.menu-children > li:last-child {
+  border-bottom: 0px;
 }
 
 #top-menu ul.menu-children > li a {

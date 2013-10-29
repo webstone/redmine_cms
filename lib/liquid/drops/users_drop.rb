@@ -1,7 +1,5 @@
 class UsersDrop < Liquid::Drop
 
-  delegate :name, :firstname, :lastname, :tags, :company, :address, :phones, :emails, :to => :@users
-
   def initialize(users)
     @users = users
   end

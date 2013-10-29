@@ -29,7 +29,7 @@ module RedmineCMS
         end
 
         def use_layout_with_cms
-          request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base")
+          request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base") 
         end
 
         def set_localization_with_cms
