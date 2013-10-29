@@ -5,17 +5,17 @@ Redmine::Plugin.register :redmine_cms do
   version '0.0.3'
   url 'http://redminecrm.com/projects/cms'
 
-  requires_redmine :version_or_higher => '2.1.2'   
+  requires_redmine :version_or_higher => '2.1.2'
 
   settings :default => {
     :use_localization => true,
     :base_layout => 'base'
-  }, :partial => 'settings/cms'  
+  }, :partial => 'settings/cms'
 
   project_module :cms do
-    permission :view_project_tabs, { 
+    permission :view_project_tabs, {
       :project_tabs => [:show]
-    }    
+    }
     permission :manage_project_tabs, {
       :contacts_settings => :save
     }
@@ -23,26 +23,27 @@ Redmine::Plugin.register :redmine_cms do
 
   Redmine::MenuManager.map :footer_menu do |menu|
     #empty
-  end  
+  end
 
   Redmine::MenuManager.map :top_menu do |menu|
     #empty
-  end  
+  end
 
-  delete_menu_item(:top_menu, :home) 
+  delete_menu_item(:top_menu, :home)
   delete_menu_item(:top_menu, :"my_page")
   delete_menu_item(:top_menu, :projects)
   delete_menu_item(:top_menu, :help)
-  delete_menu_item(:account_menu, :register)  
+  delete_menu_item(:account_menu, :register)
 
   delete_menu_item(:project_menu, :activity)
   delete_menu_item(:project_menu, :overview)
 
   10.downto(1) do |index|
     tab = "project_tab_#{index}".to_sym
-    menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index}, 
-                             :first => :true,
+    menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index},
                              :param => :project_id,
+                             :first => index != 5,
+                             :last => index == 5,
                              :caption => Proc.new{|p| ContactsSetting["project_tab_#{index}_caption".to_sym, p.id] || tab.to_s },
                              :if => Proc.new{|p| !ContactsSetting["project_tab_#{index}_caption".to_sym, p.id].blank? }
 
