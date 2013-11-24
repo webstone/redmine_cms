@@ -5,7 +5,6 @@ require 'liquid/drops/users_drop'
 require 'liquid/drops/pages_drop'
 require 'liquid/drops/menus_drop'
 require 'liquid/drops/layout_drop'
-require 'liquid/drops/contacts_drop'
 require 'liquid/drops/request_drop'
 
 require 'redmine_cms/patches/projects_helper_patch'
@@ -22,7 +21,7 @@ require 'redmine_cms/hooks/views_layouts_hook'
 require 'redmine_cms/wiki_macros/cms_wiki_macros'
 
 module RedmineCms
-  
+
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 0
 
