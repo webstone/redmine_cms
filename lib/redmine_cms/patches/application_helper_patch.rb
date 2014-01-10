@@ -1,7 +1,7 @@
 module RedmineCMS
   module Patches
     module ApplicationHelperPatch
-      
+
       def self.included(base)
         base.send(:include, InstanceMethods)
       end
@@ -13,12 +13,12 @@ module RedmineCMS
             "<link rel='shortcut icon' href='#{current_theme.image_path('/favicon.ico')}' />".html_safe
           else
             favicon
-          end          
+          end
         end
 
         def jquery_tag
           if Redmine::VERSION.to_s > "2.3"
-            stylesheet_link_tag 'jquery/jquery-ui-1.9.2', 'application', :media => 'all' 
+            stylesheet_link_tag 'jquery/jquery-ui-1.9.2', 'application', :media => 'all'
           else
             stylesheet_link_tag 'jquery/jquery-ui-1.8.21', 'application', :media => 'all'
           end
@@ -57,7 +57,7 @@ module RedmineCMS
               content_for(:footer, render_part(pages_part.part))
             when "content"
               s << cached_render_part(pages_part.part)
-            end  
+            end
           end
           s
         end
@@ -86,8 +86,11 @@ module RedmineCMS
 
           registers = {}
           registers[:part] = part if part
-
-          Liquid::Template.parse(content).render(Liquid::Context.new({}, assigns, registers)).html_safe 
+          begin
+            Liquid::Template.parse(content).render(Liquid::Context.new({}, assigns, registers)).html_safe
+          rescue => e
+            e.message
+          end
         end
 
         def render_part(part)
@@ -98,18 +101,18 @@ module RedmineCMS
               when "html"
                 render_liquid(part.content, part)
               when "java_script"
-                "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe 
+                "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe
               when "css"
-                "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe 
+                "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe
               else
                 part.content
-              end 
+              end
 
           # (part.is_a?(Part) && ["textile", "html"].include?(part.content_type))? content_tag(:span, s, :id => part.name, :class => "part") : s
-        end        
+        end
 
       end
-      
+
     end
   end
 end

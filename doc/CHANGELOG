@@ -4,6 +4,10 @@ Redmine CMS plugin - content management system for Redmine
 Copyright (C) 2011-2013  Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2014-01-10 v0.0.4
+
+* Handling liquid execptions
+
 == 2013-08-28 v0.0.3
 
 * Width for long setting fields as 98%
