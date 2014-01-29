@@ -8,13 +8,15 @@ module RedmineCms
           unloadable
           caches_action :sitemap, :expires_in => 1.week
           alias_method_chain :index, :cms
+
+          helper :pages
         end
       end
 
       module InstanceMethods
 
         def index_with_cms
-          unless RedmineCms.settings[:landing_page].blank?
+          if !RedmineCms.settings[:landing_page].blank? && !Page.find_by_name(RedmineCms.settings[:landing_page])
             redirect_to RedmineCms.settings[:landing_page], :status => 301
           else
             index_without_cms
@@ -27,8 +29,8 @@ module RedmineCms
           respond_to do |format|
             format.xml
           end
-        end        
-        
+        end
+
       end
 
     end

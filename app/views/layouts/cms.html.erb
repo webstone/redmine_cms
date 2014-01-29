@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <title><%=h html_title %></title>
-<meta name="description" content="<%= @page_description || Redmine::Info.app_name %>" />
-<meta name="keywords" content="<%= @page_keywords || "issue,bug,tracker" %>" />
+<meta name="description" content="<%= (@page && @page.description) || Redmine::Info.app_name %>" />
+<meta name="keywords" content="<%= (@page && @page.keywords) || "issue,bug,tracker" %>" />
 <%= csrf_meta_tag %>
 <%= favicon_cms %>
 <%= jquery_tag %>

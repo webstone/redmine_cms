@@ -18,26 +18,24 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page_keywords = @page.keywords if @page.keywords
-    @page_description = @page.description
     respond_to do |format|
-      format.html {render :action => 'show', :layout => use_layout} 
-    end    
+      format.html {render :action => 'show', :layout => use_layout}
+    end
   end
 
   def edit
     @pages_parts = @page.pages_parts.order_by_type
     respond_to do |format|
-      format.html {render :action => 'edit', :layout => use_layout} 
-    end  
+      format.html {render :action => 'edit', :layout => use_layout}
+    end
   end
 
   def new
     @page = Page.new
     @page.copy_from(params[:copy_from]) if params[:copy_from]
     respond_to do |format|
-      format.html {render :action => 'new', :layout => use_layout} 
-    end     
+      format.html {render :action => 'new', :layout => use_layout}
+    end
   end
 
   def update
@@ -65,12 +63,12 @@ class PagesController < ApplicationController
     else
       render :action => 'new'
     end
-  end 
+  end
 
   def destroy
     @page.destroy
     redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "pages"
-  end   
+  end
 
   def expire_cache
     expire_fragment(@page)
@@ -78,7 +76,7 @@ class PagesController < ApplicationController
       expire_fragment(part)
     end
     redirect_to :back
-  end 
+  end
 
 private
   def authorize_page
@@ -87,7 +85,7 @@ private
       render_403
     end
   rescue ActiveRecord::RecordNotFound
-    render_404    
+    render_404
   end
 
   def find_page
