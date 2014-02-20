@@ -23,28 +23,6 @@ class ProjectsDrop < Liquid::Drop
     @projects.size
   end
 
-  def previous_project
-    project = @context['project']
-    index = project && project_drops.keys.index(project.id)
-    previous_id = index && !index.zero? && project_drops.keys[index-1]
-    project_drops[previous_id].url if previous_id
-  end
-
-  def next_project
-    project = @context['project']
-    index = project && project_drops.keys.index(project.id)
-    next_id = index && project_drops.keys[index+1]
-    project_drops[next_id].url if next_id
-  end
-
-  private
-
-  def project_drops # {1 => projectDrop.new(project)}
-    Hash[ *self.all do |project_drop|
-      [project_drop.id, project_drop]
-    end.flatten ]
-  end
-
 end
 
 
@@ -79,7 +57,7 @@ class ProjectDrop < Liquid::Drop
   end
 
   def issues
-    @issues ||= IssuesDrop.new @project.issues
+    @issues ||= IssuesDrop.new @project.issues.visible
   end
 
   def users

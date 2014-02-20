@@ -64,13 +64,11 @@ module ApplicationHelper
   def render_liquid(content, part=nil)
     assigns = {}
     assigns['users'] = UsersDrop.new(User.sorted)
-    assigns['projects'] = ProjectsDrop.new(Project.order(:name))
-    assigns['newss'] = NewssDrop.new(News.order(:created_on))
-    assigns['contacts'] = ContactsDrop.new(Contact.scoped({}))
+    assigns['projects'] = ProjectsDrop.new(Project.visible.order(:name))
+    assigns['newss'] = NewssDrop.new(News.visible.order(:created_on))
     assigns['current_page'] = params[:page] || 1
     assigns['page'] = PageDrop.new(@page) if @page
     assigns['pages'] = PagesDrop.new(Page.scoped({}))
-    assigns['menus'] = MenusDrop.new(CmsMenu.scoped({}))
     assigns['params'] = self.params if self.respond_to?(:params)
     assigns['request'] = RequestDrop.new(request)
     assigns['now'] = Time.now.utc

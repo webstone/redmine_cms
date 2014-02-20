@@ -27,28 +27,6 @@ class IssuesDrop < Liquid::Drop
     @issues.size
   end
 
-  def previous_issue
-    issue = @context['issue']
-    index = issue && issue_drops.keys.index(issue.id)
-    previous_id = index && !index.zero? && issue_drops.keys[index-1]
-    issue_drops[previous_id].url if previous_id
-  end
-
-  def next_issue
-    issue = @context['issue']
-    index = issue && issue_drops.keys.index(issue.id)
-    next_id = index && issue_drops.keys[index+1]
-    issue_drops[next_id].url if next_id
-  end
-
-  private
-
-  def issue_drops # {1 => issueDrop.new(issue)}
-    Hash[ *self.all do |issue_drop|
-      [issue_drop.id, issue_drop]
-    end.flatten ]
-  end
-
 end
 
 

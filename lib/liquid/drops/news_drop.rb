@@ -27,28 +27,6 @@ class NewssDrop < Liquid::Drop
     @newss.size
   end
 
-  def previous_news
-    news = @context['news']
-    index = news && news_drops.keys.index(news.id)
-    previous_id = index && !index.zero? && news_drops.keys[index-1]
-    news_drops[previous_id].url if previous_id
-  end
-
-  def next_news
-    news = @context['news']
-    index = news && news_drops.keys.index(news.id)
-    next_id = index && news_drops.keys[index+1]
-    news_drops[next_id].url if next_id
-  end
-
-  private
-
-  def news_drops # {1 => newsDrop.new(news)}
-    Hash[ *self.all do |news_drop|
-      [news_drop.id, news_drop]
-    end.flatten ]
-  end
-
 end
 
 
