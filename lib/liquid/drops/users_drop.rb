@@ -27,28 +27,6 @@ class UsersDrop < Liquid::Drop
     @users.size
   end
 
-  def previous_user
-    user = @context['user']
-    index = user && user_drops.keys.index(user.id)
-    previous_id = index && !index.zero? && user_drops.keys[index-1]
-    user_drops[previous_id].url if previous_id
-  end
-
-  def next_user
-    user = @context['user']
-    index = user && user_drops.keys.index(user.id)
-    next_id = index && user_drops.keys[index+1]
-    user_drops[next_id].url if next_id
-  end
-
-  private
-
-  def user_drops # {1 => userDrop.new(user)}
-    Hash[ *self.all do |user_drop|
-      [user_drop.id, user_drop]
-    end.flatten ]
-  end
-
 end
 
 
@@ -75,7 +53,7 @@ class UserDrop < Liquid::Drop
   end
 
   def projects
-    @user.memberships.map(&:project).flatten.uniq.map(&:identifier).uniq
+    ProjectsDrop.new @user.memberships.map(&:project).flatten.select(&:visible?).uniq
   end
 
 end
