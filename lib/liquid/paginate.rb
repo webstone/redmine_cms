@@ -1,5 +1,7 @@
 #encoding: utf-8
 class Paginate < Liquid::Block
+  # example:
+  #   {% paginate users.all by 5 %}{{ paginate | default_pagination }}{% endpaginate %}
   # paginate contacts by 20
   # paginate contacts by settings.pagination_limit
   Syntax = /(#{Liquid::VariableSignature}+)\s+by\s+(\d+|#{Liquid::VariableSignature}+)/
@@ -21,7 +23,7 @@ class Paginate < Liquid::Block
     items = collection.size
     pages = (items + @size -1) / @size
     in_page_collection = collection[(current_page-1)*@size, @size] or return ''
-    collection.reject! {|item| !in_page_collection.include?(item)} 
+    collection.reject! {|item| !in_page_collection.include?(item)}
 
     context.stack do
 

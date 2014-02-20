@@ -23,7 +23,7 @@ class UsersDrop < Liquid::Drop
     all.each(&block)
   end
 
-  def users_count
+  def size
     @users.size
   end
 

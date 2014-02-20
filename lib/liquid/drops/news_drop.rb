@@ -23,7 +23,7 @@ class NewssDrop < Liquid::Drop
     all.each(&block)
   end
 
-  def newss_count
+  def size
     @newss.size
   end
 

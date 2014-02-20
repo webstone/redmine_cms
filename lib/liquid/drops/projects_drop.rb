@@ -19,7 +19,7 @@ class ProjectsDrop < Liquid::Drop
     all.each(&block)
   end
 
-  def projects_count
+  def size
     @projects.size
   end
 
@@ -49,6 +49,7 @@ end
 
 
 class ProjectDrop < Liquid::Drop
+  include ActionView::Helpers::UrlHelper
 
   delegate :id,
            :identifier,
@@ -69,8 +70,20 @@ class ProjectDrop < Liquid::Drop
     @project = project
   end
 
+  def link
+    link_to @project.name, self.url
+  end
+
+  def url
+    Rails.application.routes.url_helpers.project_path(@project)
+  end
+
+  def issues
+    @issues ||= IssuesDrop.new @project.issues
+  end
+
   def users
-    @users ||= @project.users.map{|u| UserDrop.new(u)}
+    @users ||= UsersDrop.new @project.users
   end
 
   def subprojects

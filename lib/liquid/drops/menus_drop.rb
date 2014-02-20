@@ -4,7 +4,7 @@ class MenusDrop < Liquid::Drop
     @menus = menus
   end
 
-  def before_method(name) 
+  def before_method(name)
     menu = @menus.where(:name => name).first || CmsMenu.new
     MenuDrop.new menu
   end
@@ -27,13 +27,17 @@ class MenusDrop < Liquid::Drop
     self.visible.account_menu
   end
 
+  def size
+    @menus.count
+  end
+
   def visible
     @visible ||= @menus.visible.map do |menu|
       MenuDrop.new menu
     end
-  end  
+  end
 
-  def each(&block) 
+  def each(&block)
     all.each(&block)
   end
 
@@ -60,6 +64,6 @@ class MenuDrop < Liquid::Drop
 
   def helpers
     Rails.application.routes.url_helpers
-  end    
+  end
 
 end

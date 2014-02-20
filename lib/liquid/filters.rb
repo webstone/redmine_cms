@@ -16,7 +16,6 @@ module RedmineCms
         helper.render_part(part)
       end
 
-
       # example:
       #   {{ 'part1:image.png' | attachment_url }}
       def attachment_url(input)
@@ -36,7 +35,7 @@ module RedmineCms
         part, filename = get_part(input)
         attachment = part.attachments.where(:filename => filename).first
         attachment ? "/attachments/thumbnail/#{attachment.id}/#{size}" : "attachment #{filename} not found"
-      end  
+      end
 
       # example:
       #   {{ 'image.png' | thumbnail_tag: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
@@ -48,7 +47,7 @@ module RedmineCms
         part, filename = get_part(input)
         attachment = part.attachments.where(:filename => filename).first
         attachment ? "<img src=\"/attachments/thumbnail/#{attachment.id}/#{size}\" #{image_options}/>"  : "attachment #{filename} not found"
-      end   
+      end
 
       # example:
       #   {{ 'image.png' | fancybox_tag: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
@@ -60,7 +59,7 @@ module RedmineCms
         # part, filename = get_part(input)
         # attachment = part.attachments.where(:filename => filename).first
         "<a rel=\"fancybox_group\" href=\"#{attachment_url(input)}\" title=\"#{options[:title]}\">#{thumbnail_tag(input, *args)}</a><p>#{options[:title]}</p>"
-      end    
+      end
 
       # example:
       #   {{ 'image.png' | asset_image_tag: 'title:A title', 'width:100px', 'height:200px'  }}
@@ -68,8 +67,8 @@ module RedmineCms
         return '' if input.nil?
         image_options = inline_options(args_to_options(args))
         options = args_to_options(args)
-        "<img src=\"/plugin_assets/redmine_cms/images/#{input}\" #{image_options}/>" 
-      end    
+        "<img src=\"/plugin_assets/redmine_cms/images/#{input}\" #{image_options}/>"
+      end
 
       # example:
       #   {% paginate users.all by 5 %}{{ paginate | default_pagination }}{% endpaginate %}
@@ -78,7 +77,7 @@ module RedmineCms
         pages = paginate['pages']
         result = ''
         if paginate['previous']
-          result += %Q( <span class="prev"><a href="#{paginate['previous']['url']}">&#187; #{paginate['previous']['title']}</a></span>)
+          result += %Q( <span class="prev"><a href="#{paginate['previous']['url']}">&#171; #{paginate['previous']['title']}</a></span>)
         end
         paginate['parts'].each do |part|
           page =  part['title']
@@ -100,9 +99,9 @@ module RedmineCms
           result += %Q( <span class="next"><a href="#{paginate['next']['url']}">#{paginate['next']['title']} &#187;</a></span>)
         end
         result
-      end        
+      end
 
-    protected  
+    protected
 
       # Convert an array of properties ('key:value') into a hash
       # Ex: ['width:50', 'height:100'] => { :width => '50', :height => '100' }
@@ -136,5 +135,5 @@ module RedmineCms
     end
   end
 
-  ::Liquid::Template.register_filter(RedmineCms::Liquid::Filters)  
+  ::Liquid::Template.register_filter(RedmineCms::Liquid::Filters)
 end
