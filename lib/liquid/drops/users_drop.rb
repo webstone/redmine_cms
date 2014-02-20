@@ -4,7 +4,7 @@ class UsersDrop < Liquid::Drop
     @users = users
   end
 
-  def before_method(login) 
+  def before_method(login)
     user = @users.where(:login => login).first || User.new
     UserDrop.new user
   end
@@ -19,7 +19,7 @@ class UsersDrop < Liquid::Drop
     end
   end
 
-  def each(&block) 
+  def each(&block)
     all.each(&block)
   end
 
@@ -47,7 +47,7 @@ class UsersDrop < Liquid::Drop
     Hash[ *self.all do |user_drop|
       [user_drop.id, user_drop]
     end.flatten ]
-  end  
+  end
 
 end
 
@@ -62,7 +62,6 @@ class UserDrop < Liquid::Drop
 
   def avatar
     ApplicationController.helpers.avatar(@user)
-    # helpers.url_for :controller => "attachments", :action => "users_thumbnail", :id => @contact.avatar, :size => '64', :only_path => true
   end
 
   def permissions
@@ -74,10 +73,10 @@ class UserDrop < Liquid::Drop
   def groups
     @user.groups.map(&:name)
   end
- 
+
   def projects
     @user.memberships.map(&:project).flatten.uniq.map(&:identifier).uniq
-  end  
+  end
 
 end
 

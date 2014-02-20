@@ -64,6 +64,8 @@ module ApplicationHelper
   def render_liquid(content, part=nil)
     assigns = {}
     assigns['users'] = UsersDrop.new(User.sorted)
+    assigns['projects'] = ProjectsDrop.new(Project.order(:name))
+    assigns['newss'] = NewssDrop.new(News.order(:created_on))
     assigns['contacts'] = ContactsDrop.new(Contact.scoped({}))
     assigns['current_page'] = params[:page] || 1
     assigns['page'] = PageDrop.new(@page) if @page
