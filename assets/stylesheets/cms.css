@@ -52,7 +52,7 @@
   margin-right: 5px;
   padding: 0px;
   position: relative;
-  top: -2px;  
+  top: -2px;
 }
 
 /**************************************************************/
@@ -209,7 +209,7 @@ a.button:hover {
   margin-top: 0px;
   border: 1px solid #CCC;
   padding: 5px 10px;
-  background: white;  
+  background: white;
   z-index: 10000;
 }
 
@@ -252,13 +252,17 @@ div.page-title {
   width: 100%;
   height: 100% !important;
   z-index: 9999;
-  font-size: 14px; 
+  font-size: 14px;
+}
+
+.CodeMirror-lines {
+  min-height: 100px;
 }
 
 .CodeMirror .cm-liquid {
   color: #0ca;
 }
-  
+
 /**************************************************************/
 /*                   ICONS
 /**************************************************************/

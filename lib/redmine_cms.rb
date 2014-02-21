@@ -3,13 +3,6 @@ require 'liquid/filters'
 require 'liquid/paginate'
 
 Dir[File.dirname(__FILE__) + '/liquid/drops/*.rb'].each { |f| require f }
-# require 'liquid/drops/users_drop'
-# require 'liquid/drops/projects_drop'
-# require 'liquid/drops/news_drop'
-# require 'liquid/drops/pages_drop'
-# require 'liquid/drops/menus_drop'
-# require 'liquid/drops/layout_drop'
-# require 'liquid/drops/request_drop'
 
 require 'redmine_cms/patches/projects_helper_patch'
 require 'redmine_cms/patches/application_helper_patch'

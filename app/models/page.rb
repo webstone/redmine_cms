@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   unloadable
-  belongs_to :page_project, :class_name => 'Project', :foreign_key => 'project_id'   
+  belongs_to :page_project, :class_name => 'Project', :foreign_key => 'project_id'
   has_many :pages_parts
   has_many :parts, :uniq => true, :through => :pages_parts
 
@@ -30,9 +30,18 @@ class Page < ActiveRecord::Base
   def self.visible_condition(user=User.current)
     user_ids = [user.id] + user.groups.map(&:id)
     cond = ""
-    cond << " ((#{table_name}.visibility = 'public')" 
+    cond << " ((#{table_name}.visibility = 'public')"
     cond << " OR (#{table_name}.visibility = 'logged')" if User.current.logged?
     cond << " OR (#{table_name}.visibility IN (#{user_ids.join(',')})))"
+  end
+
+  def visible?(user=User.current)
+    user_ids = [user.id] + user.groups.map(&:id)
+    return true if user.admin?
+    return true if visibility == 'public'
+    return true if visibility == 'logged' && User.current.logged?
+    return true if user_ids.include?(visibility.to_i) && User.current.logged?
+    false
   end
 
   def active?

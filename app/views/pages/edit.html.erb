@@ -1,4 +1,4 @@
-<div class="contextual">   
+<div class="contextual">
   <%= link_to l(:button_duplicate), {:controller => 'pages', :action => 'new', :copy_from => @page }, :class => 'icon icon-duplicate' %>
   <%= link_to l(:button_delete), {:controller => 'pages', :action => 'destroy', :id => @page}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
 </div>
@@ -9,6 +9,6 @@
 
 <% edit_page_tabs = [{:name => 'edit', :partial => 'edit', :label => :label_cms_page},
         {:name => 'page_parts', :partial => 'page_parts', :label => :label_cms_part_plural}
-        ]   %>   
+        ]   %>
 
 <%= render_tabs edit_page_tabs %>

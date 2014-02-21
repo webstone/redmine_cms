@@ -84,6 +84,7 @@ private
     if @page.page_project && @project != @page.page_project && !User.current.admin?
       render_403
     end
+    render_403 unless @page.visible?
   rescue ActiveRecord::RecordNotFound
     render_404
   end

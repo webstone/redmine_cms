@@ -1,6 +1,6 @@
 module CmsHelper
   def cms_change_status_link(obj_name, obj)
-    return unless obj.respond_to?(:status_id) 
+    return unless obj.respond_to?(:status_id)
     url = {:controller => "#{obj_name}s", :action => 'update', :id => obj, obj_name.to_sym => params[obj_name.to_sym], :status => params[:status], :tab => nil}
 
     if obj.active?
@@ -8,7 +8,15 @@ module CmsHelper
     else
       link_to l(:button_unlock), url.merge(obj_name.to_sym => {:status_id => RedmineCms::STATUS_ACTIVE}, :unlock => true), :method => :put, :remote => :true, :class => 'icon icon-unlock'
     end
-  end 
+  end
+
+  def cms_visibilities_for_select(selected = nil)
+    grouped_options = {
+      l(:label_role_plural) => [["Public", 'public'], ["Logged", 'logged']],
+      l(:label_group_plural) => Group.all.map{|g| [g.name, g.id]}
+    }
+    grouped_options_for_select(grouped_options, selected)
+  end
 
   def cms_reorder_links(name, url, method = :post)
     link_to(image_tag('2uparrow.png', :alt => l(:label_sort_highest)),
@@ -27,5 +35,5 @@ module CmsHelper
             url.merge({"#{name}[move_to]" => 'lowest'}),
             :remote => true,
             :method => method, :title => l(:label_sort_lowest))
-  end  
+  end
 end
