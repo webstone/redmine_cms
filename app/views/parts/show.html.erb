@@ -19,5 +19,7 @@
 <% content_for :header do %>
   <div class="contextual page-edit">
     <%= link_to l(:button_edit), edit_part_path(@part), :class => 'icon icon-edit' %>
+    <hr>
+    <%= link_to l(:label_cms_refresh_cache), expire_cache_part_path(@part), :class => 'icon icon-reload' %>
   </div>
 <% end if User.current.admin? %>

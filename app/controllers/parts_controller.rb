@@ -16,6 +16,11 @@ class PartsController < ApplicationController
   def edit
   end
 
+  def expire_cache
+    Rails.cache.delete(@part)
+    redirect_to :back
+  end
+
   def new
     @part = Part.new(:content_type => 'textile')
     @part.copy_from(params[:copy_from]) if params[:copy_from]
@@ -32,8 +37,8 @@ class PartsController < ApplicationController
       render_attachment_warning_if_needed(@part)
       flash[:notice] = l(:notice_successful_update)
       respond_to do |format|
-        format.html do 
-          if params[:unlock] 
+        format.html do
+          if params[:unlock]
             redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
           else
             redirect_to :action =>"show", :id => @part
@@ -58,12 +63,12 @@ class PartsController < ApplicationController
     else
       render :action => 'new'
     end
-  end 
+  end
 
   def destroy
     @part.destroy
     redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
-  end    
+  end
 
 private
   def find_part

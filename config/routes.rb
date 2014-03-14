@@ -11,7 +11,11 @@ resources :pages do
    get :expire_cache
   end
 end
-resources :parts
+resources :parts do
+  member do
+   get :expire_cache
+  end
+end
 resources :pages_parts
 
 match "pages/:project_id/:id" => "pages#show", :via => :get

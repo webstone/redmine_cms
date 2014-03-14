@@ -71,9 +71,9 @@ class PagesController < ApplicationController
   end
 
   def expire_cache
-    expire_fragment(@page)
+    Rails.cache.delete(@page)
     @page.parts.each do |part|
-      expire_fragment(part)
+      Rails.cache.delete(part)
     end
     redirect_to :back
   end
