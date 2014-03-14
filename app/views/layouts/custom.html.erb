@@ -1,17 +1,17 @@
-<% 
-    assigns = { 
+<%
+    assigns = {
       'layout_content'          => yield,
       'layout_sidebar'          => yield(:sidebar),
       'layout_header'           => yield(:header),
-      'layout_redmine_headers'  => csrf_meta_tag + "\n" + 
-                                   favicon_cms + "\n" + 
-                                   jquery_tag + "\n" + 
-                                   l(:direction) == 'rtl' ? stylesheet_link_tag('rtl', :media => 'all') : '' + "\n" + 
-                                   javascript_heads + "\n" + 
-                                   heads_for_theme + "\n" + 
-                                   call_hook(:view_layouts_base_html_head) + "\n" + 
-                                   heads_for_theme + 
-                                   yield(:header_tags), 
+      'layout_redmine_headers'  => csrf_meta_tag + "\n" +
+                                   favicon_cms + "\n" +
+                                   jquery_tag + "\n" +
+                                   l(:direction) == 'rtl' ? stylesheet_link_tag('rtl', :media => 'all') : '' + "\n" +
+                                   javascript_heads + "\n" +
+                                   heads_for_theme + "\n" +
+                                   call_hook(:view_layouts_base_html_head) + "\n" +
+                                   heads_for_theme +
+                                   yield(:header_tags),
       'layout_header_tags'      => yield(:header_tags),
       'layout_html_head_hook'   => call_hook(:view_layouts_base_html_head),
       'layout_body_bottom_hook' => call_hook(:view_layouts_base_body_bottom),
@@ -24,11 +24,13 @@
       'layout_account_menu'     => render_menu(:account_menu),
       'layout_top_menu'         => render_menu(:top_menu),
       'layout_main_menu'        => render_main_menu(@project),
-      
+
       'layout'                  => LayoutDrop.new,
 
       'users'                   => UsersDrop.new(User.sorted),
-      'contacts'                => ContactsDrop.new(Contact.scoped({})),
+      'projects'                => ProjectsDrop.new(Project.visible.order(:name)),
+      'newss'                   => NewssDrop.new(News.visible.order("#{News.table_name}.created_on")),
+
       'current_page'            => params[:page] || 1,
       'page'                    => PageDrop.new(@page),
       'pages'                   => PagesDrop.new(Page.scoped({})),

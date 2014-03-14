@@ -15,10 +15,6 @@ class IssuesDrop < Liquid::Drop
     end
   end
 
-  def last_updated
-    all.sort{ |x,y| y.updated_on <=> x.updated_on }.first
-  end
-
   def each(&block)
     all.each(&block)
   end

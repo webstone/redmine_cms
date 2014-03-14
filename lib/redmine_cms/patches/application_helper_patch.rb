@@ -65,7 +65,7 @@ module ApplicationHelper
     assigns = {}
     assigns['users'] = UsersDrop.new(User.sorted)
     assigns['projects'] = ProjectsDrop.new(Project.visible.order(:name))
-    assigns['newss'] = NewssDrop.new(News.visible.order(:created_on))
+    assigns['newss'] = NewssDrop.new(News.visible.order("#{News.table_name}.created_on"))
     assigns['current_page'] = params[:page] || 1
     assigns['page'] = PageDrop.new(@page) if @page
     assigns['pages'] = PagesDrop.new(Page.scoped({}))

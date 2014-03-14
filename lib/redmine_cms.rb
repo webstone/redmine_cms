@@ -6,6 +6,7 @@ Dir[File.dirname(__FILE__) + '/liquid/drops/*.rb'].each { |f| require f }
 
 require 'redmine_cms/patches/projects_helper_patch'
 require 'redmine_cms/patches/application_helper_patch'
+require 'redmine_cms/patches/menu_manager_patch'
 require 'redmine_cms/patches/acts_as_attachable_patch'
 require 'redmine_cms/patches/attachments_controller_patch'
 require 'redmine_cms/patches/application_controller_patch'

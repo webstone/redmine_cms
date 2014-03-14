@@ -11,6 +11,7 @@ module RedmineCms
       # example:
       #   {{ 'part1' | include_part }}
       def include_part(input)
+        # TODO: Doesn't work
         return '' if input.nil?
         part = Part.find_by_name(input)
         helper.render_part(part)
