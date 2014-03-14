@@ -3,7 +3,7 @@
 <div class="box tabular">
 
 <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_menu_name)  %></p>
-<p><%= f.text_field :caption, :size => 30, :required => true, :label => l(:label_cms_menu_caption) %></p>
+<p><%= f.text_field :caption, :required => true, :label => l(:label_cms_menu_caption), :style => "width: 99%;" %></p>
 <p><%= f.text_field :path, :required => true, :label => l(:label_cms_menu_path) %></p>
 <p><%= f.text_field :position, :size => 5, :required => true, :label => l(:label_cms_position) %></p>
 <% if @cms_menu.valid_parents.any? %>

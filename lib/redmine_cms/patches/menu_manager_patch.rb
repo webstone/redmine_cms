@@ -10,6 +10,11 @@ module Redmine
                                render_single_menu_node(node, caption, url, selected))
         end
       end
+
+      def render_single_menu_node(item, caption, url, selected)
+        link_to(caption.html_safe, url, item.html_options(:selected => selected))
+      end
+
     end
   end
 end
