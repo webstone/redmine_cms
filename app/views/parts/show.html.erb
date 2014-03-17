@@ -22,4 +22,5 @@
     <hr>
     <%= link_to l(:label_cms_refresh_cache), expire_cache_part_path(@part), :class => 'icon icon-reload' %>
   </div>
+  <%= javascript_tag "$('.contextual.page-edit').draggable();" %>
 <% end if User.current.admin? %>

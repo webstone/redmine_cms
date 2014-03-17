@@ -27,11 +27,11 @@
 
   <span class="edit-content" style="display:none;">
     <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows =>  30, :class => 'wiki-edit' %>
-    <script type="text/javascript">
-      editor = activateCodeMirror('page_content');
-    </script>
   </span>
 </div>
+
+<%= javascript_tag "editor = activateCodeMirror('page_content');" %>
+<%= javascript_tag "$('.contextual.page-edit').draggable();" %>
 
 <% if @page.attachments.any? %>
 <fieldset><legend><%= l(:label_attachment_plural) %></legend>
