@@ -25,3 +25,5 @@ match "pages/:page_id/delete_part/:part_id" => "pages_parts#delete", :via => :de
 match "pages/:page_id/update/:part_id" => "pages_parts#update", :via => :put
 
 match 'attachments/thumbnail/:id(/:size)/:filename', :controller => 'attachments', :action => 'thumbnail', :id => /\d+/, :filename => /.*/, :via => :get, :size => /\d+/
+
+get '*id' => 'pages#show'
