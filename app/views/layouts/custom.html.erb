@@ -1,8 +1,8 @@
 <%
     assigns = {
       'layout_content'          => yield,
-      'layout_sidebar'          => yield(:sidebar),
-      'layout_header'           => yield(:header),
+      'layout_sidebar'          => content_for(:sidebar),
+      'layout_header'           => content_for(:header),
       'layout_redmine_headers'  => csrf_meta_tag + "\n" +
                                    favicon_cms + "\n" +
                                    jquery_tag + "\n" +
@@ -11,8 +11,8 @@
                                    heads_for_theme + "\n" +
                                    call_hook(:view_layouts_base_html_head) + "\n" +
                                    heads_for_theme +
-                                   yield(:header_tags),
-      'layout_header_tags'      => yield(:header_tags),
+                                   content_for(:header_tags),
+      'layout_header_tags'      => content_for(:header_tags),
       'layout_html_head_hook'   => call_hook(:view_layouts_base_html_head),
       'layout_body_bottom_hook' => call_hook(:view_layouts_base_body_bottom),
       'layout_jquery_tag'       => jquery_tag,

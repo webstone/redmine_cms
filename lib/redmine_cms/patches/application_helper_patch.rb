@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def cached_render_part(part)
     if part.respond_to?(:is_cached) && part.is_cached?
-      Rails.cache.fetch(part, :expires_in => 15.minutes) {render_part(part)}
+      Rails.cache.fetch(part, :expires_in => RedmineCms.cache_expires_in.minutes) {render_part(part)}
     else
       render_part(part)
     end

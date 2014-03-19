@@ -9,6 +9,7 @@ Redmine::Plugin.register :redmine_cms do
 
   settings :default => {
     :use_localization => true,
+    :cash_expires => 10,
     :base_layout => 'base'
   }, :partial => 'settings/cms'
 

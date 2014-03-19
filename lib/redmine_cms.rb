@@ -23,17 +23,30 @@ module RedmineCms
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 0
 
-  def self.settings() Setting[:plugin_redmine_cms] ? Setting[:plugin_redmine_cms] : {} end
 
-  def self.set_project_settings(name, project_id, v)
-    settings[:project] = {project_id => {}} unless settings[:project]
-    settings[:project][project_id] = {name => ''} unless settings[:project][project_id]
-    settings[:project][project_id][name] = v if settings[:project][project_id]
-    Setting[:plugin_redmine_cms] = settings
+  class << self
+    def settings() Setting[:plugin_redmine_cms] ? Setting[:plugin_redmine_cms] : {} end
+
+    def cache_expires_in
+      expires_in = self.settings[:cache_expires_in].to_i
+      expires_in > 0 ? expires_in : 15
+    end
+
+    def layout
+      self.settings[:base_layout]
+    end
+
+    def set_project_settings(name, project_id, v)
+      settings[:project] = {project_id => {}} unless settings[:project]
+      settings[:project][project_id] = {name => ''} unless settings[:project][project_id]
+      settings[:project][project_id][name] = v if settings[:project][project_id]
+      Setting[:plugin_redmine_cms] = settings
+    end
+
+    def get_project_settings(name, project_id)
+      settings[:project][project_id][name] if settings[:project] && settings[:project][project_id]
+    end
   end
 
-  def self.get_project_settings(name, project_id)
-    settings[:project][project_id][name] if settings[:project] && settings[:project][project_id]
-  end
 
 end

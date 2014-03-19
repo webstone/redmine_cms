@@ -1,27 +1,35 @@
 class LayoutDrop < Liquid::Drop
+  include ActionView::Context
+  include ActionView::Helpers::CaptureHelper
+
 
   def url
     helpers.page_url(@page, :only_path => true)
   end
 
   def header_tags
-    yield(:header_tags)
+    content_for(:header_tags)
   end
 
   def header
-    yield(:header)
+    content_for(:header)
   end
 
   def sidebar
-    yield(:sidebar)
+    content_for(:sidebar)
   end
-  
+
   def footer
-    yield(:footer)
-  end  
+    _prepare_context
+    content_for(:footer)
+  end
 
   def content
-    yield
+    if block_given?
+      yield
+    else
+      "no block"
+    end
   end
 
   def html_head_hook
@@ -40,6 +48,6 @@ class LayoutDrop < Liquid::Drop
 
   def url_helpers
     Rails.application.routes.url_helpers
-  end    
+  end
 
 end

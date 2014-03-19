@@ -61,3 +61,6 @@ en:
 
   project_module_cms: CMS
   label_cms_custom_layout: Custom layout
+
+  label_cms_cache_expires_in: Cache expires in
+  label_cms_minute_plural: minutes
