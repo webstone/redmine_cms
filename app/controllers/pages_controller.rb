@@ -90,15 +90,7 @@ private
   end
 
   def find_page
-    page_name = params[:id]
-
-    if Array === page_name
-      page_name = page_name.join('/')
-    else
-      page_name = page_name.to_s
-    end
-
-    @page = Page.includes([:attachments, :parts, :pages_parts]).includes(:parts => :attachments).find_by_name(page_name)
+    @page = Page.includes([:attachments, :parts, :pages_parts]).includes(:parts => :attachments).find_by_name(params[:id])
     render_404 unless @page
   end
 
