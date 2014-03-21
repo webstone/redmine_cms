@@ -41,19 +41,8 @@
 <% end %>
 
 <% content_for :header_tags do %>
-  <%= javascript_include_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/emmet', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/addon/mode/overlay', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/addon/search/search', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/addon/search/searchcursor', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/addon/dialog/dialog', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/mode/htmlmixed/htmlmixed', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/mode/css/css', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/mode/xml/xml', :plugin => 'redmine_cms'  %>
-  <%= javascript_include_tag 'codemirror/mode/javascript/javascript', :plugin => 'redmine_cms'  %>
+  <%= code_mirror_tags %>
   <%= javascript_include_tag 'redmine_cms', :plugin => 'redmine_cms'  %>
-  <%= stylesheet_link_tag 'codemirror/codemirror', :plugin => 'redmine_cms'  %>
-  <%= stylesheet_link_tag 'codemirror/theme/ambiance', :plugin => 'redmine_cms'  %>
 <% end %>
 
 <% content_for :header do %>

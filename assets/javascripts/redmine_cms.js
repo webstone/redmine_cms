@@ -4,6 +4,7 @@ function activateCodeMirror(element) {
     tabMode: "indent",
     lineNumbers: "true",
     lineWrapping: "true",
+    keyMap: "sublime",
     profile: 'xhtml',
     extraKeys: {
         "Shift-Ctrl-W": function(cm) {

@@ -11,6 +11,7 @@ class PartsController < ApplicationController
   end
 
   def show
+    redirect_to edit_part_path(@part) if %w(css java_script).include?(@part.content_type)
   end
 
   def edit

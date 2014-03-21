@@ -36,4 +36,22 @@ module CmsHelper
             :remote => true,
             :method => method, :title => l(:label_sort_lowest))
   end
+
+  def code_mirror_tags
+    s = ''
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/lib/codemirror')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/lib/emmet')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/addon/mode/overlay')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/addon/search/search')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/addon/search/searchcursor')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/addon/dialog/dialog')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/htmlmixed/htmlmixed')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/css/css')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/xml/xml')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/javascript/javascript')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/keymap/sublime')
+    s << stylesheet_link_tag('/plugin_assets/redmine_cms/codemirror/lib/codemirror')
+    s << stylesheet_link_tag('/plugin_assets/redmine_cms/codemirror/theme/ambiance')
+    s.html_safe
+  end
 end
