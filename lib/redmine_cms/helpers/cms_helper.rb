@@ -74,7 +74,7 @@ module RedmineCms
       registers[:part] = part if part
       registers["projects"] = ProjectsDrop.new(Project.order(:name))
       begin
-        Liquid::Template.parse(content).render(Liquid::Context.new({}, assigns, registers)).html_safe
+        ::Liquid::Template.parse(content).render(::Liquid::Context.new({}, assigns, registers)).html_safe
       rescue => e
         e.message
       end
