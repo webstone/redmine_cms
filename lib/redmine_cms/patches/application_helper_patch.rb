@@ -8,11 +8,9 @@ module ApplicationHelper
   end
 
   def jquery_tag
-    if Redmine::VERSION.to_s > "2.3"
-      stylesheet_link_tag 'jquery/jquery-ui-1.9.2', 'application', :media => 'all'
-    else
-      stylesheet_link_tag 'jquery/jquery-ui-1.8.21', 'application', :media => 'all'
-    end
+    jquery_dir = File.join(Rails.root, "public", "stylesheets", "jquery")
+    jquery_css = File.basename(Dir[jquery_dir + "/jquery*.css"].first)
+    stylesheet_link_tag "jquery/#{jquery_css}", 'application', :media => 'all'
   end
 
   def render_account_menu
