@@ -8,6 +8,12 @@ module RedmineCms
       end
     end
 
+    def jquery_tag
+      jquery_dir = File.join(Rails.root, "public", "stylesheets", "jquery")
+      jquery_css = File.basename(Dir[jquery_dir + "/jquery*.css"].first)
+      stylesheet_link_tag "jquery/#{jquery_css}", 'application', :media => 'all'
+    end
+
     def render_account_menu
       s = "<ul>"
       if User.current.logged?
