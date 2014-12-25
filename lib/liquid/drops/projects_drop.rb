@@ -15,6 +15,12 @@ class ProjectsDrop < Liquid::Drop
     end
   end
 
+  def active
+    @active ||= @projects.active.map do |project|
+      ProjectDrop.new project
+    end
+  end
+
   def each(&block)
     all.each(&block)
   end
