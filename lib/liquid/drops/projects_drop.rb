@@ -16,7 +16,7 @@ class ProjectsDrop < Liquid::Drop
   end
 
   def active
-    @active ||= @projects.active.map do |project|
+    @active ||= @projects.select(&:active?).map do |project|
       ProjectDrop.new project
     end
   end
