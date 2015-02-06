@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   unloadable
+
   layout 'admin', :except => [:show, :edit]
   before_filter :require_admin, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
@@ -80,10 +81,7 @@ class PagesController < ApplicationController
 
 private
   def authorize_page
-    @project = Project.find(params[:project_id]) unless params[:project_id].blank?
-    if @page.page_project && @project != @page.page_project && !User.current.admin?
-      render_403
-    end
+    @project = @page.page_project || (params[:project_id] && Project.find(params[:project_id]))
     render_403 unless @page.visible?
   rescue ActiveRecord::RecordNotFound
     render_404

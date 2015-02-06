@@ -9,9 +9,12 @@ Redmine::Plugin.register :redmine_cms do
 
   settings :default => {
     :use_localization => true,
-    :cash_expires => 10,
+    :cache_expires => 10,
     :base_layout => 'base'
   }, :partial => 'settings/cms'
+
+
+  permission :view_cms_pages, {:pages => [:show]}, :public => true, :read => true
 
   project_module :cms do
     permission :view_project_tabs, {
