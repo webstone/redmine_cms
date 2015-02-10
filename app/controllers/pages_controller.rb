@@ -82,7 +82,7 @@ class PagesController < ApplicationController
 private
   def authorize_page
     @project = @page.page_project || (params[:project_id] && Project.find(params[:project_id]))
-    render_403 unless @page.visible?
+    deny_access unless @page.visible?
   rescue ActiveRecord::RecordNotFound
     render_404
   end

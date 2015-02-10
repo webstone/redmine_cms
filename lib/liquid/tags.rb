@@ -15,7 +15,7 @@ module RedmineCms
           part = context.registers[:part]
           textilizable(render_all(@nodelist, context), :attachments => part.attachments)
         end
-      end  
+      end
     end
   end
 
