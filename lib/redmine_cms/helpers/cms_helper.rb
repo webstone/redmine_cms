@@ -59,11 +59,11 @@ module RedmineCms
       assigns['users'] = UsersDrop.new(User.sorted)
       assigns['projects'] = ProjectsDrop.new(Project.visible.order(:name))
       assigns['newss'] = NewssDrop.new(News.visible.order("#{News.table_name}.created_on"))
-      assigns['current_page'] = params[:page] || 1
+      assigns['current_page'] = self.respond_to?(:params) && self.params[:page] || 1
       assigns['page'] = PageDrop.new(@page) if @page
       assigns['pages'] = PagesDrop.new(Page.scoped({}))
       assigns['params'] = self.params if self.respond_to?(:params)
-      assigns['request'] = RequestDrop.new(request)
+      assigns['request'] = RequestDrop.new(request) if self.respond_to?(:request)
       assigns['now'] = Time.now.utc
       assigns['today'] = Date.today
       assigns['layout'] = LayoutDrop.new
