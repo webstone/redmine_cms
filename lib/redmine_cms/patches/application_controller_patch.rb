@@ -32,7 +32,7 @@ module RedmineCMS
           request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base")
         end
 
-        def set_localization_with_cms
+        def set_localization_with_cms(user=User.current)
           if RedmineCms.settings[:use_localization]
             set_localization_without_cms
           else
