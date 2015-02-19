@@ -25,7 +25,7 @@ module RedmineCms
 
         def sitemap
           @projects = Project.all_public.active
-          @pages = Page.active.all
+          @pages = Page.where(:project_id => nil).active.all
           respond_to do |format|
             format.xml
           end

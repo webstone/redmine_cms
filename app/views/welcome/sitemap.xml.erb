@@ -59,7 +59,7 @@
       <lastmod><%= news_page.created_on.strftime("%Y-%m-%d") %></lastmod>
       <changefreq>weekly</changefreq>
     </url>
-    <% end if User.anonymous.allowed_to?(:view_news, project) %>    
+    <% end if User.anonymous.allowed_to?(:view_news, project) %>
 
-  <% end %>  
+  <% end %>
 </urlset>
