@@ -32,14 +32,25 @@ module RedmineCMS
           request.xhr? ? false : (RedmineCms.settings[:base_layout] || "base")
         end
 
-        def set_localization_with_cms(user=User.current)
-          if RedmineCms.settings[:use_localization]
-            set_localization_without_cms
-          else
-            lang ||= Setting.default_language
-            set_language_if_valid(lang)
-          end
 
+        if Redmine::VERSION.to_s > '2.6'
+          def set_localization_with_cms(user=User.current)
+            if RedmineCms.settings[:use_localization]
+              set_localization_without_cms
+            else
+              lang ||= Setting.default_language
+              set_language_if_valid(lang)
+            end
+          end
+        else
+          def set_localization_with_cms
+            if RedmineCms.settings[:use_localization]
+              set_localization_without_cms
+            else
+              lang ||= Setting.default_language
+              set_language_if_valid(lang)
+            end
+          end
         end
 
       end

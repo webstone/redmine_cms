@@ -16,6 +16,7 @@
         <%= yield :header_tags -%>
     </head>
     <body class="<%=h body_css_classes %> layout-cms">
+        <%= call_hook :view_layouts_cms_body_top %>
         <div id="wrapper">
             <div id="wrapper2">
                 <div id="top-menu">
