@@ -55,19 +55,19 @@ module RedmineCms
     end
 
     def layout_html_head_parts
-      if @layout_html_head_parts && @layout_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
+      if @layout_html_head_parts && @layout_head_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
         @layout_body_top_parts
       else
-        @layout_parts_cleared_on = Time.now
+        @layout_head_parts_cleared_on = Time.now
         @layout_html_head_parts = Part.where(:part_type => "layout_html_head_part").order(:name)
       end
     end
 
     def layout_body_top_parts
-      if @layout_body_top_parts && @layout_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
+      if @layout_body_top_parts && @layout_top_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
         @layout_body_top_parts
       else
-        @layout_parts_cleared_on = Time.now
+        @layout_top_parts_cleared_on = Time.now
         @layout_body_top_parts = Part.where(:part_type => "layout_body_top_parts").order(:name)
       end
     end
