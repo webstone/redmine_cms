@@ -67,11 +67,10 @@ module RedmineCms
 
 
       # example:
-      #   {{ now | plus_minutes: 30 }}
-      def plus_minutes(input, distanse)
+      #   {{ now | utc }}
+      def utc(input)
         return '' if input.nil?
-        minutes = distanse.to_i
-        input.to_time + minutes.minutes rescue 'Invalid date'
+        input.to_time.utc rescue 'Invalid date'
       end
 
       # example:
