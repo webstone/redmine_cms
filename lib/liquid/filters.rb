@@ -51,6 +51,30 @@ module RedmineCms
       end
 
       # example:
+      #   {{ today | plus_days: 2 }}
+      def plus_days(input, distanse)
+        return '' if input.nil?
+        days = distanse.to_i
+        input.to_date + days.days rescue 'Invalid date'
+      end
+
+      # example:
+      #   {{ today | date_range: '2015-12-12' }}
+      def date_range(input, distanse)
+        return '' if input.nil?
+        (input.to_date - distanse.to_date).to_i rescue 'Invalid date'
+      end
+
+
+      # example:
+      #   {{ now | plus_minutes: 30 }}
+      def plus_minutes(input, distanse)
+        return '' if input.nil?
+        minutes = distanse.to_i
+        input.to_time + minutes.minutes rescue 'Invalid date'
+      end
+
+      # example:
       #   {{ 'image.png' | fancybox_tag: 'size:100', 'title:A title', 'width:100px', 'height:200px'  }}
       def fancybox_tag(input, *args)
         return '' if input.nil?

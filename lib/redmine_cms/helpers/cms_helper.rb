@@ -82,7 +82,7 @@ module RedmineCms
       assigns['pages'] = PagesDrop.new(Page.scoped({}))
       assigns['params'] = self.params if self.respond_to?(:params)
       assigns['request'] = RequestDrop.new(request) if self.respond_to?(:request)
-      assigns['now'] = Time.now.utc
+      assigns['now'] = Time.now
       assigns['today'] = Date.today
       assigns['layout'] = LayoutDrop.new
 

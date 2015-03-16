@@ -21,11 +21,11 @@ module RedmineCMS
           raise ActiveRecord::RecordNotFound if params[:filename] && params[:filename] != @attachment.filename
           @project = @attachment.project if @attachment.respond_to?(:project)
         rescue ActiveRecord::RecordNotFound
-          render_404          
+          render_404
         end
-        
+
       end
-      
+
     end
   end
 end

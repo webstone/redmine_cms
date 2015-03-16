@@ -11,7 +11,6 @@ module RedmineCMS
           alias_method_chain :set_localization, :cms
           alias_method_chain :use_layout, :cms
           before_filter :menu_setup
-          # skip_before_filter :set_localization, :only => [:method_name]
         end
       end
 
