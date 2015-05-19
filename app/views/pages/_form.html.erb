@@ -1,7 +1,6 @@
 <div class="box tabular">
   <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
   <p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
-  <p><%= f.text_field :summary, :size => 100, :label => l(:label_cms_page_summary) %></p>
   <% if @page.valid_parents.any? %>
   <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_page_parent %></p>
   <% end %>

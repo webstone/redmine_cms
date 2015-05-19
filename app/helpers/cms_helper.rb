@@ -10,11 +10,11 @@ module CmsHelper
     end
   end
 
-  def cms_visibilities_for_select(selected = nil)
-    grouped_options = {
-      l(:label_role_plural) => [["Public", 'public'], ["Logged", 'logged']],
-      l(:label_group_plural) => Group.all.map{|g| [g.name, g.id]}
-    }
+  def cms_visibilities_for_select(selected = nil, options={})
+    grouped_options = {}
+    grouped_options[l(:label_user_plural)] = [[l(:field_admin), '']] if options[:admin]
+    grouped_options[l(:label_role_plural)] = [["Public", 'public'], ["Logged", 'logged']] unless options[:only_groups]
+    grouped_options[l(:label_group_plural)] = Group.where(:type => 'Group').map{|g| [g.name, g.id]}
     grouped_options_for_select(grouped_options, selected)
   end
 

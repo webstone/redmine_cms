@@ -7,7 +7,6 @@ module RedmineCms
         base.class_eval do
           unloadable
           alias_method_chain :show, :cms
-          alias_method_chain :index, :cms
           helper :pages
         end
       end
@@ -27,14 +26,6 @@ module RedmineCms
             redirect_to page_path, :status => 301
           else
             show_without_cms
-          end
-        end
-
-        def index_with_cms
-          unless RedmineCms.settings[:projects_page].blank?
-            redirect_to RedmineCms.settings[:projects_page], :status => 301
-          else
-            index_without_cms
           end
         end
 

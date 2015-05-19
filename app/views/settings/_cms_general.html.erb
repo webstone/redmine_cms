@@ -5,7 +5,7 @@
 
 <p>
   <label><%= l(:label_cms_edit_permissions) %></label>
-  <%= select_tag 'settings[edit_permissions]', cms_visibilities_for_select(@settings["edit_permissions"] || "admin")  %>
+  <%= select_tag 'settings[edit_permissions]', cms_visibilities_for_select(@settings["edit_permissions"] || "admin", :only_groups => true, :admin => true)  %>
 </p>
 
 <p>
@@ -17,7 +17,7 @@
 
 <p>
   <label><%= l(:label_cms_cache_expires_in) %></label>
-  <%= text_field_tag 'settings[cache_expires_in]', RedmineCms.cache_expires_in, :size => 5 %><%= l(:label_cms_minute_plural) %>
+  <%= text_field_tag 'settings[cache_expires_in]', RedmineCms.cache_expires_in, :size => 5 %> <%= l(:label_cms_minute_plural) %>
 </p>
 
 <p>
@@ -35,12 +35,6 @@
   <label><%= l(:label_cms_projects_page) %></label>
   <%= text_field_tag 'settings[projects_page]', @settings[:projects_page], :style => "width: 98%;" %>
 </p>
-
-<p>
-  <label><%= l(:label_cms_my_page) %></label>
-  <%= text_field_tag 'settings[my_page]', @settings[:my_page], :style => "width: 98%;" %>
-</p>
-
 
 <p>
   <label><%= l(:label_cms_copyright) %></label>

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title><%=h html_title %></title>
+        <title><%= @page && @page.respond_to?(:title) && @page.title || html_title %></title>
         <meta name="description" content="<%= (@page && @page.respond_to?(:description) && @page.description ) || Redmine::Info.app_name %>" />
         <meta name="keywords" content="<%= (@page && @page.respond_to?(:keywords) && @page.keywords) || "issue,bug,tracker" %>" />
         <%= csrf_meta_tag %>
