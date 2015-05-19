@@ -1,4 +1,4 @@
-<% if @page = Page.includes([:attachments, :parts, :pages_parts]).includes(:parts => :attachments).find_by_name(RedmineCms.settings[:landing_page]) %>
+<% if @page = Page.includes([:attachments, :parts, :pages_parts]).includes(:parts => :attachments).where(:id => RedmineCms.settings[:landing_page]).first %>
    <%= render :file => 'plugins/redmine_cms/app/views/pages/show.html.erb' %>
 <% else %>
   <%= render :file => 'app/views/welcome/index.html.erb' %>

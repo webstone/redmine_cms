@@ -15,7 +15,7 @@ module PagesHelper
       options << [label, page.id]
     end
     options
-  end 
+  end
 
   def pages_name_options_for_select(pages)
     options = []
@@ -25,7 +25,7 @@ module PagesHelper
       options << [label, page.name]
     end
     options
-  end   
+  end
 
   def change_page_status_link(page)
     url = {:controller => 'pages', :action => 'update', :id => page, :page => params[:page], :status => params[:status], :tab => nil}
@@ -39,6 +39,6 @@ module PagesHelper
 
   def page_tree(pages, &block)
     Page.page_tree(pages, &block)
-  end  
+  end
 
 end

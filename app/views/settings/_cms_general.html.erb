@@ -25,16 +25,12 @@
   <%= select_tag 'settings[base_layout]',  options_for_select([["Default", "base"], ["CMS", "cms"]], @settings[:base_layout]) %>
 </p>
 
+<% if Page.any? %>
 <p>
   <label><%= l(:label_cms_landing_page) %></label>
-  <%= text_field_tag 'settings[landing_page]', @settings[:landing_page], :style => "width: 98%;" %>
+  <%= select_tag 'settings[landing_page]', options_for_select(pages_options_for_select(Page.all), @settings[:landing_page]), :include_blank => true %>
 </p>
-
-
-<p>
-  <label><%= l(:label_cms_projects_page) %></label>
-  <%= text_field_tag 'settings[projects_page]', @settings[:projects_page], :style => "width: 98%;" %>
-</p>
+<% end %>
 
 <p>
   <label><%= l(:label_cms_copyright) %></label>
