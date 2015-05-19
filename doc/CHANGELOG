@@ -4,11 +4,13 @@ Redmine CMS plugin - content management system for Redmine
 Copyright (C) 2011-2013  Kirill Bezrukov
 http://www.redminecrm.com/
 
-== 2014-xx v0.0.4
+== 2014-xx v1.0.0
 
 * Handling liquid exceptions
 * Show child menu permissions
 * HTML menu captions (for images)
+* Redirects
+* Group permission for edit pages
 
 == 2013-08-28 v0.0.3
 
