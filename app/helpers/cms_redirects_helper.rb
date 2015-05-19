@@ -1,0 +1,2 @@
+module CmsRedirectsHelper
+end

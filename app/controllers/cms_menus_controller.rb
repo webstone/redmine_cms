@@ -1,14 +1,13 @@
 class CmsMenusController < ApplicationController
   unloadable
 
-  layout 'admin'
   before_filter :require_edit_permission
   before_filter :find_menu, :except => [:index, :new, :create]
 
   helper :cms
 
   def index
-    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "cms_menus"
+    redirect_to :controller => 'pages', :action => 'index', :tab => "cms_menus"
   end
 
   def edit

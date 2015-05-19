@@ -11,11 +11,16 @@ module RedmineCMS
           alias_method_chain :set_localization, :cms
           alias_method_chain :use_layout, :cms
           before_filter :menu_setup
+          before_filter :cms_redirects
         end
       end
 
 
       module InstanceMethods
+        def cms_redirects
+          redirect_to RedmineCms.redirects[request.original_fullpath], :status => 301 if RedmineCms.redirects[request.original_fullpath]
+        end
+
         def menu_setup
           # Check the settings cache for each request
           CmsMenu.check_cache

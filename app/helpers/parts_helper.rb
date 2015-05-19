@@ -10,18 +10,18 @@ module PartsHelper
   end
 
   def parts_type_collection
-    [["Content", "content"],
-     ["Sections", "sections"],
-     ["Sidebar", "sidebar"],
-     ["Header", "header"],
-     ["Footer", "footer"],
-     ["Header tags", "header_tags"],
-     ["Layout html head", "layout_html_head_part"],
-     ["Layout body top", "layout_body_top_parts"]]
+    [["Pages", [["Content", "content"],
+                ["Sections", "sections"],
+                ["Sidebar", "sidebar"],
+                ["Header", "header"],
+                ["Footer", "footer"],
+                ["Header tags", "header_tags"]]],
+     ["Layout", [["Layout html head", "layout_html_head_part"],
+                 ["Layout body top", "layout_body_top_parts"]]]]
   end
 
   def parts_option_for_select
-    parts = Part.order(:part_type).order(:content_type)
+    parts = Part.order(:part_type).where("#{Part.table_name}.part_type NOT LIKE 'layout_%'").order(:content_type)
     return "" unless parts.any?
     previous_group = parts.first.part_type
     s = "<optgroup label=\"#{ERB::Util.html_escape(parts.first.part_type)}\">".html_safe

@@ -13,7 +13,6 @@ require 'redmine_cms/patches/attachments_controller_patch'
 require 'redmine_cms/patches/application_controller_patch'
 require 'redmine_cms/patches/projects_controller_patch'
 require 'redmine_cms/patches/welcome_controller_patch'
-require 'redmine_cms/patches/settings_controller_patch'
 require 'redmine_cms/patches/attachment_patch'
 
 require 'redmine_cms/hooks/views_layouts_hook'
@@ -27,7 +26,7 @@ module RedmineCms
 
 
   class << self
-    def settings() Setting[:plugin_redmine_cms] ? Setting[:plugin_redmine_cms] : {} end
+    def settings() Setting[:plugin_redmine_cms].is_a?(Hash) ? Setting[:plugin_redmine_cms] : {} end
 
     def cache_expires_in
       expires_in = self.settings[:cache_expires_in].to_i
@@ -43,6 +42,17 @@ module RedmineCms
       return true if user.admin?
       return true if user_ids.include?(self.settings[:edit_permissions].to_i) && user.logged?
       false
+    end
+
+    def redirects
+      settings[:redirects].is_a?(Hash) ? settings[:redirects] : settings[:redirects] = {}
+    end
+
+    def save_settings
+      # cms_settings = self.settings
+      # cms_settings = {} unless cms_settings.is_a?(Hash)
+      # cms_settings.merge!(index => value)
+      Setting.plugin_redmine_cms = self.settings
     end
 
     def set_project_settings(name, project_id, v)

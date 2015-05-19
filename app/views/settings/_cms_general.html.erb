@@ -22,7 +22,7 @@
 
 <p>
   <label><%= l(:label_cms_base_layout) %></label>
-  <%= select_tag 'settings[base_layout]',  options_for_select([["Redmine", "base"], ["Redmine with meta tags", "base_meta"], ["CMS", "cms"], [l(:label_cms_custom_layout), "custom"]], @settings[:base_layout]) %>
+  <%= select_tag 'settings[base_layout]',  options_for_select([["Default", "base"], ["CMS", "cms"]], @settings[:base_layout]) %>
 </p>
 
 <p>
@@ -46,12 +46,3 @@
   <label><%= l(:label_cms_copyright) %></label>
   <%= text_field_tag 'settings[copyright]', @settings[:copyright], :style => "width: 98%;" %>
 </p>
-
-<fieldset class="box"><legend><%= l(:label_cms_layout_content) %></legend>
-<%= text_area_tag 'settings[layout_content]', @settings[:layout_content], :class => 'wiki-edit', :rows => 20 %>
-<%= javascript_tag "editor = activateCodeMirror('settings_layout_content');" %>
-
-</div>
-
-
-</fieldset>

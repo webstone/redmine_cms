@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
   unloadable
-
-  layout 'admin', :except => [:show, :edit]
   before_filter :require_edit_permission, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
   before_filter :authorize_page, :only => :show

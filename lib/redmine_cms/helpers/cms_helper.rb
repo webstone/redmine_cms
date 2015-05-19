@@ -55,22 +55,18 @@ module RedmineCms
     end
 
     def layout_html_head_parts
-      # if @layout_html_head_parts && @layout_head_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
-      #   @layout_body_top_parts
-      # else
-      #   @layout_head_parts_cleared_on = Time.now
-        @layout_html_head_parts = Part.where(:part_type => "layout_html_head_part").order(:name)
-      # end
+      @layout_html_head_parts = Part.where(:part_type => "layout_html_head_part").order(:name)
     end
 
     def layout_body_top_parts
-      # if @layout_body_top_parts && @layout_top_parts_cleared_on.to_f > Part.maximum(:updated_at).to_f
-      #   @layout_body_top_parts
-      # else
-      #   @layout_top_parts_cleared_on = Time.now
-        @layout_body_top_parts = Part.where(:part_type => "layout_body_top_parts").order(:name)
-      # end
+      @layout_body_top_parts = Part.where(:part_type => "layout_body_top_parts").order(:name)
     end
+
+    def layout_body_bottom_parts
+      @layout_body_bottom_parts = Part.where(:part_type => "layout_body_bottom_parts").order(:name)
+    end
+
+
 
     def render_liquid(content, part=nil)
       assigns = {}
@@ -103,10 +99,6 @@ module RedmineCms
             textilizable(part, :content, :attachments => part.attachments)
           when "html"
             render_liquid(part.content, part)
-          when "java_script"
-            "<script type=\"text/javascript\">#{part.content.html_safe}</script>".html_safe
-          when "css"
-            "<style type=\"text/css\">#{part.content.html_safe}</style>".html_safe
           else
             part.content
           end

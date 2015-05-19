@@ -7,7 +7,7 @@ class PartsController < ApplicationController
   helper :cms
 
   def index
-    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
+    redirect_to :controller => 'pages', :action => 'index', :tab => "parts"
   end
 
   def show

@@ -6,6 +6,7 @@ match "/sitemap.xml" => "welcome#sitemap", :defaults => {:format => :xml}
 match "projects/:project_id/pages/:tab" => "project_tabs#show", :as => "project_tab"
 
 resources :cms_menus
+resources :cms_redirects
 resources :pages do
   member do
    get :expire_cache

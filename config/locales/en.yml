@@ -65,3 +65,8 @@ en:
   label_cms_cache_expires_in: Cache expires in
   label_cms_minute_plural: minutes
   label_cms_edit_permissions: Edit permissions
+  label_cms_source_path: Source path
+  label_cms_destination_path: Destination path
+  label_cms_redirect_plural: Redirects
+  label_cms_redirect: Redirect
+  label_cms_redirect_new: New redirect

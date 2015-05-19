@@ -21,9 +21,14 @@ module RedmineCms
         s
       end
 
-      def view_layouts_base_body_bottom(context = { })
-        return render_liquid(Setting.plugin_redmine_cms[:layout_content]).html_safe if Setting.plugin_redmine_cms[:layout_content]
-      end
+      # def view_layouts_base_body_bottom(context = { })
+      #   s = ''
+      #   layout_body_bottom_parts.each do |part|
+      #     s << render_part(part)
+      #   end
+      #   s
+      # end
+
     end
   end
 end
