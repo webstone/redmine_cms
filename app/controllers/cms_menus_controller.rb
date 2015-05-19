@@ -2,7 +2,7 @@ class CmsMenusController < ApplicationController
   unloadable
 
   layout 'admin'
-  before_filter :require_admin
+  before_filter :require_edit_permission
   before_filter :find_menu, :except => [:index, :new, :create]
 
   helper :cms
@@ -12,7 +12,7 @@ class CmsMenusController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def new
@@ -25,9 +25,9 @@ class CmsMenusController < ApplicationController
       flash[:notice] = l(:notice_successful_update)
       @cms_menus = CmsMenu.all
       respond_to do |format|
-        format.html { redirect_to :back }  
+        format.html { redirect_to :back }
         format.js {render :action => "change"}
-      end    
+      end
       # redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
     else
       render :action => 'edit'
@@ -42,16 +42,21 @@ class CmsMenusController < ApplicationController
     else
       render :action => 'new'
     end
-  end 
+  end
 
   def destroy
     @cms_menu.destroy
     redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "cms_menus"
-  end  
+  end
 
 private
  def find_menu
   @cms_menu = CmsMenu.find(params[:id])
  end
+
+
+  def require_edit_permission
+    deny_access unless RedmineCms.allow_edit?
+  end
 
 end

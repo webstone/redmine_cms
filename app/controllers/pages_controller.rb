@@ -2,9 +2,8 @@ class PagesController < ApplicationController
   unloadable
 
   layout 'admin', :except => [:show, :edit]
-  before_filter :require_admin, :except => :show
+  before_filter :require_edit_permission, :except => :show
   before_filter :find_page, :except => [:index, :new, :create]
-  before_filter :check_status, :only => :show
   before_filter :authorize_page, :only => :show
 
   helper :attachments
@@ -92,8 +91,8 @@ private
     render_404 unless @page
   end
 
-  def check_status
-    render_404 unless @page.active? || User.current.admin?
+  def require_edit_permission
+    deny_access unless RedmineCms.allow_edit?
   end
 
 end

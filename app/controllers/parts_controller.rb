@@ -1,6 +1,6 @@
 class PartsController < ApplicationController
   unloadable
-  before_filter :require_admin
+  before_filter :require_edit_permission
   before_filter :find_part, :except => [:index, :new, :create]
 
   helper :attachments
@@ -76,6 +76,10 @@ private
     @part = Part.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def require_edit_permission
+    deny_access unless RedmineCms.allow_edit?
   end
 
 end

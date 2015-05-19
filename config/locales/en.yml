@@ -64,3 +64,4 @@ en:
 
   label_cms_cache_expires_in: Cache expires in
   label_cms_minute_plural: minutes
+  label_cms_edit_permissions: Edit permissions

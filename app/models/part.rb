@@ -30,7 +30,6 @@ class Part < ActiveRecord::Base
     self
   end
 
-
 private
   def touch_pages
     pages.each{|p| p.touch} if pages

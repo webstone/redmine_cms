@@ -4,6 +4,11 @@
 </p>
 
 <p>
+  <label><%= l(:label_cms_edit_permissions) %></label>
+  <%= select_tag 'settings[edit_permissions]', cms_visibilities_for_select(@settings["edit_permissions"] || "admin")  %>
+</p>
+
+<p>
   <label><%= l(:label_cms_redmine_top_menu) %></label>
   <label class="block"><%= check_box_tag 'settings[show_home]', 1, @settings[:show_home] %><%= l(:label_home) %></label>
   <label class="block"><%= check_box_tag 'settings[show_projects]', 1, @settings[:show_projects] %><%= l(:label_project_plural) %></label>

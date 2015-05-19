@@ -7,7 +7,6 @@ Dir[File.dirname(__FILE__) + '/liquid/drops/*.rb'].each { |f| require f }
 require 'redmine_cms/helpers/cms_helper'
 
 require 'redmine_cms/patches/projects_helper_patch'
-# require 'redmine_cms/patches/application_helper_patch'
 require 'redmine_cms/patches/menu_manager_patch'
 require 'redmine_cms/patches/acts_as_attachable_patch'
 require 'redmine_cms/patches/attachments_controller_patch'
@@ -37,6 +36,13 @@ module RedmineCms
 
     def layout
       self.settings[:base_layout]
+    end
+
+    def allow_edit?(user=User.current)
+      user_ids = [user.id] + user.groups.map(&:id)
+      return true if user.admin?
+      return true if user_ids.include?(self.settings[:edit_permissions].to_i) && user.logged?
+      false
     end
 
     def set_project_settings(name, project_id, v)

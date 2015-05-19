@@ -37,10 +37,12 @@ class Page < ActiveRecord::Base
 
   def visible?(user=User.current)
     user_ids = [user.id] + user.groups.map(&:id)
-    return true if user.admin?
-    return true if visibility == 'public'
-    return true if visibility == 'logged' && User.current.logged?
-    return true if user_ids.include?(visibility.to_i) && User.current.logged?
+    if active?
+      return true if visibility == 'public'
+      return true if visibility == 'logged' && User.current.logged?
+      return true if user_ids.include?(visibility.to_i) && User.current.logged?
+    end
+    return true if RedmineCms.allow_edit?(user)
     false
   end
 
@@ -81,7 +83,8 @@ class Page < ActiveRecord::Base
 
   def copy_from(arg)
     page = arg.is_a?(Page) ? arg : Page.find_by_name(arg)
-    self.attributes = page.attributes.dup.except("id", "name", "created_at", "updated_at")
+    self.attributes = page.attributes.dup.except("id", "created_at", "updated_at")
+    self.name = self.name.to_s + "_copy"
     self
   end
 

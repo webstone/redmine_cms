@@ -13,7 +13,7 @@
 </div>
 
 <% content_for :header do %>
-  <% if User.current.admin? %>
+  <% if RedmineCms.allow_edit? %>
   <div class="contextual page-edit">
     <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
     <% if @page.parts.any? %>
