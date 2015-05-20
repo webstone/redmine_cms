@@ -11,7 +11,7 @@ module RedmineCMS
           alias_method_chain :set_localization, :cms
           alias_method_chain :use_layout, :cms
           before_filter :menu_setup
-          # before_filter :cms_redirects
+          before_filter :cms_redirects
         end
       end
 
