@@ -39,11 +39,11 @@ class PartsController < ApplicationController
       flash[:notice] = l(:notice_successful_update)
       respond_to do |format|
         format.html do
-          if params[:unlock]
-            redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
-          else
-            redirect_to :action =>"show", :id => @part
-          end
+          # if params[:unlock]
+          #   redirect_to :controller => 'pages', :action => 'index', :tab => "parts"
+          # else
+            redirect_to :action =>"edit", :id => @part
+          # end
         end
         format.js {render :nothing => true}
       end
@@ -60,7 +60,7 @@ class PartsController < ApplicationController
     if @part.save
       render_attachment_warning_if_needed(@part)
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action =>"show", :id => @part
+      redirect_to :action =>"edit", :id => @part
     else
       render :action => 'new'
     end
@@ -68,7 +68,7 @@ class PartsController < ApplicationController
 
   def destroy
     @part.destroy
-    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "parts"
+    redirect_to :controller => 'pages', :action => 'index', :tab => "parts"
   end
 
 private

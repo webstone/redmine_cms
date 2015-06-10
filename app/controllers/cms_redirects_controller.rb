@@ -5,7 +5,7 @@ class CmsRedirectsController < ApplicationController
   before_filter :find_redirect, :except => [:index, :new, :create]
 
   def index
-    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "cms_redirects"
+    redirect_to :controller => 'cms_settings', :action => 'index', :tab => "cms_redirects"
   end
 
   def new

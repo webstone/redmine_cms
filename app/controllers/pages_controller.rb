@@ -43,7 +43,7 @@ class PagesController < ApplicationController
       render_attachment_warning_if_needed(@page)
       flash[:notice] = l(:notice_successful_update)
       respond_to do |format|
-        format.html {redirect_to :action =>"show", :id => @page}
+        format.html {redirect_to :action =>"edit", :id => @page}
         format.js {render :nothing => true}
       end
     else
@@ -57,7 +57,7 @@ class PagesController < ApplicationController
     if @page.save
       render_attachment_warning_if_needed(@page)
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action =>"show", :id => @page
+      redirect_to :action =>"edit", :id => @page
     else
       render :action => 'new'
     end
@@ -65,7 +65,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page.destroy
-    redirect_to :controller => 'settings', :action => 'plugin', :id => "redmine_cms", :tab => "pages"
+    redirect_to :controller => 'pages', :action => 'index', :tab => "pages"
   end
 
   def expire_cache

@@ -11,7 +11,7 @@ Redmine::Plugin.register :redmine_cms do
     :use_localization => true,
     :cache_expires => 10,
     :base_layout => 'base'
-  }, :partial => 'settings/cms'
+  }
 
 
   permission :view_cms_pages, {:pages => [:show]}, :public => true, :read => true
@@ -57,9 +57,9 @@ Redmine::Plugin.register :redmine_cms do
                            :caption => Proc.new{|p| ContactsSetting["project_tab_last_caption".to_sym, p.id] || tab.to_s },
                            :if => Proc.new{|p| !ContactsSetting["project_tab_last_caption".to_sym, p.id].blank? }
 
-  menu :top_menu, :cms, {:controller => 'settings', :action => 'plugin', :id => "redmine_cms"}, :first => true, :caption => :label_cms, :parent => :administration
+  menu :top_menu, :cms, {:controller => 'cms_settings', :action => 'index'}, :first => true, :caption => :label_cms, :parent => :administration
 
-  menu :admin_menu, :cms, {:controller => 'settings', :action => 'plugin', :id => "redmine_cms"}, :caption => :label_cms
+  menu :admin_menu, :cms, {:controller => 'cms_settings', :action => 'index'}, :caption => :label_cms
 
 end
 

@@ -1,13 +1,8 @@
-<%  @pages = Page.all
-    @parts = Part.all
-    @cms_redirects = CmsRedirect.all
-    @cms_menus = CmsMenu.all %>
-
 <% extend PagesHelper %>
 <% extend CmsHelper %>
 <% extend CmsMenusHelper %>
 
-<% cms_tabs = [{:name => 'general', :partial => 'settings/cms_general', :label => :label_general},
+<% cms_tabs = [{:name => 'general', :partial => 'cms_settings/cms_general', :label => :label_general},
         {:name => 'pages', :partial => 'pages/pages', :label => :label_cms_page_plural},
         {:name => 'cms_menus', :partial => 'cms_menus/index', :label => :label_cms_menu_plural},
         {:name => 'cms_redirects', :partial => 'cms_redirects/index', :label => :label_cms_redirect_plural},
