@@ -1,0 +1,22 @@
+page_001:
+  name: page_001
+  title: page 001
+  project_id: 
+  visibility: true
+  keywords: page 1
+  description: description for page 001
+  content_type: textile
+  is_cached: true
+  content: Content for page 001
+  status_id: 1
+
+page_002:
+  name: page_002
+  title: page 002
+  project_id: 
+  visibility: true
+  keywords: page 2
+  description: description for page 002
+  content_type: html
+  is_cached: true
+  content: Content for page 002
