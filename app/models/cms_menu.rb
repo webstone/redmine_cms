@@ -1,16 +1,18 @@
 class CmsMenu < ActiveRecord::Base
   unloadable
+  include Redmine::SafeAttributes
+
   belongs_to :source, :polymorphic => true
 
   acts_as_list :scope => 'menu_type = \'#{menu_type}\' AND parent_id #{parent_id ? \'=\' + parent_id : \'IS NULL\'}'
   acts_as_tree :dependent => :nullify
 
-  default_scope order(:menu_type).order(:position)
-  scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+  default_scope {order(:menu_type).order(:position)}
+  scope :active, lambda {where(:status_id => RedmineCms::STATUS_ACTIVE)}
   scope :visible, lambda { where(CmsMenu.visible_condition) }
-  scope :footer_menu, where(:menu_type => "footer_menu")
-  scope :top_menu, where(:menu_type => "top_menu")
-  scope :account_menu, where(:menu_type => "account_menu")
+  scope :footer_menu, lambda { where(:menu_type => "footer_menu")}
+  scope :top_menu, lambda{where(:menu_type => "top_menu")}
+  scope :account_menu, lambda{where(:menu_type => "account_menu")}
 
   after_commit :rebuild_menu
 
@@ -19,9 +21,18 @@ class CmsMenu < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   validates_length_of :caption, :maximum => 255
   validate :validate_menu
-  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
+  validates_format_of :name, :with => /\A(?!\d+$)[a-z0-9\-_]*\z/
 
   @cached_cleared_on = Time.now
+
+  attr_protected :id
+  safe_attributes 'name',
+    'caption',
+    'path',
+    'position',
+    'status_id',
+    'visibility',
+    'menu_type'
 
   def self.visible_condition(user=User.current)
     user_ids = [user.id] + user.groups.map(&:id)

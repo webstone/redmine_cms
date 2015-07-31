@@ -2,11 +2,12 @@ class CmsRedirect
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
+  include Redmine::SafeAttributes
 
   attr_accessor :source_path, :destination_path
 
   validates_presence_of :source_path, :destination_path
-  validates_format_of :source_path, :with => /^(?!\d+$)\/[a-z0-9\-_\/]*$/
+  validates_format_of :source_path, :with => /\A(?!\d+$)\/[a-z0-9\-_\/]*\z/
   validates_length_of :source_path, :destination_path, :maximum => 200
   validate :validate_redirect
 

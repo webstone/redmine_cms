@@ -52,7 +52,8 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new
+    @page.safe_attributes = params[:page]
     @page.save_attachments(params[:attachments])
     if @page.save
       render_attachment_warning_if_needed(@page)

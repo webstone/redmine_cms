@@ -1,5 +1,7 @@
 class Page < ActiveRecord::Base
   unloadable
+  include Redmine::SafeAttributes
+
   belongs_to :page_project, :class_name => 'Project', :foreign_key => 'project_id'
   has_many :pages_parts
   has_many :parts, :uniq => true, :through => :pages_parts
@@ -7,7 +9,7 @@ class Page < ActiveRecord::Base
   acts_as_attachable
   acts_as_tree :dependent => :nullify
 
-  scope :active, where(:status_id => RedmineCms::STATUS_ACTIVE)
+  scope :active, lambda{where(:status_id => RedmineCms::STATUS_ACTIVE)}
   scope :visible, lambda{where(Page.visible_condition)}
 
   validates_presence_of :name, :title
@@ -15,7 +17,7 @@ class Page < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   validates_length_of :title, :maximum => 255
   validate :validate_page
-  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
+  validates_format_of :name, :with => /\A(?!\d+$)[a-z0-9\-_]*\z/i
 
   [:content, :header, :footer, :sidebar].each do |name, params|
     src = <<-END_SRC
@@ -26,6 +28,16 @@ class Page < ActiveRecord::Base
     END_SRC
     class_eval src, __FILE__, __LINE__
   end
+  attr_protected :id
+  safe_attributes 'name',
+    'title',
+    'project_id',
+    'visibility',
+    'keywords',
+    'description',
+    'content_type',
+    'is_cached',
+    'content'
 
   def self.visible_condition(user=User.current)
     user_ids = [user.id] + user.groups.map(&:id)

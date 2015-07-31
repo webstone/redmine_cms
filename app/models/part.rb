@@ -1,11 +1,12 @@
 class Part < ActiveRecord::Base
   unloadable
-
+  include Redmine::SafeAttributes
+  
   has_and_belongs_to_many :pages, :uniq => true
 
   acts_as_attachable
 
-  default_scope order(:part_type)
+  default_scope {order(:part_type)}
 
   liquid_methods :name, :attachments, :title
 
@@ -13,7 +14,7 @@ class Part < ActiveRecord::Base
 
   validates_uniqueness_of :name
   validates_presence_of :name, :part_type, :content_type
-  validates_format_of :name, :with => /^(?!\d+$)[a-z0-9\-_]*$/
+  validates_format_of :name, :with => /\A(?!\d+$)[a-z0-9\-_]*\z/
 
  [:content, :header, :footer, :sidebar].each do |name, params|
     src = <<-END_SRC
@@ -24,6 +25,13 @@ class Part < ActiveRecord::Base
     class_eval src, __FILE__, __LINE__
   end
 
+  attr_protected :id
+  safe_attributes 'name',
+    'part_type',
+    'content_type',
+    'is_cached',
+    'content'
+  
   def copy_from(arg)
     part = arg.is_a?(Part) ? arg : Part.find_by_id(arg)
     self.attributes = part.attributes.dup.except("id", "name", "created_at", "updated_at") if part
