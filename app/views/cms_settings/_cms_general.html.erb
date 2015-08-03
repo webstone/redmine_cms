@@ -25,13 +25,13 @@
 
   <p>
     <label><%= l(:label_cms_base_layout) %></label>
-    <%= select_tag 'settings[base_layout]',  options_for_select([["Default", "base"], ["CMS", "cms"]], @settings["base_layout"]) %>
+    <%= select_tag 'settings[base_layout]',  options_for_select([["Default", "base"], ["CMS", "cms"]], @settings[:base_layout]) %>
   </p>
 
   <% if Page.any? %>
   <p>
     <label><%= l(:label_cms_landing_page) %></label>
-    <%= select_tag 'settings[landing_page]', options_for_select(pages_options_for_select(Page.all), @settings["landing_page"]), :include_blank => true %>
+    <%= select_tag 'settings[landing_page]', options_for_select(pages_options_for_select(Page.all), @settings[:landing_page]), :include_blank => true %>
   </p>
   <% end %>
 

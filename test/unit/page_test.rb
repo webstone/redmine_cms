@@ -36,15 +36,24 @@ class PageTest < ActiveSupport::TestCase
   end
 
   def test_visible
-    user = users(:users_001) #admin
+    admin = users(:users_001) #admin
+    non_admin = users(:users_003)
+    other_non_admin = users(:users_002)
+    anonymus = users(:users_006)
     page = pages(:page_001)
-    assert page.visible?(user), 'Page does not visible for admin user'
-    # not active page
-
+    assert page.visible?(admin), 'Page does not visible for admin user'
+    assert !pages(:page_003).visible?(non_admin), 'Non visible page is visible for user'
+    assert pages(:page_003).visible?(admin), 'Admin cannot see non visible page'
     # anonymus user
+    assert pages(:page_002).visible?(anonymus), 'anonymus cannot see public page'
+    assert !pages(:page_001).visible?(anonymus), 'anonymus can see logged page'
 
-    # logged page
+    assert pages(:page_002).visible?(non_admin), 'non admin user cannot see logged page'
+    assert pages(:page_002).visible?(non_admin), 'non admin user cannot see logged page'
+    
+    # page for single user
+    assert pages(:page_004).visible?(non_admin), 'non admin user cannot see his page'
+    assert !pages(:page_004).visible?(other_non_admin), 'other non admin user can see his page'
 
-    # public page
   end
 end

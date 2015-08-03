@@ -34,7 +34,7 @@ module RedmineCms
     end
 
     def layout
-      self.settings["base_layout"]
+      self.settings[:base_layout]
     end
 
     def allow_edit?(user=User.current)

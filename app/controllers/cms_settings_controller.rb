@@ -16,7 +16,10 @@ class CmsSettingsController < ApplicationController
   end
 
   def update
-    @settings.merge!(params[:settings])
+    # @settings.merge!(params[:settings])
+    params[:settings].each do |key, value|
+      @settings[key.to_sym] = value
+    end
     Setting.plugin_redmine_cms = @settings
     flash[:notice] = l(:notice_successful_update)
     redirect_to :action => 'index', :tab => params[:tab]

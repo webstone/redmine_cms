@@ -48,14 +48,13 @@ class Page < ActiveRecord::Base
   end
 
   def visible?(user=User.current)
-    user_ids = [user.id] + user.groups.map(&:id)
     if active?
       return true if visibility == 'public'
-      return true if visibility == 'logged' && User.current.logged?
-      return true if user_ids.include?(visibility.to_i) && User.current.logged?
+      return true if visibility == 'logged' && user.logged?
+      user_ids = [user.id] + user.groups.map(&:id)
+      return true if user_ids.include?(visibility.to_i) && user.logged?
     end
-    return true if RedmineCms.allow_edit?(user)
-    false
+    RedmineCms.allow_edit?(user)
   end
 
   def active?

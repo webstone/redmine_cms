@@ -2,7 +2,7 @@ page_001:
   name: page_001
   title: page 001
   project_id: 
-  visibility: true
+  visibility: logged
   keywords: page 1
   description: description for page 001
   content_type: textile
@@ -14,9 +14,32 @@ page_002:
   name: page_002
   title: page 002
   project_id: 
-  visibility: true
+  visibility: public
   keywords: page 2
   description: description for page 002
   content_type: html
   is_cached: true
   content: Content for page 002
+  status_id: 1
+page_003:
+  name: page_003
+  title: page 003 (not visibile)
+  project_id: 
+  visibility: nil
+  keywords: page 3
+  description: description for page 003
+  content_type: html
+  is_cached: true
+  content: Content for page 003
+  status_id: 0
+page_004:
+  name: page_004
+  title: page 004 (for single user)
+  project_id: 
+  visibility: 3
+  keywords: page 4
+  description: description for page 004
+  content_type: html
+  is_cached: true
+  content: Content for page 004
+  status_id: 1
