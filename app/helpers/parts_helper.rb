@@ -32,7 +32,7 @@ module PartsHelper
         s << "<optgroup label=\"#{ERB::Util.html_escape(part.part_type)}\">".html_safe
         previous_group = part.part_type
       end
-      s << %Q(<option value="#{ERB::Util.html_escape(part.id)}">#{ERB::Util.html_escape(part.name)} (#{part.content_type})</option>).html_safe
+      s << %Q(<option value="#{ERB::Util.html_escape(part.id)}">#{part.to_s}</option>).html_safe
     end
     s << '</optgroup>'
     s.html_safe

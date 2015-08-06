@@ -26,7 +26,7 @@ class PageTest < ActiveSupport::TestCase
     assert !page.save, "Can save a page with invalid name included &"
     page.name = "invalid?name"
     assert !page.save, "Can save a page with invalid name included ?"
-    page.name = "valid_name"
+    page.name = "Name_with_CAP_letters"
     assert page.save, 'Cannot save a page with valid name'
   end
 

@@ -38,6 +38,10 @@ class Part < ActiveRecord::Base
     self
   end
 
+  def to_s
+    "#{ERB::Util.html_escape(name)} (#{content_type})"
+  end
+
 private
   def touch_pages
     pages.each{|p| p.touch} if pages

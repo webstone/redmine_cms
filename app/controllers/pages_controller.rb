@@ -47,6 +47,7 @@ class PagesController < ApplicationController
         format.js {render :nothing => true}
       end
     else
+      @pages_parts = @page.pages_parts.order_by_type
       render :action => 'edit'
     end
   end
