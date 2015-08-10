@@ -17,8 +17,7 @@ class CmsRedirectsController < ApplicationController
 
   def update
     new_cms_redirect = CmsRedirect.new(params[:cms_redirect])
-    if new_cms_redirect.valid?
-      new_cms_redirect.save
+    if new_cms_redirect.save
       @cms_redirect.destroy
       flash[:notice] = l(:notice_successful_update)
       redirect_to cms_redirects_path
@@ -32,8 +31,8 @@ class CmsRedirectsController < ApplicationController
 
   def create
     @cms_redirect = CmsRedirect.new(params[:cms_redirect])
-    if @cms_redirect.valid?
-      @cms_redirect.save
+    # if @cms_redirect.valid?
+    if @cms_redirect.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to cms_redirects_path
     else

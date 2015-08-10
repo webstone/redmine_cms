@@ -4,7 +4,12 @@ class Page < ActiveRecord::Base
 
   belongs_to :page_project, :class_name => 'Project', :foreign_key => 'project_id'
   has_many :pages_parts
-  has_many :parts, :uniq => true, :through => :pages_parts
+
+  if Rails::VERSION::MAJOR > 3
+    has_many :parts, lambda {uniq }, :through => :pages_parts
+  else
+    has_many :parts, :uniq => true, :through => :pages_parts
+  end
 
   acts_as_attachable
   acts_as_tree :dependent => :nullify

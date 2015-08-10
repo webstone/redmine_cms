@@ -7,7 +7,7 @@ class CmsRedirect
   attr_accessor :source_path, :destination_path
 
   validates_presence_of :source_path, :destination_path
-  validates_format_of :source_path, :with => /\A(?!\d+$)\/[a-z0-9\-_\/]*\z/
+  validates_format_of :source_path, :with => /\A(?!\d+$)\/[a-z0-9\-_\/]*\z/i, :message => "Invalide format"
   validates_length_of :source_path, :destination_path, :maximum => 200
   validate :validate_redirect
 
@@ -22,6 +22,10 @@ class CmsRedirect
   end
 
   def save
+    if !valid?
+      errors.messages.each{|k, msg| Rails.logger.info "attribute #{k} #{msg.first}('#{send(k)}')"}
+      return false
+    end
     redirects = Setting.plugin_redmine_cms[:redirects].is_a?(Hash) ? Setting.plugin_redmine_cms[:redirects] : {}
     redirects.merge!(source_path => destination_path)
     Setting.plugin_redmine_cms = Setting.plugin_redmine_cms.merge({:redirects => redirects})
@@ -49,13 +53,9 @@ class CmsRedirect
   private
 
   def validate_redirect
-    if source_path.to_s.start_with?("/admin") ||
-            source_path.to_s.start_with?("/settings") ||
-            source_path.to_s.start_with?("/users") ||
-            source_path.to_s.start_with?("/groups") ||
-            source_path.to_s.start_with?("/plugins") ||
-            source_path.to_s.start_with?("/cms_redirects")
-      errors.add :base, 'Invalid source path'
+    
+    if source_path.to_s.start_with?("/admin", "/settings", "/users", "/groups", "/plugins", "/cms_redirects")
+      errors.add :source_path, 'Invalid source path'
     end
   end
 

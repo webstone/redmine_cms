@@ -27,7 +27,7 @@ private
 
   def touch_page
     page.touch
-    page.save
+    # page.save
   end
 
 end

@@ -24,7 +24,8 @@ class CmsMenusController < ApplicationController
       flash[:notice] = l(:notice_successful_update)
       @cms_menus = CmsMenu.all
       respond_to do |format|
-        format.html { redirect_to :back }
+        # format.html { redirect_to :back }
+        format.html {render :action =>"edit", :id => @cms_menus}
         format.js {render :action => "change"}
       end
       # redirect_to :controller => 'pages', :action => 'index', :tab => 'cms_menus'
@@ -37,7 +38,7 @@ class CmsMenusController < ApplicationController
     @cms_menu = CmsMenu.new(params[:cms_menu])
     if @cms_menu.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'edit', :id => @cms_menu
+      render :action => 'edit', :id => @cms_menu
     else
       render :action => 'new'
     end
