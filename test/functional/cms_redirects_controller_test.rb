@@ -55,6 +55,7 @@ class CmsRedirectsControllerTest < ActionController::TestCase
     found_changed_redirect = false
     CmsRedirect.all.each do |rd|
       found_changed_redirect = rd.source_path == "/new_source_path" && rd.destination_path == "/new_dest_path"
+      break if found_changed_redirect
     end
     assert found_changed_redirect, "Didn't find changed redirect"      
   end
@@ -67,8 +68,10 @@ class CmsRedirectsControllerTest < ActionController::TestCase
     }
     assert_redirected_to cms_redirects_path
     found_changed_redirect = false
+    p "REDIRECTS: #{CmsRedirect.all.to_json}"
     CmsRedirect.all.each do |rd|
       found_changed_redirect = (rd.source_path == "/new_source_path" && rd.destination_path == "/new_dest_path")
+      break if found_changed_redirect
     end
     assert found_changed_redirect, "Didn't find created redirect"      
   end
