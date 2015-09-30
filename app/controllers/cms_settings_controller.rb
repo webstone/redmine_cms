@@ -16,7 +16,6 @@ class CmsSettingsController < ApplicationController
   end
 
   def update
-    # @settings.merge!(params[:settings])
     params[:settings].each do |key, value|
       @settings[key.to_sym] = value
     end

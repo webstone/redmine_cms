@@ -31,7 +31,6 @@ class CmsRedirectsController < ApplicationController
 
   def create
     @cms_redirect = CmsRedirect.new(params[:cms_redirect])
-    # if @cms_redirect.valid?
     if @cms_redirect.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to cms_redirects_path
