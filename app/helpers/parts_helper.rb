@@ -34,7 +34,7 @@ module PartsHelper
       end
       s << %Q(<option value="#{ERB::Util.html_escape(part.id)}">#{part.to_s}</option>).html_safe
     end
-    s << '</optgroup>'
+    s << '</optgroup>'.html_safe
     s.html_safe
   end
 end
