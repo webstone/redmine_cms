@@ -47,12 +47,14 @@ class PagesController < ApplicationController
         format.js {render :nothing => true}
       end
     else
+      @pages_parts = @page.pages_parts.order_by_type
       render :action => 'edit'
     end
   end
 
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new
+    @page.safe_attributes = params[:page]
     @page.save_attachments(params[:attachments])
     if @page.save
       render_attachment_warning_if_needed(@page)

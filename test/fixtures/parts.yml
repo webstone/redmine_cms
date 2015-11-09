@@ -1,0 +1,14 @@
+part_001:
+  name: footer
+  part_type: footer
+  content_type: html
+  is_cached: true
+  content: <b>CopyRight</b>
+  id: 1
+part_002:
+  name: header
+  part_type: header
+  content_type: html
+  is_cached: true
+  content: <b>HEAD</b>
+  id: 2

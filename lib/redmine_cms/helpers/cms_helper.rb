@@ -75,7 +75,7 @@ module RedmineCms
       assigns['newss'] = NewssDrop.new(News.visible.order("#{News.table_name}.created_on"))
       assigns['current_page'] = self.respond_to?(:params) && self.params[:page] || 1
       assigns['page'] = PageDrop.new(@page) if @page
-      assigns['pages'] = PagesDrop.new(Page.scoped({}))
+      assigns['pages'] = PagesDrop.new(Page.where(nil))
       assigns['params'] = self.params if self.respond_to?(:params)
       assigns['request'] = RequestDrop.new(request) if self.respond_to?(:request)
       assigns['now'] = Time.now
