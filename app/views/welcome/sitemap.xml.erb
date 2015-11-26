@@ -15,7 +15,7 @@
   <% @projects.each do |project| %>
 
     <% 10.downto(1) do |index| %>
-      <% unless ContactsSetting["project_tab_#{index}_caption".to_sym, project.id].blank? %>
+      <% unless RedmineCms.get_project_settings("project_tab_#{index}_caption".to_sym, project.id).blank? %>
         <url>
           <loc><%= project_tab_url(index, :project_id => project) %></loc>
           <changefreq>weekly</changefreq>
