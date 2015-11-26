@@ -27,6 +27,18 @@ class CmsSettingsController < ApplicationController
   def edit
   end
 
+  def save
+    find_project_by_project_id
+    if params[:cms_settings] && params[:cms_settings].is_a?(Hash) then
+      settings = params[:cms_settings]
+      settings.map do |k, v|
+        # ContactsSetting[k, @project.id] = v
+        RedmineCms.set_project_settings(k, @project.id, v)
+      end
+    end
+    redirect_to :controller => 'projects', :action => 'settings', :id => @project, :tab => params[:tab]
+  end
+
 
 private
 

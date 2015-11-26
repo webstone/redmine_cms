@@ -47,15 +47,15 @@ Redmine::Plugin.register :redmine_cms do
     menu :project_menu, tab, {:controller => 'project_tabs', :action => 'show', :tab => index},
                              :param => :project_id,
                              :first => true,
-                             :caption => Proc.new{|p| ContactsSetting["project_tab_#{index}_caption".to_sym, p.id] || tab.to_s },
-                             :if => Proc.new{|p| !ContactsSetting["project_tab_#{index}_caption".to_sym, p.id].blank? }
+                             :caption => Proc.new{|p| RedmineCms.get_project_settings("project_tab_#{index}_caption".to_sym, p.id) || tab.to_s },
+                             :if => Proc.new{|p| !RedmineCms.get_project_settings("project_tab_#{index}_caption".to_sym, p.id).blank? }
 
   end
   menu :project_menu, :project_tab_last, {:controller => 'project_tabs', :action => 'show', :tab => "last"},
                            :param => :project_id,
                            :last => true,
-                           :caption => Proc.new{|p| ContactsSetting["project_tab_last_caption".to_sym, p.id] || tab.to_s },
-                           :if => Proc.new{|p| !ContactsSetting["project_tab_last_caption".to_sym, p.id].blank? }
+                           :caption => Proc.new{|p| RedmineCms.get_project_settings("project_tab_last_caption".to_sym, p.id) || tab.to_s },
+                           :if => Proc.new{|p| !RedmineCms.get_project_settings("project_tab_last_caption".to_sym, p.id).blank? }
 
   menu :top_menu, :cms, {:controller => 'cms_settings', :action => 'index'}, :first => true, :caption => :label_cms, :parent => :administration
 

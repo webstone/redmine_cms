@@ -27,4 +27,8 @@ put "pages/:page_id/update/:part_id" => "pages_parts#update"
 
 get 'attachments/thumbnail/:id(/:size)/:filename', :controller => 'attachments', :action => 'thumbnail', :id => /\d+/, :filename => /.*/, :size => /\d+/
 
-resources :cms_settings
+resources :cms_settings do 
+  collection do 
+    post 'save'
+  end
+end

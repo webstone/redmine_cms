@@ -23,6 +23,6 @@ Redmine::MenuManager.map :account_menu do |menu|
 end
 
 Redmine::MenuManager.map :project_menu do |menu|
-  menu.push :activity, { :controller => 'activities', :action => 'index' }, :if => Proc.new{|p| !p.module_enabled?(:cms) || ContactsSetting["project_tab_show_activity".to_sym, p.id].to_i > 0 }, :first => true
-  menu.push :overview, { :controller => 'projects', :action => 'show' }, :if => Proc.new{|p| !p.module_enabled?(:cms) || ContactsSetting["landing_page".to_sym, p.id].blank? }, :first => true
+  menu.push :activity, { :controller => 'activities', :action => 'index' }, :if => Proc.new{|p| !p.module_enabled?(:cms) || RedmineCms.get_project_settings("project_tab_show_activity".to_sym, p.id).to_i > 0 }, :first => true
+  menu.push :overview, { :controller => 'projects', :action => 'show' }, :if => Proc.new{|p| !p.module_enabled?(:cms) || RedmineCms.get_project_settings("landing_page".to_sym, p.id).blank? }, :first => true
 end        
