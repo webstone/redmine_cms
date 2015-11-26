@@ -16,16 +16,16 @@
     <% 10.times do |n| %>
     <p>
       <label><%= l(:label_project_tab_caption, :index => n + 1) %></label>
-      <%= text_field_tag "cms_settings[project_tab_#{n + 1}_caption]",  RedmineCms.get_project_settings("project_tab_#{n + 1}_caption".to_sym, @project.id) %>
+      <%= text_field_tag "cms_settings[project_tab_#{n + 1}_caption]",  RedmineCms.get_project_settings("project_tab_#{n + 1}_caption", @project.id) %>
       <em><%= l(:label_project_tab_page) %></em>
-      <%= select_tag "cms_settings[project_tab_#{n + 1}_page]", options_for_select(pages_name_options_for_select(pages), RedmineCms.get_project_settings("project_tab_#{n + 1}_page".to_sym, @project.id)), :include_blank => true  %>
+      <%= select_tag "cms_settings[project_tab_#{n + 1}_page]", options_for_select(pages_name_options_for_select(pages), RedmineCms.get_project_settings("project_tab_#{n + 1}_page", @project.id)), :include_blank => true  %>
     </p>
     <% end %>
     <p>
       <label><%= l(:label_project_tab_caption, :index => "last") %></label>
-      <%= text_field_tag "cms_settings[project_tab_last_caption]",  RedmineCms.get_project_settings("project_tab_last_caption".to_sym, @project.id) %>
+      <%= text_field_tag "cms_settings[project_tab_last_caption]",  RedmineCms.get_project_settings("project_tab_last_caption", @project.id) %>
       <em><%= l(:label_project_tab_page) %></em>
-      <%= select_tag "cms_settings[project_tab_last_page]", options_for_select(pages_name_options_for_select(pages), RedmineCms.get_project_settings("project_tab_last_page".to_sym, @project.id)), :include_blank => true  %>
+      <%= select_tag "cms_settings[project_tab_last_page]", options_for_select(pages_name_options_for_select(pages), RedmineCms.get_project_settings("project_tab_last_page", @project.id)), :include_blank => true  %>
     </p>
   </div>
   <%= submit_tag l(:button_save) %>
