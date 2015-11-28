@@ -57,15 +57,30 @@ class VariableControllerTest < ActionController::TestCase
     end
   end
 
-  def test_permission
+  def test_create_without_permission
     @request.session[:user_id] = 2
-    get :new
-    assert_response 403
-    get :edit, :id => variables(:var001).id
-    assert_response 403
-    post :update, :id => variables(:var001).id, :variable => {:name => "new_name", :value => "new_value"}
-    assert_response 403
-    delete :destroy, :id => variables(:var001).id
-    assert_response 403
+    assert_no_difference 'Variable.count' do 
+      post :create,
+        :variable => {
+          :name => "new_var",
+          :value => "value for var"
+        }
+    end   
+  end
+
+  def test_destroy_without_permission
+    @request.session[:user_id] = 2
+    assert_no_difference "Variable.count" do
+      delete :destroy, :id => variables(:var001).id
+    end
+  end
+
+  def test_update_without_permission
+    var = variables(:var001)
+    @request.session[:user_id] = 2
+    post :update, :id => var.id, :variable => {:name => "new_name", :value => "new_value"}
+    var.reload
+    assert_not_equal "new_name", var.name
+    assert_not_equal "new_value", var.value
   end
 end
