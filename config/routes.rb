@@ -18,6 +18,7 @@ resources :parts do
   end
 end
 resources :pages_parts
+resources :variables
 
 get "pages/:project_id/:id" => "pages#show"
 

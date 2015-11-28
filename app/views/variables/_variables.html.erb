@@ -1,0 +1,26 @@
+<div class="contextual">
+<%= link_to l(:label_cms_variable_new), new_variable_path, :class => 'icon icon-add' %>
+</div>
+
+<h3><%=l(:label_cms_variable_plural)%></h3>
+<p><%= l(:lable_cms_note_for_use_variable) %></p>
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+    <th><%= l(:label_cms_variable_name) %></th>
+    <th><%= l(:label_cms_variable_value) %></th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% Variable.all.each do |var| -%>
+  <tr class="page project <%= cycle("odd", "even") %>">
+  <td class="name"><span><%= link_to h(var.name), edit_variable_path(var) %></span></td>
+  <td class="name"><%= var.value %></td>
+    <td class="buttons">
+      <%= delete_link variable_path(var, :back_url => variables_path) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+</div>
