@@ -82,7 +82,7 @@ module RedmineCms
       assigns['today'] = Date.today
       assigns['layout'] = LayoutDrop.new
 
-      Variable.all.each do |var|
+      CmsVariable.all.each do |var|
         assigns["cms_variable_#{var.name}"] = var.value
       end
 

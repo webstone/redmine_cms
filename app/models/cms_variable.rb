@@ -1,4 +1,4 @@
-class Variable < ActiveRecord::Base
+class CmsVariable < ActiveRecord::Base
   unloadable
   include Redmine::SafeAttributes
 

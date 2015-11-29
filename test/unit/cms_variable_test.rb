@@ -1,10 +1,10 @@
 require File.expand_path('../../test_helper', __FILE__)
 
-class VariableTest < ActiveSupport::TestCase
+class CmsVariableTest < ActiveSupport::TestCase
 
   # Replace this with your real tests.
   def test_create_variable
-    new_variable = Variable.new
+    new_variable = CmsVariable.new
     assert !new_variable.save, "Can save Variable without name"
     new_variable.name = "bad format for name"
     assert !new_variable.save, "Can save Variable with a bad format of name"

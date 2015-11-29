@@ -1,13 +1,13 @@
-class VariablesController < ApplicationController
+class CmsVariablesController < ApplicationController
 
   before_filter :find_variable, :only => [:edit, :update, :destroy]
   before_filter :require_admin
   def new
-    @variable = Variable.new
+    @variable = CmsVariable.new
   end
 
   def create
-    @variable = Variable.new
+    @variable = CmsVariable.new
     @variable.safe_attributes = params[:variable]
     if @variable.save
       flash[:notice] = l(:notice_successful_create)
@@ -52,7 +52,7 @@ class VariablesController < ApplicationController
 private
   
   def find_variable
-    @variable = Variable.find(params[:id])
+    @variable = CmsVariable.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end

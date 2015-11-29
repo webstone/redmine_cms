@@ -1,6 +1,6 @@
 class CreateVariables < ActiveRecord::Migration
   def change
-    create_table :variables do |t|
+    create_table :cms_variables do |t|
       t.string :name
       t.string :value
     end
