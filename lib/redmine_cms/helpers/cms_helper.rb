@@ -82,6 +82,10 @@ module RedmineCms
       assigns['today'] = Date.today
       assigns['layout'] = LayoutDrop.new
 
+      CmsVariable.all.each do |var|
+        assigns["cms_variable_#{var.name}"] = var.value
+      end
+
       registers = {}
       registers[:part] = part if part
       registers["projects"] = ProjectsDrop.new(Project.order(:name))

@@ -70,3 +70,8 @@ en:
   label_cms_redirect_plural: Redirects
   label_cms_redirect: Redirect
   label_cms_redirect_new: New redirect
+  label_cms_variable_plural: Global variables
+  label_cms_variable: Global variable
+  label_cms_variable_new: New global variable
+  label_cms_variable_name: Name
+  label_cms_variable_value: Value

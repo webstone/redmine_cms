@@ -1,0 +1,8 @@
+<h2><%=l(:label_cms_variable)%></h2>
+
+<%= labelled_form_for @variable, :method => "PUT", :html => {:class => 'tabular'} do |f|%>
+  <%= render :partial => 'form', :locals => { :f => f} %>
+  <p>
+    <%= f.submit l(:button_save) %>
+  </p>
+<% end %>
