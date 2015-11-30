@@ -8,7 +8,7 @@ class CmsVariablesController < ApplicationController
 
   def create
     @variable = CmsVariable.new
-    @variable.safe_attributes = params[:variable]
+    @variable.safe_attributes = params[:cms_variable]
     if @variable.save
       flash[:notice] = l(:notice_successful_create)
       respond_to do |format|
@@ -24,7 +24,7 @@ class CmsVariablesController < ApplicationController
   end
 
   def update
-    @variable.safe_attributes = params[:variable]
+    @variable.safe_attributes = params[:cms_variable]
     if @variable.save
       flash[:notice] = l(:notice_successful_update)
       respond_to do |format|
