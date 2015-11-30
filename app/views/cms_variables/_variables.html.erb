@@ -3,7 +3,6 @@
 </div>
 
 <h3><%=l(:label_cms_variable_plural)%></h3>
-<p><%= l(:lable_cms_note_for_use_variable) %></p>
 <div class="autoscroll">
 <table class="list">
   <thead><tr>
@@ -14,7 +13,7 @@
   <tbody>
 <% CmsVariable.all.each do |var| -%>
   <tr class="page project <%= cycle("odd", "even") %>">
-  <td class="name"><span><%= link_to h(var.name), edit_cms_variable_path(var) %></span></td>
+  <td class="name"><span style="color: #aaa;">cms_variable_</span><span><%= link_to h(var.name), edit_cms_variable_path(var) %></span></td>
   <td class="name"><%= var.value %></td>
     <td class="buttons">
       <%= delete_link cms_variable_path(var, :back_url => cms_variables_path) %>

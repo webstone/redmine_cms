@@ -75,4 +75,3 @@ en:
   label_cms_variable_new: New global variable
   label_cms_variable_name: Name
   label_cms_variable_value: Value
-  lable_cms_note_for_use_variable: When You use global variable in template You must add 'cms_variable_' to name of variable
