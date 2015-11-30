@@ -1,0 +1,9 @@
+<div class="box tabular">
+  <%= error_messages_for f.object %>
+  <p>
+    cms_variable_<%= f.text_field :name, :required => true%>
+  </p>
+  <p>
+    <%= f.text_field :value, :required => true%>
+  </p>
+</div>

@@ -1,0 +1,6 @@
+var001:
+  name: first_var
+  value: first_val
+var002:
+  name: second_var
+  value: second_val
