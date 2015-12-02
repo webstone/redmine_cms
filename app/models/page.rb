@@ -13,6 +13,7 @@ class Page < ActiveRecord::Base
 
   acts_as_attachable
   acts_as_tree :dependent => :nullify
+  acts_as_versionable
 
   scope :active, lambda{where(:status_id => RedmineCms::STATUS_ACTIVE)}
   scope :visible, lambda{where(Page.visible_condition)}
@@ -103,7 +104,7 @@ class Page < ActiveRecord::Base
     self.name = self.name.to_s + "_copy"
     self
   end
-
+  
   protected
 
   def validate_page

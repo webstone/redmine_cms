@@ -16,6 +16,10 @@ class PagesController < ApplicationController
   end
 
   def show
+    if params[:version]
+      require_edit_permission  
+      set_content_from_version
+    end
     respond_to do |format|
       format.html {render :action => 'show', :layout => use_layout}
     end
@@ -23,6 +27,8 @@ class PagesController < ApplicationController
 
   def edit
     @pages_parts = @page.pages_parts.order_by_type
+    set_content_from_version if params[:version]
+      
     respond_to do |format|
       format.html {render :action => 'edit', :layout => use_layout}
     end
@@ -66,8 +72,18 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    @page.destroy
-    redirect_to :controller => 'pages', :action => 'index', :tab => "pages"
+    if params[:version]
+      version = @page.versions.where(:version => params[:version]).first
+      if version.current_version?
+        flash[:warning] = l(:cms_version_cannot_destroy_current)
+      else
+        version.destroy
+      end
+      redirect_to history_page_path(@page)
+    else
+      @page.destroy
+      redirect_to :controller => 'pages', :action => 'index', :tab => "pages"
+    end
   end
 
   def expire_cache
@@ -76,6 +92,21 @@ class PagesController < ApplicationController
       Rails.cache.delete(part)
     end
     redirect_to :back
+  end
+
+  def history
+    @versions = @page.versions
+    @version_count = @versions.count
+  end
+
+  def diff
+    @diff = @page.diff(params[:version], params[:version_from])
+    render_404 unless @diff
+  end
+
+  def annotate
+    @annotate = @page.annotate(params[:version])
+    render_404 unless @annotate
   end
 
 private
@@ -93,6 +124,12 @@ private
 
   def require_edit_permission
     deny_access unless RedmineCms.allow_edit?
+  end
+
+  def set_content_from_version
+    return if !@page
+    @version = @page.versions.where(:version => params[:version]).first
+    @page.content = @version.content if @version
   end
 
 end

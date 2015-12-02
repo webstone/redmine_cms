@@ -9,6 +9,6 @@ class CreateCmsContentVersions < ActiveRecord::Migration
       t.column :versionable_id, :integer, :default => 0, :null => false
     end
     add_index :cms_content_versions, :versionable_id
-    add_index :cms_content_versions, ["versionable_id", "versionable_type"], name: "index_cms_content_versions_on_versionable_id_and_versionable_type", using: :btree
+    add_index :cms_content_versions, ["versionable_id", "versionable_type"], name: "index_cms_content_versions_on_versionable", using: :btree
   end
 end

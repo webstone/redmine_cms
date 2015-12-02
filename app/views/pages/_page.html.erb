@@ -14,7 +14,11 @@
 
 <% if RedmineCms.allow_edit? %>
   <div class="contextual page-edit">
-    <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
+    <% if @version %>
+      <%= link_to l(:button_rollback), edit_page_path(@page, :version => @version), :class => 'icon icon-cancel' %>
+    <% else %>  
+      <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
+    <% end %>
     <% if @page.parts.any? %>
       <ul class="parts-edit">
         <% @page.parts.each do |part| %>

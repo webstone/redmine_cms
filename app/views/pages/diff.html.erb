@@ -1,0 +1,27 @@
+<div class="contextual">
+  <%= link_to l(:label_history), history_page_path(@page),
+            :class => 'icon icon-history' %>
+</div>
+
+<%= title [@page.title, page_path(@page, @page.title, :version => nil)],
+      [l(:label_history), history_page_path(@page, @page.title)],
+      "#{l(:label_version)} #{@diff.version_to.version}" %>
+
+<p>
+<%= l(:label_version) %> <%= link_to @diff.version_from.version, :action => 'show', :id => @page, :version => @diff.version_from %>
+<em>(<%= @diff.version_from.author ?
+             @diff.version_from.author.name : l(:label_user_anonymous)
+      %>, <%= format_time(@diff.version_from.updated_at) %>)</em>
+&#8594;
+<%= l(:label_version) %> <%= link_to @diff.version_to.version, :action => 'show',
+                             :id => @page,
+                             :version => @diff.version_to.version
+                          %>/<%= @page.version %>
+<em>(<%= @diff.version_to.author ?
+             link_to_user(@diff.version_to.author.name) : l(:label_user_anonymous)
+      %>, <%= format_time(@diff.version_to.updated_at) %>)</em>
+</p>
+
+<div class="text-diff">
+  <%= simple_format_without_paragraph @diff.to_html %>
+</div>

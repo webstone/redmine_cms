@@ -11,10 +11,12 @@ class PartsController < ApplicationController
   end
 
   def show
+    set_content_from_version if params[:version]
     redirect_to edit_part_path(@part) if %w(css java_script).include?(@part.content_type)
   end
 
   def edit
+    set_content_from_version if params[:version]
   end
 
   def expire_cache
@@ -67,8 +69,33 @@ class PartsController < ApplicationController
   end
 
   def destroy
-    @part.destroy
-    redirect_to :controller => 'pages', :action => 'index', :tab => "parts"
+    if params[:version]
+      version = @part.versions.where(:version => params[:version]).first
+      if version.current_version?
+        flash[:warning] = l(:cms_version_cannot_destroy_current)
+      else
+        version.destroy
+      end
+      redirect_to history_part_path(@page)
+    else
+      @part.destroy
+      redirect_to :controller => 'pages', :action => 'index', :tab => "parts"
+    end
+  end
+
+  def history
+    @versions = @part.versions
+    @version_count = @versions.count
+  end
+
+  def diff
+    @diff = @part.diff(params[:version], params[:version_from])
+    render_404 unless @diff
+  end
+
+  def annotate
+    @annotate = @part.annotate(params[:version])
+    render_404 unless @annotate
   end
 
 private
@@ -80,6 +107,12 @@ private
 
   def require_edit_permission
     deny_access unless RedmineCms.allow_edit?
+  end
+
+  def set_content_from_version
+    return if !@page
+    @version = @page.versions.where(:version => params[:version]).first
+    @page.content = @version.content if @version
   end
 
 end
