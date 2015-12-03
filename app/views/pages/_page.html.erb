@@ -13,6 +13,36 @@
 </div>
 
 <% if RedmineCms.allow_edit? %>
+  <style type="text/css">
+    .contextual.page-edit {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      margin-top: 0px;
+      border: 1px solid #CCC;
+      padding: 5px 10px;
+      background: white;
+      z-index: 10000;
+      white-space: nowrap;
+      line-height: 1.4em;
+      padding-left: 10px;
+      font-size: 0.9em;
+    }
+
+    .contextual.page-edit ul.parts-edit li {
+      padding-left: 10px;
+      list-style-type: none;
+    }
+
+    .contextual.page-edit ul.parts-edit {
+      display: none;
+    }
+
+    .contextual.page-edit:hover ul.parts-edit {
+      display: inline;
+    }
+
+  </style>
   <div class="contextual page-edit">
     <%= link_to l(:button_edit), edit_page_path(@page), :class => 'icon icon-edit' %>
     <% if @page.parts.any? %>
