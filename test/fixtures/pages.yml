@@ -7,9 +7,10 @@ page_001:
   keywords: page 1
   description: description for page 001
   content_type: textile
-  is_cached: true
+  is_cached: false
   content: Content for page 001
   status_id: 1
+  version: 2
 
 page_002:
   name: page_002

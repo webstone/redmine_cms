@@ -1,0 +1,13 @@
+version001:
+  version: 1
+  content: 'Content for first version'
+  versionable_type: Page
+  versionable_id: 1
+  author_id: 1
+
+version002:
+  version: 2
+  content: 'Content for second version'
+  versionable_type: Page
+  versionable_id: 1
+  author_id: 1

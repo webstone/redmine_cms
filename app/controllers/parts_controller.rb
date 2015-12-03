@@ -72,7 +72,7 @@ class PartsController < ApplicationController
     if params[:version]
       version = @part.versions.where(:version => params[:version]).first
       if version.current_version?
-        flash[:warning] = l(:cms_version_cannot_destroy_current)
+        flash[:warning] = l(:label_cms_version_cannot_destroy_current)
       else
         version.destroy
       end

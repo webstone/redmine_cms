@@ -103,4 +103,21 @@ class PartsControllerTest < ActionController::TestCase
     get :index
     assert_redirected_to :controller => 'pages', :action => 'index', :tab => "parts"
   end
+
+  def test_history_page
+    @request.session[:user_id] = 1
+    get :history, :id => parts(:part_001)
+    assert_response :success
+    assert_select 'table.wiki-page-versions'
+  end
+
+  def test_version_diff
+    @request.session[:user_id] = 1
+    part1 = parts(:part_001)
+    part1.content = "New content"
+    part1.save
+    get :diff, :id => part1,  :version => part1.version, :version_from => 1
+    assert_response :success
+    assert_select '.text-diff'
+  end
 end

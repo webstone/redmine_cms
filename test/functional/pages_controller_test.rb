@@ -2,9 +2,9 @@ require File.expand_path('../../test_helper', __FILE__)
 
 class PagesControllerTest < ActionController::TestCase
   
-  fixtures :users, :pages, :parts, :pages_parts
+  fixtures :users, :pages, :parts, :pages_parts, :cms_content_versions
 
-  RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts])
+  RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts, :cms_content_versions])
 
   def setup
     # RedmineCMS::TestCase.prepare
@@ -183,4 +183,31 @@ class PagesControllerTest < ActionController::TestCase
     assert_redirected_to :controller => 'pages', :action => 'index', :tab => "pages"
   end
 
+  def test_history_page
+    @request.session[:user_id] = 1
+    page = pages(:page_001)
+    get :history, :id => page
+    assert_response :success
+    assert_select 'table.wiki-page-versions'
+    assert_select 'td.id a', {:href => page_url(page, :version => page.version)}
+  end
+
+  def test_version_diff
+    @request.session[:user_id] = 1
+    page1 = pages(:page_001)
+    page1.content = "New content"
+    page1.save
+    get :diff, :id => page1,  :version => page1.version, :version_from => 1
+    assert_response :success
+    assert_select '.text-diff'
+  end
+
+  def test_show_page_with_specific_version
+    @request.session[:user_id] = 1
+    page1 = pages(:page_001)
+    get :show, :id => page1, :version => 1
+    assert_response :success
+    assert_match page1.versions.where(:version => 1).first.content, @response.body
+    assert_select 'a.icon', {:href => edit_page_url(page1, :version => 1)}
+  end
 end

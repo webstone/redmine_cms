@@ -3,7 +3,7 @@
             :class => 'icon icon-history' %>
 </div>
 
-<%= title [@page.title, page_path(@page, @page.title, :version => nil)],
+<%= title [@page.title, page_path(@page, :version => nil)],
       [l(:label_history), history_page_path(@page, @page.title)],
       "#{l(:label_version)} #{@diff.version_to.version}" %>
 
