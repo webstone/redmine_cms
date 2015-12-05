@@ -1,5 +1,6 @@
-<div class="box tabular">
+<div class="box tabular splitcontent">
   <%= error_messages_for 'page' %>
+
   <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
   <p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
   <% if @page.valid_parents.any? %>

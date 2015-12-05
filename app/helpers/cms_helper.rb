@@ -49,6 +49,7 @@ module CmsHelper
     s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/css/css')
     s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/xml/xml')
     s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/javascript/javascript')
+    s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/mode/textile/textile')
     s << javascript_include_tag('/plugin_assets/redmine_cms/codemirror/keymap/sublime')
     s << stylesheet_link_tag('/plugin_assets/redmine_cms/codemirror/lib/codemirror')
     s << stylesheet_link_tag('/plugin_assets/redmine_cms/codemirror/theme/ambiance')
