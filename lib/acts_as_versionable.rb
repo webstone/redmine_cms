@@ -68,14 +68,15 @@ module ActsAsVersionable
 
       after_save :save_version
       before_save :set_version
-    
+      
+      attr_accessor :version_comment
     end
   end
 
   module SingletonMethods
 
     def save_version
-      versions.create(:author => User.current, :content => content, :version => version)
+      versions.create(:author => User.current, :content => content, :version => version, :comments => version_comment)
     end
 
     def set_version
@@ -91,7 +92,7 @@ module ActsAsVersionable
     def diff(version_to=nil, version_from=nil)
       version_to = version_to ? version_to.to_i : self.version
       version_to = versions.find_by_version(version_to)
-      version_from = version_from ? versions.find_by_version(version_from.to_i) : try(:previous)
+      version_from = version_from ? versions.find_by_version(version_from.to_i) : try(:previous_version)
       return nil unless version_to && version_from
 
       if version_from.version > version_to.version
@@ -101,12 +102,21 @@ module ActsAsVersionable
       (version_to && version_from) ? ContentVersionDiff.new(version_to, version_from) : nil
     end
 
-    def previous
+    def previous_version
       @previous ||= versions.
-        reorder('version DESC').
+        reorder('version ASC').
         includes(:author).
         where("version < ?", version).first
     end
+    
+    def next_version
+      @next ||= versions.
+        reorder('version ASC').
+        includes(:author).
+        where("version > ?", version).first
+    end
+
+
   end
 end
 

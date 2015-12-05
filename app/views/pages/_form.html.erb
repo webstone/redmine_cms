@@ -28,6 +28,10 @@
   <span class="edit-content" style="display:none;">
     <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows =>  30, :class => 'wiki-edit' %>
   </span>
+
+  <p>
+    <%= f.text_field :version_comment, :label => l(:label_cms_version_comment) %>
+  </p> 
 </div>
 
 <%= javascript_tag "editor = activateCodeMirror('page_content');" %>

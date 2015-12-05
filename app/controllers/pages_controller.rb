@@ -129,7 +129,11 @@ private
   def set_content_from_version
     return if !@page
     @version = @page.versions.where(:version => params[:version]).first
-    @page.content = @version.content if @version
+    if @version
+      @current_version = @page.version
+      @page.content = @version.content
+      @page.version = @version.version
+    end
   end
 
 end
