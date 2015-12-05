@@ -1,4 +1,8 @@
-<%= title [@page.title, page_path(@page, :version => nil)], l(:label_history) %>
+<% if Redmine::VERSION.to_s < '2.4' %>
+  <h2> <%= h(@page.title) %> </h2>
+<% else %>
+  <%= title [@page.title, page_path(@page, :version => nil)], l(:label_history) %>
+<% end %>
 
 <%= form_tag({:controller => 'pages', :action => 'diff',
               :id => @page},
