@@ -1,4 +1,4 @@
-<%= title [@part.name, edit_part_path(@part, :version => nil)], l(:label_history) %>
+<%= cms_title [@part.name, edit_part_path(@part, :version => nil)], l(:label_history) %>
 
 <%= form_tag({:controller => 'parts', :action => 'diff',
               :id => @part},

@@ -5,7 +5,7 @@
 </div>
 
 
-<%= title [@part.name, part_path(@part, :version => nil)], l(:label_history) %>
+<%= cms_title [@part.name, part_path(@part, :version => nil)], l(:label_history) %>
 
 <p>
   <em><%= @annotate.content.author ? link_to_user(@annotate.content.author) : l(:label_user_anonymous)

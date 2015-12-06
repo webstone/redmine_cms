@@ -3,7 +3,7 @@
             :class => 'icon icon-history' %>
 </div>
 
-<%= title [@part.name, part_path(@part, @part.name, :version => nil)],
+<%= cms_title [@part.name, part_path(@part, @part.name, :version => nil)],
       [l(:label_history), history_part_path(@part, @part.name)],
       "#{l(:label_version)} #{@diff.version_to.version}" %>
 
