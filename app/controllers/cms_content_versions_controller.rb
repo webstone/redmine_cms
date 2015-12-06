@@ -1,3 +1,0 @@
-class CmsContentVersionsController < ApplicationController
-
-end
