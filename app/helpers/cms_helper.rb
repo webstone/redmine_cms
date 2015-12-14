@@ -55,4 +55,15 @@ module CmsHelper
     s << stylesheet_link_tag('/plugin_assets/redmine_cms/codemirror/theme/ambiance')
     s.html_safe
   end
+
+  def cms_title(*args)
+    strings = args.map do |arg|
+      if arg.is_a?(Array) && arg.size >= 2
+        link_to(*arg)
+      else
+        h(arg.to_s)
+      end
+    end
+    content_tag('h2', strings.join(' &#187; ').html_safe)
+  end
 end

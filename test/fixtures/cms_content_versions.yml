@@ -1,0 +1,34 @@
+version001:
+  version: 1
+  content: 'Content for first version'
+  versionable_type: Page
+  versionable_id: 1
+  author_id: 1
+
+version002:
+  version: 2
+  content: 'Content for second version'
+  versionable_type: Page
+  versionable_id: 1
+  author_id: 1
+
+version003:
+  version: 1
+  content: 'v1 for page2'
+  versionable_type: Page
+  versionable_id: 2
+  author_id: 1
+
+version004:
+  version: 2
+  content: 'v2 for page2'
+  versionable_type: Page
+  versionable_id: 2
+  author_id: 1
+
+version005:
+  version: 3
+  content: 'v3 for page2'
+  versionable_type: Page
+  versionable_id: 2
+  author_id: 1
