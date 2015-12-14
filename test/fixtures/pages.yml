@@ -22,7 +22,7 @@ page_002:
   description: description for page 002
   content_type: html
   is_cached: false
-  content: Content for page 002
+  content: v3 for page2
   status_id: 1
   version: 3
 page_003:

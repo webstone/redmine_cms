@@ -236,4 +236,13 @@ class PagesControllerTest < ActionController::TestCase
     new_version = page.versions.last
     assert_equal new_version.comments, "comment for this version"
   end
+  
+  def test_if_content_not_changed_no_new_version
+    @request.session[:user_id] = 1
+    page = pages(:page_002)
+    assert_no_difference 'page.versions.count' do
+      put :update, :id => page, :page => {:content => page.content, :version_comment => "comment for this version"}
+    end
+  end
+
 end

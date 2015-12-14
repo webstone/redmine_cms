@@ -76,6 +76,7 @@ module ActsAsVersionable
   module SingletonMethods
 
     def save_version
+      return if (versions.count > 0) && (versions.last.content == content)
       versions.create(:author => User.current, :content => content, :version => version, :comments => version_comment)
     end
 
