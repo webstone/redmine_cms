@@ -43,10 +43,10 @@
 <%= javascript_tag "$('.contextual.page-edit').draggable();" %>
 
 <% if @page.attachments.any? %>
-<fieldset><legend><%= l(:label_attachment_plural) %></legend>
-  <%= link_to_attachments @page, :thumbnails => true  %>
-</fieldset>
-<br/>
+  <fieldset><legend><%= l(:label_attachment_plural) %></legend>
+    <%= link_to_cms_attachments @page, :thumbnails => true  %>
+  </fieldset>
+  <br/>
 <% end %>
 
 <% content_for :header_tags do %>

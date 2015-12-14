@@ -2,7 +2,7 @@ require File.expand_path('../../test_helper', __FILE__)
 
 class PagesControllerTest < ActionController::TestCase
   
-  fixtures :users, :pages, :parts, :pages_parts
+  fixtures :users, :pages, :parts, :pages_parts, :attachments
 
   RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts])
 
@@ -183,4 +183,22 @@ class PagesControllerTest < ActionController::TestCase
     assert_redirected_to :controller => 'pages', :action => 'index', :tab => "pages"
   end
 
+  def test_create_page_with_attachment
+    @request.session[:user_id] = 1
+    # assert_difference 'Page.count' do
+    #   post :create, :page => {
+    #     :name => "New_page",
+    #     :title => "title for page",
+    #     :visibility => "public",
+    #     :keywords => "some keywords",
+    #     :content => "Content"},
+    #     :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain'), 'description' => 'test file'}
+    #   }
+    # end
+    # assert_redirected_to :controller => "pages", :action => 'edit', :id => Page.last
+    page = pages(:page_001)
+    page.attachments << Attachment.first
+    get :edit, :id => page
+    assert_response :success
+  end
 end
