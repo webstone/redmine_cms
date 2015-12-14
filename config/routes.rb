@@ -7,14 +7,22 @@ get "projects/:project_id/pages/:tab" => "project_tabs#show", :as => "project_ta
 
 resources :cms_menus
 resources :cms_redirects
+
+get 'page/:id/:version', :to => 'page#show', :constraints => {:version => /\d+/}
 resources :pages do
   member do
    get :expire_cache
+   get :history
+   get :diff
+   get :annotate
   end
 end
 resources :parts do
   member do
    get :expire_cache
+   get :history
+   get :diff
+   get :annotate
   end
 end
 resources :pages_parts

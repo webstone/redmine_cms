@@ -31,6 +31,7 @@
   <td class="name"><%= link_to h(part.name), edit_part_path(part) %></td>
   <td class="type"><%= part.content_type %></td>
     <td class="buttons">
+      <%= link_to l(:label_history), history_part_path(part), :class => 'icon icon-history' %>
       <%= link_to l(:button_duplicate), {:controller => 'parts', :action => 'new', :copy_from => part }, :class => 'icon icon-duplicate' %>
       <%= delete_link part_path(part, :back_url => parts_path) %>
     </td>

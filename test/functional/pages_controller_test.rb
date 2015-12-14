@@ -2,9 +2,9 @@ require File.expand_path('../../test_helper', __FILE__)
 
 class PagesControllerTest < ActionController::TestCase
   
-  fixtures :users, :pages, :parts, :pages_parts, :attachments
+  fixtures :users, :pages, :parts, :pages_parts, :cms_content_versions, :attachments
 
-  RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts])
+  RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts, :cms_content_versions])
 
   def setup
     # RedmineCMS::TestCase.prepare
@@ -185,20 +185,72 @@ class PagesControllerTest < ActionController::TestCase
 
   def test_create_page_with_attachment
     @request.session[:user_id] = 1
-    # assert_difference 'Page.count' do
-    #   post :create, :page => {
-    #     :name => "New_page",
-    #     :title => "title for page",
-    #     :visibility => "public",
-    #     :keywords => "some keywords",
-    #     :content => "Content"},
-    #     :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain'), 'description' => 'test file'}
-    #   }
-    # end
-    # assert_redirected_to :controller => "pages", :action => 'edit', :id => Page.last
     page = pages(:page_001)
     page.attachments << Attachment.first
     get :edit, :id => page
     assert_response :success
   end
+
+  def test_history_page
+    @request.session[:user_id] = 1
+    page = pages(:page_001)
+    get :history, :id => page
+    assert_response :success
+    assert_select 'table.wiki-page-versions'
+    assert_select 'td.id a', {:href => page_url(page, :version => page.version)}
+  end
+
+  def test_version_diff
+    @request.session[:user_id] = 1
+    page1 = pages(:page_001)
+    page1.content = "New content"
+    page1.save
+    get :diff, :id => page1,  :version => page1.version, :version_from => 1
+    assert_response :success
+    assert_select '.text-diff'
+  end
+
+  def test_show_page_with_specific_version
+    @request.session[:user_id] = 1
+    page1 = pages(:page_001)
+    get :show, :id => page1, :version => 1
+    assert_response :success
+    assert_match page1.versions.where(:version => 1).first.content, @response.body
+    assert_select 'a.icon', {:href => edit_page_url(page1, :version => 1)}
+  end
+
+  def test_show_page_with_current_version
+    @request.session[:user_id] = 1
+    page1 = pages(:page_001)
+    get :show, :id => page1, :version => page1.version
+    assert_response :success
+    assert_select 'a.icon.icon-cancel', :count => 0 
+  end
+
+  def test_menu_next_previous_version
+    @request.session[:user_id] = 1
+    page = pages(:page_002)
+    get :show, :id => page, :version => 2
+    assert_response :success
+    assert_select '.history-link a', {:href => page_url(page, :version => 1)}
+    assert_select '.history-link a', {:href => page_url(page, :version => 3)}
+    assert_select '.history-link a', {:href => diff_page_url(page, :version => 1)}
+  end
+
+  def test_comment_for_version
+    @request.session[:user_id] = 1
+    page = pages(:page_002)
+    put :update, :id => page, :page => {:content => "new content", :version_comment => "comment for this version"}
+    new_version = page.versions.last
+    assert_equal new_version.comments, "comment for this version"
+  end
+  
+  def test_if_content_not_changed_no_new_version
+    @request.session[:user_id] = 1
+    page = pages(:page_002)
+    assert_no_difference 'page.versions.count' do
+      put :update, :id => page, :page => {:content => page.content, :version_comment => "comment for this version"}
+    end
+  end
+
 end

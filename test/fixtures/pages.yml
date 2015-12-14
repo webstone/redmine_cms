@@ -7,11 +7,13 @@ page_001:
   keywords: page 1
   description: description for page 001
   content_type: textile
-  is_cached: true
+  is_cached: false
   content: Content for page 001
   status_id: 1
+  version: 2
 
 page_002:
+  id: 2
   name: page_002
   title: page 002
   project_id: 
@@ -19,9 +21,10 @@ page_002:
   keywords: page 2
   description: description for page 002
   content_type: html
-  is_cached: true
-  content: Content for page 002
+  is_cached: false
+  content: v3 for page2
   status_id: 1
+  version: 3
 page_003:
   name: page_003
   title: page 003 (not visibile)

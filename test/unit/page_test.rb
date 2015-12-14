@@ -54,6 +54,5 @@ class PageTest < ActiveSupport::TestCase
     # page for single user
     assert pages(:page_004).visible?(non_admin), 'non admin user cannot see his page'
     assert !pages(:page_004).visible?(other_non_admin), 'other non admin user can see his page'
-
   end
 end

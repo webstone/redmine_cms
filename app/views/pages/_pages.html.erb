@@ -13,17 +13,18 @@
     <th></th>
   </tr></thead>
   <tbody>
-<% page_tree(@pages) do |page, level| -%>
-  <tr class="page project <%= cycle("odd", "even") %> <%= %w(disabled active)[page.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
-  <td class="name"><span><%= link_to h(page.name), edit_page_path(page) %></span></td>
-  <td class="name"><%= page.title %></td>
-    <td class="buttons">
-      <%= change_page_status_link(page) %>
-      <%= link_to l(:button_duplicate), {:controller => 'pages', :action => 'new', :copy_from => page }, :class => 'icon icon-duplicate' %>
-      <%= delete_link page_path(page, :back_url => pages_path) %>
-    </td>
-  </tr>
-<% end -%>
+    <% page_tree(@pages) do |page, level| -%>
+      <tr class="page project <%= cycle("odd", "even") %> <%= %w(disabled active)[page.status_id] %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+      <td class="name"><span><%= link_to h(page.name), edit_page_path(page) %></span></td>
+      <td class="name"><%= page.title %></td>
+        <td class="buttons">
+          <%= change_page_status_link(page) %>
+          <%= link_to l(:label_history), history_page_path(page), :class => 'icon icon-history' %>
+          <%= link_to l(:button_duplicate), {:controller => 'pages', :action => 'new', :copy_from => page }, :class => 'icon icon-duplicate' %>
+          <%= delete_link page_path(page, :back_url => pages_path) %>
+        </td>
+      </tr>
+    <% end -%>
   </tbody>
 </table>
 </div>
