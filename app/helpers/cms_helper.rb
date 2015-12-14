@@ -56,6 +56,26 @@ module CmsHelper
     s.html_safe
   end
 
+  def link_to_cms_attachments(container, options = {})
+    options.assert_valid_keys(:author, :thumbnails)
+
+    attachments = container.attachments.preload(:author).to_a
+    if attachments.any?
+      options = {
+        :editable => RedmineCms.allow_edit?,
+        :deletable => RedmineCms.allow_edit?,
+        :author => true
+      }.merge(options)
+      render :partial => 'attachments/links',
+        :locals => {
+          :container => container,
+          :attachments => attachments,
+          :options => options,
+          :thumbnails => (options[:thumbnails] && Setting.thumbnails_enabled?)
+        }
+    end
+  end
+  
   def cms_title(*args)
     strings = args.map do |arg|
       if arg.is_a?(Array) && arg.size >= 2
