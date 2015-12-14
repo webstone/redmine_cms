@@ -1,4 +1,6 @@
 <div class="contextual">
+  <%= link_to l(:label_history), history_page_path(@page),
+            :class => 'icon icon-history' %>
   <%= link_to l(:button_duplicate), {:controller => 'pages', :action => 'new', :copy_from => @page }, :class => 'icon icon-duplicate' %>
   <%= link_to l(:button_delete), {:controller => 'pages', :action => 'destroy', :id => @page}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
 </div>
