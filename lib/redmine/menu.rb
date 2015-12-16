@@ -12,7 +12,7 @@ Redmine::MenuManager.map :top_menu do |menu|
     menu.push :adm_ldap_authentication, {:controller => 'auth_sources', :action => 'index'}, :caption => :label_ldap_authentication, :html => {:class => 'server_authentication'}, :parent => :administration
     menu.push :adm_plugins, {:controller => 'admin', :action => 'plugins'}, :caption => :label_plugins, :last => true, :parent => :administration
     menu.push :adm_info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true, :parent => :administration
-    binding.pry
+
     menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural, :if => Proc.new { Setting.plugin_redmine_cms["show_projects"].to_i > 0 }, :first => true
     menu.push :home, { :controller => 'welcome', :action => 'index' }, :if => Proc.new { Setting.plugin_redmine_cms["show_home"].to_i > 0 }, :first => true
     menu.push :help, Redmine::Info.help_url, :last => true, :if => Proc.new { Setting.plugin_redmine_cms["show_help"].to_i > 0 }
