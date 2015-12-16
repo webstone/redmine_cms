@@ -6,7 +6,6 @@ module RedmineCms
       def view_layouts_base_html_head(context={})
         s = ''
         s << stylesheet_link_tag(:cms, :plugin => 'redmine_cms')
-        s << javascript_include_tag("jquery-migrate-1.2.1.js", :plugin => 'redmine_cms')
         layout_html_head_parts.each do |part|
           s << render_part(part)
         end
