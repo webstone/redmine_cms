@@ -59,15 +59,15 @@ module RedmineCms
     end
 
     def layout_body_top_parts
-      @layout_body_top_parts = Part.where(:part_type => "layout_body_top_parts").order(:name)
+      @layout_body_top_parts = Part.where(:part_type => "layout_body_top_part").order(:name)
     end
 
     def layout_body_bottom_parts
-      @layout_body_bottom_parts = Part.where(:part_type => "layout_body_bottom_parts").order(:name)
+      @layout_body_bottom_parts = Part.where(:part_type => "layout_body_bottom_part").order(:name)
     end
 
-    def view_layouts_base_sidebar
-      @view_layouts_base_sidebar = Part.where(:part_type => "view_layouts_base_sidebar").order(:name)
+    def layout_base_sidebar_parts
+      @layout_base_sidebar_parts = Part.where(:part_type => "layout_base_sidebar").order(:name)
     end
 
     def render_liquid(content, part=nil)
