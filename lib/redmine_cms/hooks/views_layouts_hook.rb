@@ -14,7 +14,7 @@ module RedmineCms
 
       def view_layouts_base_sidebar(context = { })
         s = ''
-        layout_body_top_parts.each do |part|
+        view_layouts_base_sidebar.each do |part|
           s << render_part(part)
         end
         s
