@@ -30,23 +30,23 @@ module RedmineCms
     def settings() Setting[:plugin_redmine_cms].is_a?(Hash) ? Setting[:plugin_redmine_cms] : {} end
 
     def cache_expires_in
-      expires_in = self.settings[:cache_expires_in].to_i
+      expires_in = self.settings["cache_expires_in"].to_i
       expires_in > 0 ? expires_in : 15
     end
 
-    def layout
-      self.settings[:base_layout]
+    def base_layout
+      ["base", "cms"].include?(self.settings["base_layout"]) ? self.settings["base_layout"] : "base"
     end
 
     def allow_edit?(user=User.current)
       user_ids = [user.id] + user.groups.map(&:id)
       return true if user.admin?
-      return true if user_ids.include?(self.settings[:edit_permissions].to_i) && user.logged?
+      return true if user_ids.include?(self.settings["edit_permissions"].to_i) && user.logged?
       false
     end
 
     def redirects
-      settings[:redirects].is_a?(Hash) ? settings[:redirects] : settings[:redirects] = {}
+      settings["redirects"].is_a?(Hash) ? settings["redirects"] : settings["redirects"] = {}
     end
 
     def save_settings

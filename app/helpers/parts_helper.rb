@@ -17,7 +17,9 @@ module PartsHelper
                 ["Footer", "footer"],
                 ["Header tags", "header_tags"]]],
      ["Layout", [["Layout html head", "layout_html_head_part"],
-                 ["Layout body top", "layout_body_top_parts"]]]]
+                 ["Layout sidebar top", "view_layouts_base_sidebar"],
+                 ["Layout body top", "layout_body_top_parts"],
+                 ["Layout body bottom", "view_layouts_base_body_bottom"]]]]
   end
 
   def parts_option_for_select

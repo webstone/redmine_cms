@@ -12,6 +12,14 @@ module RedmineCms
         s
       end
 
+      def view_layouts_base_sidebar(context = { })
+        s = ''
+        layout_body_top_parts.each do |part|
+          s << render_part(part)
+        end
+        s
+      end
+
       def view_layouts_cms_body_top(context = { })
         s = ''
         layout_body_top_parts.each do |part|
@@ -20,13 +28,13 @@ module RedmineCms
         s
       end
 
-      # def view_layouts_base_body_bottom(context = { })
-      #   s = ''
-      #   layout_body_bottom_parts.each do |part|
-      #     s << render_part(part)
-      #   end
-      #   s
-      # end
+      def view_layouts_base_body_bottom(context = { })
+        s = ''
+        layout_body_bottom_parts.each do |part|
+          s << render_part(part)
+        end
+        s
+      end
 
     end
   end

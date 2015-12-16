@@ -17,7 +17,7 @@ class CmsSettingsController < ApplicationController
 
   def update
     params[:settings].each do |key, value|
-      @settings[key.to_sym] = value
+      @settings[key] = value
     end
     Setting.plugin_redmine_cms = @settings
     flash[:notice] = l(:notice_successful_update)

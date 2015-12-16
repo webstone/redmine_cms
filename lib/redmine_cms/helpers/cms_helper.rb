@@ -66,7 +66,9 @@ module RedmineCms
       @layout_body_bottom_parts = Part.where(:part_type => "layout_body_bottom_parts").order(:name)
     end
 
-
+    def view_layouts_base_sidebar
+      @view_layouts_base_sidebar = Part.where(:part_type => "view_layouts_base_sidebar").order(:name)
+    end
 
     def render_liquid(content, part=nil)
       assigns = {}
