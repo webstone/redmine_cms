@@ -1,20 +1,34 @@
-<div class="box tabular splitcontent">
-  <%= error_messages_for 'page' %>
+<div class="box tabular">
+  <div class="splitcontent">
+    <%= error_messages_for 'page' %>
 
-  <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
-  <p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
-  <% if @page.valid_parents.any? %>
-  <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_page_parent %></p>
-  <% end %>
+    <div class="splitcontentleft">
+      <p><%= f.text_field :name, :size => 30, :required => true, :label => l(:label_cms_page_name)  %></p>
+      <p><%= f.text_field :title, :size => 30, :required => true, :label => l(:label_cms_page_title) %></p>
+      <% if @page.valid_parents.any? %>
+      <p><%= f.select :parent_id, pages_options_for_select(@page.valid_parents), :include_blank => true, :label => :label_cms_page_parent %></p>
+      <% end %>
+    </div>
 
-  <p><%= f.select :project_id, project_tree_options_for_select(Project.all, :selected => @page.page_project), :include_blank => true %></p>
+    <div class="splitcontentright">
+      <p><%= f.select :project_id, project_tree_options_for_select(Project.all, :selected => @page.page_project), :include_blank => true %></p>
 
-  <p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>
-  <p><%= f.select :visibility, cms_visibilities_for_select(@page.visibility || "public"), :label => l(:label_cms_visibility)  %></p>
-  <fieldset><legend><%= l(:label_cms_seo) %></legend>
+      <p><%= f.select :status_id, options_for_select([["Locked", RedmineCms::STATUS_LOCKED], ["Active", RedmineCms::STATUS_ACTIVE]], @page.status_id), :label => l(:label_cms_page_status)  %></p>
+      <p><%= f.select :visibility, cms_visibilities_for_select(@page.visibility || "public"), :label => l(:label_cms_visibility)  %></p>
+
+    </div>
+  </div>
+
+
+  <p id="show_seo_edit" style="<%= 'display:none;' unless @page.keywords.blank? && @page.description.blank? %>">
+    <%= f.label_for_field :keywords, :label => l(:label_cms_seo) %>
+    <%= link_to_function image_tag('edit.png'), '$("#show_seo_edit").hide();$("#seo_edit").show();return false;' %>
+  </p>
+
+  <span id="seo_edit" style="<%= 'display:none;' if @page.keywords.blank? && @page.description.blank? %>">
     <p><%= f.text_field :keywords, :size => 100, :label => l(:label_cms_keywords)  %></p>
     <p><%= f.text_area :description, :rows => 5, :label => l(:label_cms_description) %></p>
-  </fieldset>
+  </span>
 
   <p id="show_content_edit">
     <%= f.label_for_field :content, :label => l(:label_cms_page_content) %>
@@ -28,11 +42,12 @@
 
   <span class="edit-content" style="display:none;">
     <%= text_area_tag 'page[content]', @page.content, :cols => 100, :rows =>  30, :class => 'wiki-edit' %>
+      <p>
+    <%= f.text_field :version_comment, :label => l(:label_cms_version_comment), :style => "width: 100%;" %>
+  </p>
   </span>
 
-  <p>
-    <%= f.text_field :version_comment, :label => l(:label_cms_version_comment) %>
-  </p> 
+
 </div>
 
 <%= javascript_tag "editor = activateCodeMirror('page_content');" %>
