@@ -8,7 +8,7 @@ class CmsRedirectsControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     User.current = nil
-    Setting.plugin_redmine_cms[:redirects] = []
+    Setting.plugin_redmine_cms["redirects"] = []
     @redirect1 = CmsRedirect.new(
       :source_path => '/source_path',
       :destination_path => '/destination_path'
@@ -35,8 +35,8 @@ class CmsRedirectsControllerTest < ActionController::TestCase
     @request.session[:user_id] = 1
     get :new
     assert_response :success
-    assert_select "#cms_redirect_source_path", 1 
-    assert_select "#cms_redirect_destination_path", 1 
+    assert_select "#cms_redirect_source_path", 1
+    assert_select "#cms_redirect_destination_path", 1
   end
 
   def test_new_for_non_admin
@@ -57,7 +57,7 @@ class CmsRedirectsControllerTest < ActionController::TestCase
       found_changed_redirect = rd.source_path == "/new_source_path" && rd.destination_path == "/new_dest_path"
       break if found_changed_redirect
     end
-    assert found_changed_redirect, "Didn't find changed redirect"      
+    assert found_changed_redirect, "Didn't find changed redirect"
   end
 
   def test_create
@@ -72,7 +72,7 @@ class CmsRedirectsControllerTest < ActionController::TestCase
       found_changed_redirect = (rd.source_path == "/new_source_path" && rd.destination_path == "/new_dest_path")
       break if found_changed_redirect
     end
-    assert found_changed_redirect, "Didn't find created redirect"      
+    assert found_changed_redirect, "Didn't find created redirect"
   end
 
   def test_fail_create
@@ -86,7 +86,7 @@ class CmsRedirectsControllerTest < ActionController::TestCase
     CmsRedirect.all.each do |rd|
       found_changed_redirect = (rd.source_path == "/bad source_path" && rd.destination_path == "/new_dest_path")
     end
-    assert !found_changed_redirect, "found created redirect"      
+    assert !found_changed_redirect, "found created redirect"
   end
 
 end

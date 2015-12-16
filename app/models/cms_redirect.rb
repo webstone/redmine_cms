@@ -26,15 +26,15 @@ class CmsRedirect
       errors.messages.each{|k, msg| Rails.logger.info "attribute #{k} #{msg.first}('#{send(k)}')"}
       return false
     end
-    redirects = Setting.plugin_redmine_cms[:redirects].is_a?(Hash) ? Setting.plugin_redmine_cms[:redirects] : {}
+    redirects = Setting.plugin_redmine_cms["redirects"].is_a?(Hash) ? Setting.plugin_redmine_cms["redirects"] : {}
     redirects.merge!(source_path => destination_path)
-    Setting.plugin_redmine_cms = Setting.plugin_redmine_cms.merge({:redirects => redirects})
+    Setting.plugin_redmine_cms = Setting.plugin_redmine_cms.merge({"redirects" => redirects})
   end
 
   def destroy
-    redirects = Setting.plugin_redmine_cms[:redirects].is_a?(Hash) ? Setting.plugin_redmine_cms[:redirects] : {}
+    redirects = Setting.plugin_redmine_cms["redirects"].is_a?(Hash) ? Setting.plugin_redmine_cms["redirects"] : {}
     redirects.delete(source_path)
-    Setting.plugin_redmine_cms = Setting.plugin_redmine_cms.merge({:redirects => redirects})
+    Setting.plugin_redmine_cms = Setting.plugin_redmine_cms.merge({"redirects" => redirects})
     true
   end
 
@@ -53,7 +53,7 @@ class CmsRedirect
   private
 
   def validate_redirect
-    
+
     if source_path.to_s.start_with?("/admin", "/settings", "/users", "/groups", "/plugins", "/cms_redirects")
       errors.add :source_path, 'Invalid source path'
     end

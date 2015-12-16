@@ -1,7 +1,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class PagesControllerTest < ActionController::TestCase
-  
+
   fixtures :users, :pages, :parts, :pages_parts, :cms_content_versions, :attachments
 
   RedmineCMS::TestCase.create_fixtures([:pages, :parts, :pages_parts, :cms_content_versions])
@@ -20,7 +20,7 @@ class PagesControllerTest < ActionController::TestCase
     page = pages(:page_001)
     get :show, :id => page.name
     assert_response :success
-    assert_template RedmineCms.layout
+    assert_template RedmineCms.base_layout
     assert_match page.content, @response.body
   end
 
@@ -158,7 +158,7 @@ class PagesControllerTest < ActionController::TestCase
     assert_equal new_status, page.status_id
     assert_equal new_content, page.content
   end
-  
+
   def test_fail_update_page
     @request.session[:user_id] = 1
     page = Page.find(1)
@@ -224,7 +224,7 @@ class PagesControllerTest < ActionController::TestCase
     page1 = pages(:page_001)
     get :show, :id => page1, :version => page1.version
     assert_response :success
-    assert_select 'a.icon.icon-cancel', :count => 0 
+    assert_select 'a.icon.icon-cancel', :count => 0
   end
 
   def test_menu_next_previous_version
@@ -244,7 +244,7 @@ class PagesControllerTest < ActionController::TestCase
     new_version = page.versions.last
     assert_equal new_version.comments, "comment for this version"
   end
-  
+
   def test_if_content_not_changed_no_new_version
     @request.session[:user_id] = 1
     page = pages(:page_002)

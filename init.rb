@@ -8,9 +8,9 @@ Redmine::Plugin.register :redmine_cms do
   requires_redmine :version_or_higher => '2.1.2'
 
   settings :default => {
-    :use_localization => true,
-    :cache_expires => 10,
-    :base_layout => 'base'
+    "use_localization" => true,
+    "cache_expires" => 10,
+    "base_layout" => 'base'
   }
 
 
