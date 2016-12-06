@@ -4,7 +4,7 @@
   <p>
     <label for="settings_use_localization"><%= l(:label_cms_use_localization) %></label>
     <%= hidden_field_tag 'settings[use_localization]', 0 %>
-    <%= check_box_tag 'settings[use_localization]', 1, @settings["use_localization"].to_i > 0 %>
+    <%= check_box_tag 'settings[use_localization]', 1, @settings["use_localization"] %>
   </p>
 
   <p>
